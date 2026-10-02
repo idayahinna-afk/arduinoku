@@ -222,7 +222,41 @@ button,select,input,textarea{font:inherit;color:inherit}
 .ring{fill:none;stroke:#ffb02e;stroke-width:1.4;pointer-events:none}
 .ghost{position:fixed;pointer-events:none;z-index:30;opacity:.85;width:70px;height:60px;transform:translate(-50%,-50%)}
 
-@media (max-width:1100px){ .work{grid-template-columns:170px minmax(0,1fr) minmax(300px,360px)} }
+
+/* tata letak panel: tampil/sembunyi & lebar kode */
+.vt{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel);height:36px}
+.vt button{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;padding:0 11px;cursor:pointer;font-weight:600;color:var(--muted);white-space:nowrap}
+.vt button+button{border-left:1px solid var(--line)}
+.vt button svg{width:16px;height:16px;flex:none}
+.vt button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
+.vt button:hover{color:var(--fg)}
+.resizer{position:absolute;right:0;top:0;bottom:0;width:8px;cursor:col-resize;z-index:6;touch-action:none}
+.resizer::after{content:"";position:absolute;left:4px;top:50%;width:2px;height:44px;margin-top:-22px;border-radius:2px;background:var(--line)}
+.resizer:hover::after,.resizer.on::after{background:var(--accent)}
+.edgebtn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;display:flex;align-items:center;gap:6px;writing-mode:vertical-rl;padding:12px 6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-weight:600;font-size:12.5px;cursor:pointer;box-shadow:var(--shadow)}
+.edgebtn svg{width:14px;height:14px}
+.edgebtn:hover{color:var(--accent);border-color:var(--accent)}
+.edgebtn.r{right:0;border-right:0;border-radius:8px 0 0 8px}
+.edgebtn.l{left:0;border-left:0;border-radius:0 8px 8px 0}
+.edgebtn.l span{transform:rotate(180deg)}
+@media (min-width:901px){
+  .work{grid-template-columns:196px minmax(0,1fr) var(--side-w,400px)}
+  #app.no-parts .work{grid-template-columns:minmax(0,1fr) var(--side-w,400px)}
+  #app.no-side .work{grid-template-columns:196px minmax(0,1fr)}
+  #app.no-parts.no-side .work{grid-template-columns:minmax(0,1fr)}
+}
+#app.no-parts .parts,#app.no-side .side{display:none}
+#app.no-side .resizer,#app:not(.no-side) .edgebtn.r,#app:not(.no-parts) .edgebtn.l{display:none}
+#app.no-parts .tb.tl,#app.no-parts #insp,#app.no-parts .hint{left:44px}
+#app.no-parts .tb.tl{max-width:calc(100% - 54px)}
+#app.no-side .tb.tr,#app.no-side .warns{right:44px}
+body.resizing{user-select:none;cursor:col-resize}
+@media (max-width:1500px){ .vt button .t-long{display:none} .field input{width:130px} .field select{max-width:180px} .brand small{display:none} .chip{padding:0 10px} .btn{padding:0 11px} }
+.stagewrap{container-type:inline-size}
+@media (max-width:1450px) and (min-width:901px){ .fname-f{display:none} }
+@container (max-width:680px){ .tb.tl{top:54px} }
+@media (max-width:1250px){ .vt button span{display:none} .vt button{padding:0 9px} }
+@media (max-width:1100px) and (min-width:901px){ .work{grid-template-columns:170px minmax(0,1fr) var(--side-w,360px)} #app.no-parts .work{grid-template-columns:minmax(0,1fr) var(--side-w,360px)} #app.no-side .work{grid-template-columns:170px minmax(0,1fr)} }
 @media (max-width:900px){
   body{overflow:auto}
   #app{height:auto;min-height:100%}
@@ -237,6 +271,8 @@ button,select,input,textarea{font:inherit;color:inherit}
   .btn .t-long{display:none}
   #insp{top:auto;bottom:52px;max-height:46%}
   .hint{display:none}
+  .resizer{display:none}
+  .vt button .t-long{display:none}
   .tb.tl{top:54px}
 }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
@@ -251,7 +287,12 @@ button,select,input,textarea{font:inherit;color:inherit}
       <div><b>Mutmainnah_Lab</b><small>Simulator papan UNO</small></div>
     </div>
     <div class="field"><label for="exSel">Proyek</label><select id="exSel"></select></div>
-    <div class="field"><label for="projName">Nama</label><input id="projName" maxlength="60"></div>
+    <div class="field fname-f"><label for="projName">Nama</label><input id="projName" maxlength="60"></div>
+    <div class="vt" role="group" aria-label="Tampilan panel">
+      <button id="tgParts" aria-pressed="true" title="Tampilkan/sembunyikan rak komponen"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M8 3v14"/></svg><span>Komponen</span></button>
+      <button id="tgCode" aria-pressed="true" title="Tampilkan/sembunyikan panel kode (tombol K)"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m7 6-4 4 4 4M13 6l4 4-4 4"/></svg><span>Kode <span class="t-long">&amp; Serial</span></span></button>
+      <button id="tgFocus" aria-pressed="false" title="Mode lihat papan: sembunyikan semua panel (tombol F)"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V3h4M13 3h4v4M17 13v4h-4M7 17H3v-4"/></svg><span>Lihat papan</span></button>
+    </div>
     <div class="spacer"></div>
     <div class="chip" id="stChip"><i></i><span id="stTxt">Papan mati</span></div>
     <button class="btn run" id="btnRun" title="Unggah & jalankan (Ctrl+Enter)"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span>Unggah <span class="t-long">&amp; Jalankan</span></span></button>
@@ -290,6 +331,9 @@ button,select,input,textarea{font:inherit;color:inherit}
         <button class="ib on" id="bSnd" title="Suara buzzer"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8v4h3l4 3V5L6 8z"/><path class="w1" d="M13 7.5a3.5 3.5 0 0 1 0 5M15.5 5a7 7 0 0 1 0 10"/></svg></button>
       </div>
       <div id="insp" hidden></div>
+      <div class="resizer" id="resizer" title="Seret untuk mengubah lebar panel kode · klik ganda untuk ukuran awal"></div>
+      <button class="edgebtn l" id="edgeParts" title="Tampilkan rak komponen"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 4 4 4-4 4"/></svg><span>Komponen</span></button>
+      <button class="edgebtn r" id="edgeCode" title="Tampilkan kode (K)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m10 4-4 4 4 4"/></svg><span>Kode &amp; Serial</span></button>
       <div class="hint" id="hint">Klik lubang atau pin untuk mulai menarik kabel.</div>
       <div class="warns" id="warns"></div>
       <div id="tip" hidden></div>
@@ -1404,7 +1448,7 @@ $('#sPlot').onclick=()=>{ $('#sPlot').classList.add('on'); $('#sMon').classList.
 
 /* =================== tab =================== */
 let curTab='code';
-function showTab(t){ curTab=t; $$('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t)); $$('.pane').forEach(p=>p.classList.toggle('on',p.dataset.pane===t)); if(t==='serial') $('#serBadge').hidden=true; if(t==='design') renderDesign(); if(t==='code') refreshEditor(); }
+function showTab(t){ curTab=t; if(typeof layout!=='undefined'&&!layout.code){ layout.code=true; applyLayout(true); } $$('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t)); $$('.pane').forEach(p=>p.classList.toggle('on',p.dataset.pane===t)); if(t==='serial') $('#serBadge').hidden=true; if(t==='design') renderDesign(); if(t==='code') refreshEditor(); }
 $$('.tab').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 
 /* =================== LCD =================== */
@@ -1609,6 +1653,40 @@ function renderDesign(){
 }
 function saveLaterLocal(){ clearTimeout(saveT); saveT=setTimeout(saveLocal,400); }
 projName.addEventListener('input',saveLaterLocal);
+
+/* =================== tata letak: tampil/sembunyi panel =================== */
+const appEl=$('#app'); const LAYOUT_KEY='mutmainnah_lab:layout';
+let layout={parts:true,code:true,w:400};
+try{ Object.assign(layout,JSON.parse(localStorage.getItem(LAYOUT_KEY)||'{}')); }catch(e){}
+function applyLayout(refit){
+  appEl.classList.toggle('no-parts',!layout.parts); appEl.classList.toggle('no-side',!layout.code);
+  appEl.style.setProperty('--side-w',layout.w+'px');
+  $('#tgParts').setAttribute('aria-pressed',layout.parts); $('#tgCode').setAttribute('aria-pressed',layout.code);
+  $('#tgFocus').setAttribute('aria-pressed',!layout.parts&&!layout.code);
+  try{ localStorage.setItem(LAYOUT_KEY,JSON.stringify(layout)); }catch(e){}
+  if(refit) requestAnimationFrame(()=>requestAnimationFrame(fitView));
+}
+function setPanels(parts,code){ layout.parts=parts; layout.code=code; applyLayout(true); if(code&&curTab==='code') refreshEditor(); }
+$('#tgParts').onclick=()=>setPanels(!layout.parts,layout.code);
+$('#tgCode').onclick=()=>setPanels(layout.parts,!layout.code);
+$('#tgFocus').onclick=()=>{ const focus=!layout.parts&&!layout.code; setPanels(focus,focus); };
+$('#edgeParts').onclick=()=>setPanels(true,layout.code);
+$('#edgeCode').onclick=()=>setPanels(layout.parts,true);
+document.addEventListener('keydown',e=>{
+  if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)||e.ctrlKey||e.metaKey||e.altKey) return;
+  if(e.key==='k'||e.key==='K'){ e.preventDefault(); setPanels(layout.parts,!layout.code); }
+  else if(e.key==='f'||e.key==='F'){ e.preventDefault(); $('#tgFocus').click(); }
+});
+// lebar panel kode
+(function(){
+  const rz=$('#resizer'); let st=null;
+  rz.addEventListener('pointerdown',e=>{ e.preventDefault(); rz.setPointerCapture(e.pointerId); rz.classList.add('on'); document.body.classList.add('resizing'); st={x:e.clientX,w:layout.w}; });
+  rz.addEventListener('pointermove',e=>{ if(!st) return; const max=Math.min(820,innerWidth*0.62); layout.w=Math.round(clamp(st.w+(st.x-e.clientX),300,max)); appEl.style.setProperty('--side-w',layout.w+'px'); });
+  const end=()=>{ if(!st) return; st=null; rz.classList.remove('on'); document.body.classList.remove('resizing'); applyLayout(false); };
+  rz.addEventListener('pointerup',end); rz.addEventListener('pointercancel',end);
+  rz.addEventListener('dblclick',()=>{ layout.w=400; applyLayout(false); });
+})();
+applyLayout(false);
 /* =================== contoh proyek =================== */
 const H=(k,r)=>`bb:${k}:${r}`;
 const CW={blk:'#1e1e1e',red:'#d32f2a',org:'#f08a1c',yel:'#f0c419',grn:'#2d9d4c',blu:'#2f6ed4',pur:'#8b4fc6',wht:'#ececec'};
