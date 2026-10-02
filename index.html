@@ -127,7 +127,12 @@ button,select,input,textarea{font:inherit;color:inherit}
 #insp{position:absolute;left:10px;top:58px;width:250px;max-width:calc(100% - 20px);max-height:calc(100% - 110px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);z-index:4}
 #insp .ih{display:flex;align-items:baseline;gap:8px;padding:10px 12px 6px}
 #insp .ih b{font-family:var(--f-label);font-size:18px;font-weight:700}
-#insp .ih span{color:var(--muted);font-size:12.5px}
+#insp .ih span{color:var(--muted);font-size:12.5px;flex:1}
+#insp .ih .imin{width:26px;height:26px;margin:-4px -4px 0 0}
+#insp.min .ib2,#insp.min .if{display:none}
+#insp.min .ih{padding-bottom:10px}
+#insp details summary{cursor:pointer;color:var(--accent);font-weight:600}
+#insp details[open] summary{margin-bottom:4px}
 #insp .ib2{padding:4px 12px 10px;display:grid;gap:9px}
 #insp label.row{display:grid;gap:4px;font-size:12px;color:var(--muted)}
 #insp .row select,#insp .row input[type=range]{width:100%}
@@ -220,6 +225,18 @@ button,select,input,textarea{font:inherit;color:inherit}
 .wire{cursor:pointer}
 .wire.sel .wsel{stroke:#ffb02e;stroke-opacity:.95}
 .ring{fill:none;stroke:#ffb02e;stroke-width:1.4;pointer-events:none}
+.wh{cursor:grab;vector-effect:non-scaling-stroke}
+.wh.end{fill:#ff9f1c;stroke:#fff;stroke-width:1.4px;vector-effect:non-scaling-stroke;cursor:move}
+.wh.bend{fill:#fff;stroke:#ff9f1c;stroke-width:1.8px;vector-effect:non-scaling-stroke}
+.wh.add circle{fill:#fff;fill-opacity:.85;stroke:#ff9f1c;stroke-width:1.2px;stroke-dasharray:2 1.5;vector-effect:non-scaling-stroke}
+.wh.add path{stroke:#e07b00;stroke-width:1.4px;vector-effect:non-scaling-stroke;fill:none}
+.wh:hover{filter:drop-shadow(0 0 2px #ff9f1c)}
+.iswatch{display:flex;flex-wrap:wrap;gap:6px}
+#insp .seg{display:flex}
+#insp .seg button{flex:1}
+#insp .btn.sm{height:30px;padding:0 9px;font-size:12.5px;flex:none}
+#insp .btn[disabled]{opacity:.45}
+.tb .wst{width:28px;height:28px}
 .ghost{position:fixed;pointer-events:none;z-index:30;opacity:.85;width:70px;height:60px;transform:translate(-50%,-50%)}
 
 
@@ -254,7 +271,7 @@ body.resizing{user-select:none;cursor:col-resize}
 @media (max-width:1500px){ .vt button .t-long{display:none} .field input{width:130px} .field select{max-width:180px} .brand small{display:none} .chip{padding:0 10px} .btn{padding:0 11px} }
 .stagewrap{container-type:inline-size}
 @media (max-width:1450px) and (min-width:901px){ .fname-f{display:none} }
-@container (max-width:680px){ .tb.tl{top:54px} }
+@container (max-width:860px){ .tb.tl{top:54px} #insp{top:100px;max-height:calc(100% - 150px)} }
 @media (max-width:1250px){ .vt button span{display:none} .vt button{padding:0 9px} }
 @media (max-width:1100px) and (min-width:901px){ .work{grid-template-columns:170px minmax(0,1fr) var(--side-w,360px)} #app.no-parts .work{grid-template-columns:minmax(0,1fr) var(--side-w,360px)} #app.no-side .work{grid-template-columns:170px minmax(0,1fr)} }
 @media (max-width:900px){
@@ -1053,7 +1070,7 @@ const gBB=svgEl('g',{id:'bb','class':'brd',filter:'url(#fShadow)'},lBoards); gBB
 const gArd=svgEl('g',{id:'ard','class':'brd',filter:'url(#fShadow)'},lBoards); gArd.innerHTML=boardMarkup();
 function placeBoards(){ gArd.setAttribute('transform',`translate(${S.ard.x} ${S.ard.y})`); gBB.setAttribute('transform',`translate(${S.bb.x} ${S.bb.y})`); holesCache=null; }
 
-function applyView(){ world.setAttribute('transform',`translate(${view.x} ${view.y}) scale(${view.k})`); pMat.setAttribute('patternTransform',`translate(${view.x} ${view.y}) scale(${view.k})`); $('#zl').textContent=Math.round(view.k*100)+'%'; }
+function applyView(){ world.setAttribute('transform',`translate(${view.x} ${view.y}) scale(${view.k})`); pMat.setAttribute('patternTransform',`translate(${view.x} ${view.y}) scale(${view.k})`); $('#zl').textContent=Math.round(view.k*100)+'%'; if(typeof renderHandles==='function'&&sel&&sel.kind==='wire') renderHandles(); }
 function toWorld(ev){ const r=svg.getBoundingClientRect(); return {x:(ev.clientX-r.left-view.x)/view.k,y:(ev.clientY-r.top-view.y)/view.k}; }
 function zoomAt(f,cx,cy){ const r=svg.getBoundingClientRect(); if(cx==null){cx=r.width/2;cy=r.height/2;} const k=clamp(view.k*f,0.35,8); const wx=(cx-view.x)/view.k, wy=(cy-view.y)/view.k; view.k=k; view.x=cx-wx*k; view.y=cy-wy*k; applyView(); }
 function fitView(){
@@ -1077,12 +1094,18 @@ function renderPart(p){
   p._lcdKey=null;
 }
 function shade(hex,f){ const n=parseInt(hex.slice(1),16); let r=n>>16,g=(n>>8)&255,b=n&255; const t=f<0?0:255, a=Math.abs(f); r=Math.round(r+(t-r)*a); g=Math.round(g+(t-g)*a); b=Math.round(b+(t-b)*a); return '#'+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1); }
-function wireD(a,b,pts){
+function orthoPts(a,b){ const dx=Math.abs(b.x-a.x), dy=Math.abs(b.y-a.y); if(dx<1||dy<1) return [];
+  if(dy>=dx){ const my=Math.round((a.y+b.y)/10)*5; return [[a.x,my],[b.x,my]]; } const mx=Math.round((a.x+b.x)/10)*5; return [[mx,a.y],[mx,b.y]]; }
+function wirePts(w,a,b){ if(w.pts&&w.pts.length) return w.pts; if(w.style==='ortho') return orthoPts(a,b); return []; }
+function endPos(w,which){ return w._drag&&w._drag.which===which?{x:w._drag.x,y:w._drag.y}:refPos(w[which]); }
+function wireD(a,b,pts,style){
   const P=[a,...(pts||[]).map(q=>({x:q[0],y:q[1]})),b];
+  if(P.length===2&&style&&style!=='curve') return `M${a.x} ${a.y} L${b.x} ${b.y}`;
+  const rad=style&&style!=='curve'?3.5:7;
   if(P.length===2){ const dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1; const bow=Math.min(26,L*0.13)+1.5; let nx=-dy/L,ny=dx/L; if(ny<0||(Math.abs(ny)<1e-6&&nx<0)){nx=-nx;ny=-ny;}
     return `M${a.x} ${a.y} Q${(a.x+b.x)/2+nx*bow} ${(a.y+b.y)/2+ny*bow} ${b.x} ${b.y}`; }
   let d=`M${P[0].x} ${P[0].y}`;
-  for(let i=1;i<P.length-1;i++){ const p0=P[i-1],p1=P[i],p2=P[i+1]; const l1=Math.hypot(p1.x-p0.x,p1.y-p0.y)||1,l2=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1; const rr=Math.min(7,l1/2,l2/2);
+  for(let i=1;i<P.length-1;i++){ const p0=P[i-1],p1=P[i],p2=P[i+1]; const l1=Math.hypot(p1.x-p0.x,p1.y-p0.y)||1,l2=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1; const rr=Math.min(rad,l1/2,l2/2);
     d+=` L${p1.x-(p1.x-p0.x)/l1*rr} ${p1.y-(p1.y-p0.y)/l1*rr} Q${p1.x} ${p1.y} ${p1.x+(p2.x-p1.x)/l2*rr} ${p1.y+(p2.y-p1.y)/l2*rr}`; }
   return d+` L${b.x} ${b.y}`;
 }
@@ -1098,7 +1121,32 @@ function wireMarkup(d,color,a,b){
 }
 function renderWires(){
   lWires.innerHTML='';
-  for(const w of S.wires){ const a=refPos(w.a),b=refPos(w.b); const g=svgEl('g',{'class':'wire'+(sel&&sel.kind==='wire'&&sel.id===w.id?' sel':''),'data-wire':w.id},lWires); g.innerHTML=wireMarkup(wireD(a,b,w.pts),w.color,a,b); }
+  for(const w of S.wires){ const a=endPos(w,'a'),b=endPos(w,'b'); const g=svgEl('g',{'class':'wire'+(sel&&sel.kind==='wire'&&sel.id===w.id?' sel':''),'data-wire':w.id},lWires); g.innerHTML=wireMarkup(wireD(a,b,wirePts(w,a,b),w.style),w.color,a,b); }
+  renderHandles();
+}
+/* pegangan edit kabel */
+const wHandles=svgEl('g',{});
+function renderHandles(){
+  if(!wHandles.parentNode) lOver.appendChild(wHandles);
+  wHandles.innerHTML='';
+  if(!sel||sel.kind!=='wire'||wiring) return; const w=S.wires.find(x=>x.id===sel.id); if(!w) return;
+  const a=endPos(w,'a'), b=endPos(w,'b'), pts=wirePts(w,a,b); const r=Math.max(2.4,5.2/view.k);
+  const P=[a,...pts.map(q=>({x:q[0],y:q[1]})),b]; let s='';
+  for(let i=0;i<P.length-1;i++){ const m={x:(P[i].x+P[i+1].x)/2,y:(P[i].y+P[i+1].y)/2}; if(Math.hypot(P[i+1].x-P[i].x,P[i+1].y-P[i].y)<r*5) continue;
+    s+=`<g class="wh add" data-wh="add:${i}"><circle cx="${m.x}" cy="${m.y}" r="${r*0.85}"/><path d="M${m.x-r*0.45} ${m.y}H${m.x+r*0.45}M${m.x} ${m.y-r*0.45}V${m.y+r*0.45}"/></g>`; }
+  pts.forEach((q,i)=>{ s+=`<circle class="wh bend" data-wh="bend:${i}" cx="${q[0]}" cy="${q[1]}" r="${r}"/>`; });
+  for(const [k,p] of [['a',a],['b',b]]) s+=`<circle class="wh end" data-wh="end:${k}" cx="${p.x}" cy="${p.y}" r="${r*1.15}"/>`;
+  wHandles.innerHTML=s;
+}
+let wedit=null;
+function nearestSeg(P,w){ let best=0,bd=Infinity; for(let i=0;i<P.length-1;i++){ const A=P[i],B=P[i+1]; const vx=B.x-A.x,vy=B.y-A.y; const L=vx*vx+vy*vy||1; const t=clamp(((w.x-A.x)*vx+(w.y-A.y)*vy)/L,0,1); const d=Math.hypot(A.x+vx*t-w.x,A.y+vy*t-w.y); if(d<bd){bd=d;best=i;} } return best; }
+function snap5(v){ return Math.round(v/5)*5; }
+function startWireEdit(w,kind,idx,pos){
+  const snap=snapshot();
+  if(kind!=='end'&&!(w.pts&&w.pts.length)){ const a=refPos(w.a),b=refPos(w.b); w.pts=wirePts(w,a,b).map(q=>[...q]); }
+  if(kind==='add'){ w.pts.splice(idx,0,[snap5(pos.x),snap5(pos.y)]); kind='bend'; }
+  wedit={w,kind,idx,snap,moved:false};
+  hideHover(); renderWires();
 }
 function renderAll(){ lParts.innerHTML=''; for(const p of S.parts){ p._g=null; renderPart(p);} placeBoards(); renderWires(); }
 
@@ -1155,7 +1203,8 @@ function rotateSel(){ if(!sel||sel.kind!=='part') return; pushUndo(); const p=pa
 
 /* =================== interaksi meja kerja =================== */
 let drag=null, wiring=null, pan=null, actDrag=null, pinch=null; const pointers=new Map();
-let wireColor=WIRE_COLORS[2][0];
+let wireColor=WIRE_COLORS[2][0], wireStyle='curve';
+const WIRE_STYLES=[['curve','Lengkung','M3 14 Q10 2 17 14'],['straight','Lurus','M3 15 L17 5'],['ortho','Siku','M3 15 V8 H17 V5']];
 const ring=svgEl('circle',{'class':'ring',r:4.2,visibility:'hidden'},lOver);
 const netDots=svgEl('g',{},lOver);
 const preview=svgEl('g',{style:'pointer-events:none'},lOver);
@@ -1165,14 +1214,14 @@ function freePins(){ const H=holeMap(), out=[]; for(const p of S.parts) for(cons
 function nearestPoint(w,r){ let best=null,bd=r*r; for(const h of allHoles()){ const d=(h.x-w.x)**2+(h.y-w.y)**2; if(d<bd){bd=d;best=h;} } for(const p of freePins()){ const d=(p.x-w.x)**2+(p.y-w.y)**2; if(d<=bd){bd=d;best=p;} } return best; }
 function pinPoint(pinEl){ const p=partById(+pinEl.closest('[data-part]').dataset.part); const pos=pinWorld(p,pinEl.dataset.pin); const h=holeMap().get(hkey(pos.x,pos.y)); return h?h:{ref:pr(p,pinEl.dataset.pin),x:pos.x,y:pos.y}; }
 function autoColor(a,b){ for(const r of [a,b]){ if(/^ard:GND/.test(r)||/:(tm|bm)$/.test(r)||/:GND$/.test(r)) return '#1e1e1e'; } for(const r of [a,b]){ if(r==='ard:5V'||/:(tp|bp)$/.test(r)||/:VCC$/.test(r)) return '#d32f2a'; } return null; }
-function startWire(ref){ wiring={a:ref,pts:[]}; svg.classList.add('wiring'); $('#hint').textContent='Klik lubang atau pin tujuan. Klik area kosong untuk menekuk kabel. Esc untuk batal.'; }
+function startWire(ref){ wiring={a:ref,pts:[]}; wHandles.innerHTML=''; svg.classList.add('wiring'); $('#hint').textContent='Klik lubang atau pin tujuan. Klik area kosong untuk menekuk kabel. Esc untuk batal.'; }
 function cancelWire(){ wiring=null; preview.innerHTML=''; svg.classList.remove('wiring'); $('#hint').textContent='Klik lubang atau pin untuk mulai menarik kabel.'; }
 function finishWire(ref){
   if(ref===wiring.a){ cancelWire(); return; }
   if(S.wires.some(w=>(w.a===wiring.a&&w.b===ref)||(w.b===wiring.a&&w.a===ref))){ cancelWire(); return; }
   pushUndo();
   const color=autoColor(wiring.a,ref)||wireColor;
-  const w={id:S.nextId++,a:wiring.a,b:ref,pts:wiring.pts,color}; S.wires.push(w); cancelWire(); changed(); select({kind:'wire',id:w.id});
+  const w={id:S.nextId++,a:wiring.a,b:ref,pts:wiring.pts,color,style:wireStyle}; S.wires.push(w); cancelWire(); changed(); select({kind:'wire',id:w.id});
 }
 function ridersOf(kind){
   const H=holeMap(), parts=[];
@@ -1216,13 +1265,17 @@ svg.addEventListener('pointerdown',e=>{
   if(pointers.size===2){ const [p1,p2]=[...pointers.values()]; pinch={d:Math.hypot(p1.x-p2.x,p1.y-p2.y),k:view.k}; drag=null; pan=null; return; }
   const w=toWorld(e), t=e.target;
   if(e.button===2){ if(wiring) cancelWire(); return; }
+  const wh=t.closest&&t.closest('[data-wh]');
+  if(wh&&!wiring){ const w2=S.wires.find(x=>x.id===sel.id); const [kind,v]=wh.dataset.wh.split(':'); startWireEdit(w2,kind,kind==='end'?v:+v,w); return; }
   const act=t.closest&&t.closest('.act');
   if(act&&!wiring){ onAct(act,e); return; }
   if(wiring){ const pe=t.closest('[data-pin]'); const pt=pe?pinPoint(pe):nearestPoint(w,6); if(pt) finishWire(pt.ref); else wiring.pts.push([Math.round(w.x*2)/2,Math.round(w.y*2)/2]); return; }
   const pe=t.closest('[data-pin]'); if(pe){ startWire(pinPoint(pe).ref); return; }
   const pEl=t.closest('[data-part]');
   if(pEl){ const p=partById(+pEl.dataset.part); select({kind:'part',id:p.id}); drag={kind:'part',p,ox:w.x-p.x,oy:w.y-p.y,moved:false,snap:snapshot(),sx:e.clientX,sy:e.clientY}; hideHover(); return; }
-  const wEl=t.closest('[data-wire]'); if(wEl){ select({kind:'wire',id:+wEl.dataset.wire}); return; }
+  const wEl=t.closest('[data-wire]'); if(wEl){ const id=+wEl.dataset.wire; const wr=S.wires.find(x=>x.id===id);
+    if(sel&&sel.kind==='wire'&&sel.id===id){ const a=refPos(wr.a),b=refPos(wr.b); const P=[a,...wirePts(wr,a,b).map(q=>({x:q[0],y:q[1]})),b]; startWireEdit(wr,'add',nearestSeg(P,w),w); return; }
+    select({kind:'wire',id}); return; }
   const near=nearestPoint(w,4.6); if(near){ startWire(near.ref); return; }
   const b=t.closest('.brd');
   if(b){ const kind=b.id; select({kind}); drag={kind,ox:w.x-S[kind].x,oy:w.y-S[kind].y,moved:false,snap:snapshot(),sx:e.clientX,sy:e.clientY,riders:ridersOf(kind)}; return; }
@@ -1234,6 +1287,10 @@ svg.addEventListener('pointermove',e=>{
   if(actDrag){ const p=actDrag.p; p.props.pos=clamp(actDrag.pos-(e.clientY-actDrag.y)/140+(e.clientX-actDrag.x)/140,0,1); const k=p._g.querySelector('.knobrot'); if(k) k.setAttribute('transform',`rotate(${-135+p.props.pos*270} 10 -17.5)`); solveDirty=true; liveInspector(); return; }
   if(pan){ view.x=pan.vx+e.clientX-pan.x; view.y=pan.vy+e.clientY-pan.y; applyView(); return; }
   const w=toWorld(e);
+  if(wedit){ const W=wedit.w; wedit.moved=true;
+    if(wedit.kind==='end'){ const pt=nearestPoint(w,6); W._drag={which:wedit.idx,x:pt?pt.x:w.x,y:pt?pt.y:w.y,ref:pt?pt.ref:null}; if(pt){ ring.setAttribute('cx',pt.x); ring.setAttribute('cy',pt.y); ring.setAttribute('visibility','visible'); } else ring.setAttribute('visibility','hidden'); }
+    else { W.pts[wedit.idx]=e.shiftKey?[Math.round(w.x*2)/2,Math.round(w.y*2)/2]:[snap5(w.x),snap5(w.y)]; }
+    renderWires(); return; }
   if(drag){
     if(!drag.moved&&Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<3) return;
     drag.moved=true;
@@ -1243,7 +1300,7 @@ svg.addEventListener('pointermove',e=>{
     topoDirty=true; return;
   }
   if(wiring){ const a=refPos(wiring.a); const pe=e.target.closest&&e.target.closest('[data-pin]'); const pt=pe?pinPoint(pe):nearestPoint(w,6); const b=pt?{x:pt.x,y:pt.y}:w; const c=autoColor(wiring.a,pt?pt.ref:'')||wireColor;
-    preview.innerHTML=wireMarkup(wireD(a,b,wiring.pts),c,a,b).replace(/<path/g,'<path opacity=".85"'); }
+    preview.innerHTML=wireMarkup(wireD(a,b,wiring.pts.length?wiring.pts:(wireStyle==='ortho'?orthoPts(a,b):[]),wireStyle),c,a,b).replace(/<path/g,'<path opacity=".85"'); }
   const pe=e.target.closest&&e.target.closest('[data-pin]');
   const overPart=e.target.closest&&e.target.closest('[data-part]');
   const pt=pe?pinPoint(pe):(!overPart?nearestPoint(w,5):null);
@@ -1253,11 +1310,21 @@ svg.addEventListener('pointermove',e=>{
 function endPointer(e){
   pointers.delete(e.pointerId); if(pointers.size<2) pinch=null;
   if(actDrag){ pushUndo(actDrag.snap); actDrag=null; changed(); }
+  if(wedit){ const W=wedit.w;
+    if(wedit.kind==='end'){ const d=W._drag; W._drag=null; ring.setAttribute('visibility','hidden');
+      const other=wedit.idx==='a'?W.b:W.a;
+      if(d&&d.ref&&d.ref!==other&&d.ref!==W[wedit.idx]){ W[wedit.idx]=d.ref; pushUndo(wedit.snap); changed(); toast('Ujung kabel dipindah ke '+refName(d.ref)+'.'); }
+      else renderWires(); }
+    else if(wedit.moved){ pushUndo(wedit.snap); changed(); }
+    else { pushUndo(wedit.snap); changed(); }
+    wedit=null; refreshInspector(); }
   if(pressHeld&&!pressHeld.props.latch){ pressHeld.pressed=false; renderPart(pressHeld); topoDirty=true; liveInspector(); }
   pressHeld=null;
   if(pan){ pan=null; svg.classList.remove('panning'); }
   if(drag){ if(drag.moved){ pushUndo(drag.snap); changed(); refreshInspector(); } drag=null; netDots.innerHTML=''; }
 }
+svg.addEventListener('dblclick',e=>{ const wh=e.target.closest&&e.target.closest('[data-wh^="bend"]'); if(!wh||!sel||sel.kind!=='wire') return;
+  const W=S.wires.find(x=>x.id===sel.id); pushUndo(); W.pts.splice(+wh.dataset.wh.split(':')[1],1); changed(); });
 svg.addEventListener('pointerup',endPointer); svg.addEventListener('pointercancel',endPointer);
 svg.addEventListener('pointerleave',()=>{ if(!drag&&!pan) hideHover(); });
 svg.addEventListener('wheel',e=>{ e.preventDefault(); const kn=e.target.closest&&e.target.closest('[data-act="knob"]');
@@ -1291,14 +1358,22 @@ document.addEventListener('keydown',e=>{
 (function(){
   const tb=$('#tbWire');
   WIRE_COLORS.forEach(([c,n])=>{ const b=document.createElement('button'); b.className='sw'+(c===wireColor?' on':''); b.style.background=c; b.title='Kabel '+n.toLowerCase(); b.setAttribute('aria-label','Kabel '+n);
-    b.onclick=()=>{ wireColor=c; $$('.sw',tb).forEach(x=>x.classList.toggle('on',x===b)); if(sel&&sel.kind==='wire'){ pushUndo(); const w=S.wires.find(x=>x.id===sel.id); w.color=c; changed(); refreshInspector(); } };
+    b.dataset.c=c; b.onclick=()=>setWireColor(c);
     tb.appendChild(b); });
+  const sep=document.createElement('span'); sep.className='sep'; tb.appendChild(sep);
+  WIRE_STYLES.forEach(([k,n,d])=>{ const b=document.createElement('button'); b.className='ib wst'+(k===wireStyle?' on':''); b.dataset.style=k; b.title='Bentuk kabel: '+n; b.setAttribute('aria-label','Bentuk kabel '+n);
+    b.innerHTML=`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+    b.onclick=()=>setWireStyle(k); tb.appendChild(b); });
   $('#bUndo').onclick=undo; $('#bRedo').onclick=redo; $('#bRot').onclick=rotateSel; $('#bDel').onclick=deleteSel;
   $('#bZi').onclick=()=>zoomAt(1.25); $('#bZo').onclick=()=>zoomAt(0.8); $('#bFit').onclick=fitView;
   $('#bSnd').onclick=()=>{ muted=!muted; $('#bSnd').classList.toggle('on',!muted); $('#bSnd').querySelector('.w1').style.opacity=muted?0:1; if(muted) stopAllVoices(); };
   updUndo();
 })();
 
+function setWireStyle(k,clearBends){ wireStyle=k; $$('.wst').forEach(x=>x.classList.toggle('on',x.dataset.style===k));
+  if(sel&&sel.kind==='wire'){ pushUndo(); const w=S.wires.find(x=>x.id===sel.id); w.style=k; if(clearBends) w.pts=[]; changed(); refreshInspector(); } }
+function setWireColor(c){ wireColor=c; $$('#tbWire .sw').forEach(x=>x.classList.toggle('on',x.dataset.c===c));
+  if(sel&&sel.kind==='wire'){ pushUndo(); const w=S.wires.find(x=>x.id===sel.id); w.color=c; changed(); refreshInspector(); } }
 /* =================== rak komponen =================== */
 (function(){
   const list=$('#partList');
@@ -1532,7 +1607,7 @@ let toastT=0;
 function toast(msg){ let t=$('.toast'); if(!t){ t=document.createElement('div'); t.className='toast'; document.body.appendChild(t); } t.textContent=msg; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,2600); }
 
 /* =================== panel properti =================== */
-const insp=$('#insp');
+const insp=$('#insp'); let inspMin=false;
 function opt(v,l,cur){ return `<option value="${v}"${String(v)===String(cur)?' selected':''}>${l}</option>`; }
 function refreshInspector(){
   if(!sel){ insp.hidden=true; insp.innerHTML=''; return; }
@@ -1554,12 +1629,18 @@ function refreshInspector(){
     body+=`<div class="meter" id="iMeter"></div>`;
     foot=`<button class="btn" data-a="rot">Putar 90°</button><button class="btn" data-a="del">Hapus</button>`;
   } else if(sel.kind==='wire'){ const w=S.wires.find(x=>x.id===sel.id); if(!w){ insp.hidden=true; return; }
-    head=`<b>Kabel</b><span>jumper</span>`;
-    body=`<div class="meter"><span>Dari</span><b style="font-family:var(--f-ui);text-align:right">${esc(refName(w.a))}</b><span>Ke</span><b style="font-family:var(--f-ui);text-align:right">${esc(refName(w.b))}</b></div><div class="note">Pilih warna di bilah “Kabel” untuk mengubah warna kabel ini.</div><div class="meter" id="iMeter"></div>`;
+    const cn=(WIRE_COLORS.find(q=>q[0]===w.color)||['','kustom'])[1].toLowerCase(); const st=w.style||'curve'; const nb=(w.pts||[]).length;
+    head=`<b>Kabel ${cn}</b><span>jumper</span>`;
+    body=`<div class="meter"><span>Dari</span><b style="font-family:var(--f-ui);text-align:right">${esc(refName(w.a))}</b><span>Ke</span><b style="font-family:var(--f-ui);text-align:right">${esc(refName(w.b))}</b><span>Tikungan</span><b>${nb}</b></div>
+      <div class="row" style="display:grid;gap:5px;font-size:12px;color:var(--muted)">Warna<div class="iswatch">${WIRE_COLORS.map(([c,n])=>`<button class="sw${c===w.color?' on':''}" data-wc="${c}" style="background:${c}" title="${n}" aria-label="Warna ${n}"></button>`).join('')}</div></div>
+      <div class="row" style="display:grid;gap:5px;font-size:12px;color:var(--muted)">Bentuk<div class="seg">${WIRE_STYLES.map(([k,n])=>`<button class="${k===st?'on':''}" data-ws="${k}">${n}</button>`).join('')}</div></div>
+      <div class="rowbtn"><button class="btn sm" data-a="tidy">Rapikan siku</button><button class="btn sm" data-a="clear"${nb?'':' disabled'}>Hapus tikungan</button><button class="btn sm" data-a="swap">Tukar ujung</button></div>
+      <details class="note"><summary>Cara mengedit kabel</summary>Seret titik oranye di ujung kabel untuk memindah sambungan. Seret titik putih untuk menggeser tikungan, seret tanda + untuk menambah tikungan, atau seret badan kabel langsung. Klik ganda tikungan untuk menghapusnya. Tahan Shift untuk geser halus.</details>
+      <div class="meter" id="iMeter"></div>`;
     foot=`<button class="btn" data-a="del">Hapus kabel</button>`;
   } else if(sel.kind==='ard'){ head=`<b>UNO</b><span>ATmega328P · 16 MHz</span>`; body=`<div class="note">Flash 32 KB · SRAM 2 KB · 14 pin digital (6 PWM) · 6 input analog 10-bit. Batas arus per pin 20 mA (maks 40 mA).</div><div id="iMeter"></div>`; }
   else if(sel.kind==='bb'){ head=`<b>Breadboard</b><span>400 titik</span>`; body=`<div class="note">Setiap kolom bernomor terbagi dua: baris a–e terhubung, f–j terhubung, dipisah parit tengah. Rel + dan − terhubung sepanjang papan. Arahkan tetikus ke lubang untuk melihat apa saja yang terhubung.</div>`; }
-  insp.innerHTML=`<div class="ih">${head}</div><div class="ib2">${body}</div>${foot?`<div class="if">${foot}</div>`:''}`; insp.hidden=false;
+  insp.classList.toggle('min',inspMin); insp.innerHTML=`<div class="ih">${head}<button class="ib imin" title="Perkecil/perbesar panel" aria-label="Perkecil panel"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="${inspMin?'m6 8 4 4 4-4':'m6 12 4-4 4 4'}"/></svg></button></div><div class="ib2">${body}</div>${foot?`<div class="if">${foot}</div>`:''}`; insp.hidden=false;
   insp.querySelectorAll('[data-prop]').forEach(el=>{ const ev=el.type==='range'?'input':'change'; let snap=null;
     if(el.type==='range') el.addEventListener('pointerdown',()=>{ snap=snapshot(); });
     el.addEventListener(ev,()=>{ const p=partById(sel.id); const k=el.dataset.prop; let v=el.type==='checkbox'?el.checked:el.value;
@@ -1568,7 +1649,14 @@ function refreshInspector(){
       if(el.type!=='range'){ changed(); refreshInspector(); } else { liveInspector(); clearTimeout(saveT); saveT=setTimeout(saveLocal,400); } });
     if(el.type==='range') el.addEventListener('change',()=>{ if(snap) pushUndo(snap); changed(); });
   });
-  insp.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ const a=b.dataset.a; if(a==='del') deleteSel(); else if(a==='rot') rotateSel(); else if(a==='fix'){ pushUndo(); const p=partById(sel.id); p.burnt=false; p._over=0; renderPart(p); changed(); refreshInspector(); } });
+  insp.querySelector('.imin').onclick=()=>{ inspMin=!inspMin; refreshInspector(); };
+  insp.querySelectorAll('[data-wc]').forEach(b=>b.onclick=()=>setWireColor(b.dataset.wc));
+  insp.querySelectorAll('[data-ws]').forEach(b=>b.onclick=()=>setWireStyle(b.dataset.ws));
+  insp.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ const a=b.dataset.a; const W=sel&&sel.kind==='wire'?S.wires.find(x=>x.id===sel.id):null;
+    if(W&&a==='tidy'){ pushUndo(); W.style='ortho'; W.pts=orthoPts(refPos(W.a),refPos(W.b)); changed(); refreshInspector(); return; }
+    if(W&&a==='clear'){ pushUndo(); W.pts=[]; changed(); refreshInspector(); return; }
+    if(W&&a==='swap'){ pushUndo(); [W.a,W.b]=[W.b,W.a]; W.pts=(W.pts||[]).slice().reverse(); changed(); refreshInspector(); return; }
+    if(a==='del') deleteSel(); else if(a==='rot') rotateSel(); else if(a==='fix'){ pushUndo(); const p=partById(sel.id); p.burnt=false; p._over=0; renderPart(p); changed(); refreshInspector(); } });
   liveInspector();
 }
 function bandNames(o){ const N_=['hitam','coklat','merah','oranye','kuning','hijau','biru','ungu','abu-abu','putih']; let e=0,v=o; while(v>=100){v/=10;e++;} v=Math.round(v); return `${N_[Math.floor(v/10)]} – ${N_[v%10]} – ${e>=0?N_[e]:'emas'} – emas`; }
