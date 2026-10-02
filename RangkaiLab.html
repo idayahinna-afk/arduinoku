@@ -1,4 +1,11 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mutmainnah_Lab — simulator papan UNO di browser: rakit rangkaian di breadboard, tulis kode Arduino, jalankan, dan susun rancangan proyek.">
+<meta name="theme-color" content="#0a7c83">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='5' width='28' height='22' rx='3' fill='%230a7c83'/%3E%3Crect x='11' y='16' width='14' height='6' rx='1' fill='%231b1b1b'/%3E%3Ccircle cx='7' cy='20' r='2.2' fill='%23ffcf3a'/%3E%3C/svg%3E">
 <title>Mutmainnah_Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +45,7 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html,body{height:100%}
+html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:14px;line-height:1.4;overflow:hidden}
 button,select,input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -234,12 +241,14 @@ button,select,input,textarea{font:inherit;color:inherit}
 }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
 </style>
+</head>
+<body>
 
 <div id="app">
   <header class="top">
     <div class="brand">
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="22" rx="3" fill="#0a7c83"/><rect x="6" y="9" width="9" height="3" rx=".5" fill="#111"/><rect x="17" y="9" width="9" height="3" rx=".5" fill="#111"/><rect x="11" y="16" width="14" height="6" rx="1" fill="#1b1b1b"/><circle cx="7" cy="20" r="2.2" fill="#ffcf3a"/></svg>
-      <div><b>RangkaiLab</b><small>Simulator papan UNO</small></div>
+      <div><b>Mutmainnah_Lab</b><small>Simulator papan UNO</small></div>
     </div>
     <div class="field"><label for="exSel">Proyek</label><select id="exSel"></select></div>
     <div class="field"><label for="projName">Nama</label><input id="projName" maxlength="60"></div>
@@ -1078,7 +1087,7 @@ function loadProject(o,keepView){
 }
 let saveT=0, designT=0;
 function changed(){ topoDirty=true; solveDirty=true; holesCache=null; renderWires(); clearTimeout(saveT); saveT=setTimeout(saveLocal,400); clearTimeout(designT); designT=setTimeout(renderDesign,250); }
-function saveLocal(){ try{ localStorage.setItem('rangkailab:v1',JSON.stringify({...JSON.parse(snapshot()),notes:S.notes||''})); }catch(e){} }
+function saveLocal(){ try{ localStorage.setItem('mutmainnah_lab:v1',JSON.stringify({...JSON.parse(snapshot()),notes:S.notes||''})); }catch(e){} }
 
 /* =================== tambah / hapus / putar =================== */
 function nextDes(type){ const pre=PT[type].prefix; const used=new Set(S.parts.map(q=>q.des)); let n=1; while(used.has(pre+n)) n++; return pre+n; }
@@ -1594,7 +1603,7 @@ function renderDesign(){
     <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Proyek juga tersimpan otomatis di peramban ini.</p></section>`;
   $('#dName').oninput=e=>{ projName.value=e.target.value; saveLaterLocal(); };
   $('#dNotes').oninput=e=>{ S.notes=e.target.value; saveLaterLocal(); };
-  $('#dCopy').onclick=()=>{ const txt=JSON.stringify({...JSON.parse(snapshot()),notes:S.notes||'',format:'rangkailab-1'}); navigator.clipboard.writeText(txt).then(()=>toast('Proyek disalin ke papan klip.')).catch(()=>{ $('#impBox').hidden=false; $('#impTxt').value=txt; $('#impTxt').select(); toast('Salin teks yang sudah dipilih.'); }); };
+  $('#dCopy').onclick=()=>{ const txt=JSON.stringify({...JSON.parse(snapshot()),notes:S.notes||'',format:'mutmainnah_lab-1'}); navigator.clipboard.writeText(txt).then(()=>toast('Proyek disalin ke papan klip.')).catch(()=>{ $('#impBox').hidden=false; $('#impTxt').value=txt; $('#impTxt').select(); toast('Salin teks yang sudah dipilih.'); }); };
   $('#dImp').onclick=()=>{ $('#impBox').hidden=!$('#impBox').hidden; };
   $('#impGo').onclick=()=>{ try{ const o=JSON.parse($('#impTxt').value); if(!o.parts||!o.wires) throw 0; pushUndo(); stopSim(true); loadProject(o); toast('Proyek dimuat.'); }catch(e){ toast('Teks bukan data proyek yang valid.'); } };
 }
@@ -1873,7 +1882,7 @@ function nextDesIn(list,type){ const pre=PT[type].prefix; const used=new Set(lis
 (function init(){
   exSel.innerHTML=`<option value="" disabled>Muat contoh…</option>`+EX.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join('');
   exSel.onchange=()=>{ const ex=EX.find(e=>e.id===exSel.value); if(!ex) return; pushUndo(); stopSim(true); clearC(); loadProject(buildExample(ex)); logC(`Contoh “${ex.title}” dimuat. Tekan Unggah untuk menjalankan.`,'mu'); toast('Contoh dimuat. Ctrl+Z untuk kembali ke proyek sebelumnya.'); };
-  let saved=null; try{ saved=JSON.parse(localStorage.getItem('rangkailab:v1')||'null'); }catch(e){}
+  let saved=null; try{ saved=JSON.parse(localStorage.getItem('mutmainnah_lab:v1')||'null'); }catch(e){}
   placeBoards(); applyView();
   if(saved&&saved.parts){ loadProject(saved); exSel.value=''; logC('Proyek terakhir dipulihkan dari peramban ini.','mu'); }
   else { loadProject(buildExample(EX[0])); exSel.value='blink'; logC('Selamat datang. Contoh “Blink LED” sudah dirakit — tekan Unggah & Jalankan.','mu'); }
@@ -1885,5 +1894,5 @@ function nextDesIn(list,type){ const pre=PT[type].prefix; const used=new Set(lis
   document.fonts&&document.fonts.ready.then(()=>{ refreshEditor(); });
 })();
 </script>
-
-</body></html>
+</body>
+</html>
