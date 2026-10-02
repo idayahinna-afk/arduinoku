@@ -237,6 +237,28 @@ button,select,input,textarea{font:inherit;color:inherit}
 #insp .btn.sm{height:30px;padding:0 9px;font-size:12.5px;flex:none}
 #insp .btn[disabled]{opacity:.45}
 .tb .wst{width:28px;height:28px}
+
+.psearch{padding:8px 8px 4px}
+.psearch input{width:100%;height:32px;border:1px solid var(--line);border-radius:7px;background:var(--panel-2);padding:0 10px;font-size:13px}
+.pcat{font-family:var(--f-label);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 8px 3px}
+.pempty{padding:12px 8px;color:var(--muted);font-size:12.5px}
+.btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.ftabs{display:flex;gap:2px;flex-wrap:wrap}
+.ft{border:1px solid transparent;background:transparent;border-radius:6px;padding:3px 9px;font-family:var(--f-mono);font-size:12px;color:var(--muted);cursor:pointer}
+.ft.on{background:var(--panel-2);border-color:var(--line);color:var(--fg)}
+.edhint{display:none}
+.fpane{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--code)}
+.fpane[hidden]{display:none}
+.fbar{display:flex;gap:8px;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);flex-wrap:wrap}
+.fbar span{flex:1;min-width:140px}
+.fbar .btn.sm{height:28px;padding:0 10px;font-size:12.5px}
+#djson{flex:1;min-height:0;border:0;resize:none;outline:none;background:transparent;color:var(--fg);font-family:var(--f-mono);font-size:12px;line-height:1.5;padding:10px 12px;tab-size:2}
+.libdoc{flex:1;min-height:0;overflow:auto;padding:12px 14px 20px;font-size:13px}
+.libdoc h4{margin:14px 0 4px;font-family:var(--f-label);font-size:14px;letter-spacing:.04em}
+.libdoc h4:first-child{margin-top:0}
+.libdoc code{font-family:var(--f-mono);font-size:11.5px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+.libdoc p{margin:3px 0;color:var(--muted)}
+.libdoc .fnl{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
 .ghost{position:fixed;pointer-events:none;z-index:30;opacity:.85;width:70px;height:60px;transform:translate(-50%,-50%)}
 
 
@@ -268,11 +290,13 @@ button,select,input,textarea{font:inherit;color:inherit}
 #app.no-parts .tb.tl{max-width:calc(100% - 54px)}
 #app.no-side .tb.tr,#app.no-side .warns{right:44px}
 body.resizing{user-select:none;cursor:col-resize}
+@media (max-width:1680px){ #btnPause span,#btnStop span{display:none} #btnPause,#btnStop{padding:0 10px} .field select{max-width:150px} .vt button{padding:0 9px} }
+@media (max-width:1560px) and (min-width:901px){ #tgFocus span{display:none} .brand b{font-size:19px} .chip{font-size:11.5px} }
 @media (max-width:1500px){ .vt button .t-long{display:none} .field input{width:130px} .field select{max-width:180px} .brand small{display:none} .chip{padding:0 10px} .btn{padding:0 11px} }
 .stagewrap{container-type:inline-size}
-@media (max-width:1450px) and (min-width:901px){ .fname-f{display:none} }
+@media (max-width:2000px) and (min-width:901px){ .fname-f{display:none} }
 @container (max-width:860px){ .tb.tl{top:54px} #insp{top:100px;max-height:calc(100% - 150px)} }
-@media (max-width:1250px){ .vt button span{display:none} .vt button{padding:0 9px} }
+@media (max-width:1330px){ .vt button span{display:none} .vt button{padding:0 9px} }
 @media (max-width:1100px) and (min-width:901px){ .work{grid-template-columns:170px minmax(0,1fr) var(--side-w,360px)} #app.no-parts .work{grid-template-columns:minmax(0,1fr) var(--side-w,360px)} #app.no-side .work{grid-template-columns:170px minmax(0,1fr)} }
 @media (max-width:900px){
   body{overflow:auto}
@@ -281,6 +305,7 @@ body.resizing{user-select:none;cursor:col-resize}
   .parts .list{flex-direction:row;overflow-x:auto;overflow-y:hidden}
   .pitem{grid-template-columns:44px auto;flex:none}
   .pitem span{display:none}
+  .pcat{display:none}
   .parts .help{display:none}
   .stagewrap{height:64vh;min-height:380px}
   .side{height:78vh;min-height:460px}
@@ -303,6 +328,7 @@ body.resizing{user-select:none;cursor:col-resize}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="22" rx="3" fill="#0a7c83"/><rect x="6" y="9" width="9" height="3" rx=".5" fill="#111"/><rect x="17" y="9" width="9" height="3" rx=".5" fill="#111"/><rect x="11" y="16" width="14" height="6" rx="1" fill="#1b1b1b"/><circle cx="7" cy="20" r="2.2" fill="#ffcf3a"/></svg>
       <div><b>Mutmainnah_Lab</b><small>Simulator papan UNO</small></div>
     </div>
+    <div class="field"><label for="boardSel">Papan</label><select id="boardSel"><option value="uno">Uno R3</option><option value="nano">Nano</option><option value="mega">Mega 2560</option></select></div>
     <div class="field"><label for="exSel">Proyek</label><select id="exSel"></select></div>
     <div class="field fname-f"><label for="projName">Nama</label><input id="projName" maxlength="60"></div>
     <div class="vt" role="group" aria-label="Tampilan panel">
@@ -313,12 +339,14 @@ body.resizing{user-select:none;cursor:col-resize}
     <div class="spacer"></div>
     <div class="chip" id="stChip"><i></i><span id="stTxt">Papan mati</span></div>
     <button class="btn run" id="btnRun" title="Unggah & jalankan (Ctrl+Enter)"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span>Unggah <span class="t-long">&amp; Jalankan</span></span></button>
+    <button class="btn" id="btnPause" title="Jeda/lanjutkan simulasi (Spasi)" disabled><svg viewBox="0 0 16 16"><path d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor"/></svg><span>Jeda</span></button>
     <button class="btn" id="btnStop" title="Matikan papan" disabled><svg viewBox="0 0 16 16"><rect x="3.5" y="3.5" width="9" height="9" rx="1" fill="currentColor"/></svg><span>Matikan</span></button>
   </header>
 
   <main class="work">
     <aside class="panel parts">
-      <div class="ph"><span>Komponen</span></div>
+      <div class="ph"><span>Komponen</span><span id="pCount" style="font-family:var(--f-mono);letter-spacing:0"></span></div>
+      <div class="psearch"><input id="pSearch" type="search" placeholder="Cari komponen…" aria-label="Cari komponen"></div>
       <div class="list" id="partList"></div>
       <div class="help">
         <div>Seret komponen ke breadboard. Kaki akan masuk ke lubang terdekat.</div>
@@ -363,11 +391,13 @@ body.resizing{user-select:none;cursor:col-resize}
         <button class="tab" data-tab="design" role="tab">Rancangan<span class="badge" id="ercBadge" hidden>0</span></button>
       </div>
       <div class="pane on" data-pane="code">
-        <div class="edhead"><span class="fname" id="fname">sketch.ino</span><span>C++ Arduino · Ctrl+Enter untuk menjalankan</span></div>
-        <div class="editor">
+        <div class="edhead"><div class="ftabs" role="tablist"><button class="ft on" data-f="ino">sketch.ino</button><button class="ft" data-f="json">diagram.json</button><button class="ft" data-f="lib">pustaka.txt</button></div><span class="edhint">Ctrl+Enter menjalankan</span></div>
+        <div class="editor" id="fIno">
           <div class="gut" id="gut"></div>
           <div class="cw" id="cw"><div class="errbar" id="errbar" hidden></div><pre id="hl" aria-hidden="true"></pre><textarea id="code" spellcheck="false" wrap="off" autocapitalize="off" autocomplete="off" aria-label="Kode sketch"></textarea></div>
         </div>
+        <div class="fpane" id="fJson" hidden><div class="fbar"><span>Rangkaian dalam format JSON. Ubah lalu terapkan.</span><button class="btn sm" id="jApply">Terapkan</button><button class="btn sm" id="jReload">Muat ulang</button></div><textarea id="djson" spellcheck="false" wrap="off" aria-label="diagram.json"></textarea></div>
+        <div class="fpane" id="fLib" hidden><div class="libdoc" id="libdoc"></div></div>
         <div class="console" id="console"></div>
       </div>
       <div class="pane" data-pane="serial">
@@ -405,19 +435,18 @@ function svgEl(tag,attrs,parent){const e=document.createElementNS(NS,tag);if(att
 const now=()=>performance.now();
 
 /* =================== geometri papan UNO (2,54 mm = 10 px) =================== */
-const ARD_PINS={};
+const UNO_PINS={};
 [['SCL',74],['SDA',84],['AREF',94],['GND1',104],['D13',114],['D12',124],['D11',134],['D10',144],['D9',154],['D8',164],
- ['D7',180],['D6',190],['D5',200],['D4',210],['D3',220],['D2',230],['D1',240],['D0',250]].forEach(([n,x])=>ARD_PINS[n]={x,y:10});
+ ['D7',180],['D6',190],['D5',200],['D4',210],['D3',220],['D2',230],['D1',240],['D0',250]].forEach(([n,x])=>UNO_PINS[n]={x,y:10});
 [['NC',110],['IOREF',120],['RESET',130],['3V3',140],['5V',150],['GND2',160],['GND3',170],['VIN',180],
- ['A0',200],['A1',210],['A2',220],['A3',230],['A4',240],['A5',250]].forEach(([n,x])=>ARD_PINS[n]={x,y:200});
-const PIN_NAMES=['D0','D1','D2','D3','D4','D5','D6','D7','D8','D9','D10','D11','D12','D13','A0','A1','A2','A3','A4','A5'];
-const PWM_PINS=new Set([3,5,6,9,10,11]);
-function ardLabel(n){ if(/^GND/.test(n)) return 'GND'; if(n==='3V3') return '3.3V'; if(/^D\d+$/.test(n)){const k=+n.slice(1); return (PWM_PINS.has(k)?'~':'')+k;} return n; }
+ ['A0',200],['A1',210],['A2',220],['A3',230],['A4',240],['A5',250]].forEach(([n,x])=>UNO_PINS[n]={x,y:200});
+let ARD_PINS=UNO_PINS, PIN_NAMES=['D0','D1','D2','D3','D4','D5','D6','D7','D8','D9','D10','D11','D12','D13','A0','A1','A2','A3','A4','A5'], PWM_PINS=new Set([3,5,6,9,10,11]), BOARD=null;
+function ardLabel(n){ if(/^GND/.test(n)) return 'GND'; if(n==='3V3') return '3.3V'; if(/^5V/.test(n)) return '5V'; if(/^RST|^RESET/.test(n)) return 'RST'; if(/^D\d+$/.test(n)){const k=+n.slice(1); return (PWM_PINS.has(k)?'~':'')+k;} return n; }
 function ardTitle(n){
-  if(/^GND/.test(n)) return 'GND'; if(n==='3V3') return '3.3V'; if(n==='5V') return '5V';
+  if(/^GND/.test(n)) return 'GND'; if(n==='3V3') return '3.3V'; if(/^5V/.test(n)) return '5V'; if(/^RST|^RESET/.test(n)) return 'RESET';
   if(/^D\d+$/.test(n)){const k=+n.slice(1); return 'Pin digital '+k+(PWM_PINS.has(k)?' (PWM ~)':'')+(k===0?' · RX':k===1?' · TX':'');}
-  if(/^A\d$/.test(n)) return 'Pin analog '+n+(n==='A4'?' · SDA':n==='A5'?' · SCL':'');
-  if(n==='SDA') return 'SDA (sama dengan A4)'; if(n==='SCL') return 'SCL (sama dengan A5)';
+  if(/^A\d+$/.test(n)) return 'Pin analog '+n+(BOARD&&n===BOARD.sda?' · SDA':BOARD&&n===BOARD.scl?' · SCL':'');
+  if(n==='SDA') return 'SDA (sama dengan '+(BOARD?BOARD.sda:'A4')+')'; if(n==='SCL') return 'SCL (sama dengan '+(BOARD?BOARD.scl:'A5')+')';
   return n;
 }
 
@@ -693,6 +722,207 @@ const DRAW={
     <text class="sdist" x="15" y="-92" font-size="7" text-anchor="middle" font-family="JetBrains Mono, monospace" fill="currentColor" style="pointer-events:none"></text>`;
     return s; },
 };
+/* =================== papan: Uno, Nano, Mega =================== */
+const NANO_PINS={};
+['D13','3V3','AREF','A0','A1','A2','A3','A4','A5','A6','A7','5V','RESET','GND1','VIN'].forEach((n,i)=>NANO_PINS[n]={x:15+i*10,y:5});
+['D12','D11','D10','D9','D8','D7','D6','D5','D4','D3','D2','GND2','RST2','D0','D1'].forEach((n,i)=>NANO_PINS[n]={x:15+i*10,y:65});
+const MEGA_PINS={};
+[['SCL',74],['SDA',84],['AREF',94],['GND1',104],['D13',114],['D12',124],['D11',134],['D10',144],['D9',154],['D8',164],
+ ['D7',180],['D6',190],['D5',200],['D4',210],['D3',220],['D2',230],['D1',240],['D0',250],
+ ['D14',266],['D15',276],['D16',286],['D17',296],['D18',306],['D19',316],['D20',326],['D21',336]].forEach(([n,x])=>MEGA_PINS[n]={x,y:10});
+[['NC',110],['IOREF',120],['RESET',130],['3V3',140],['5V',150],['GND2',160],['GND3',170],['VIN',180]].forEach(([n,x])=>MEGA_PINS[n]={x,y:200});
+for(let i=0;i<8;i++){ MEGA_PINS['A'+i]={x:200+i*10,y:200}; MEGA_PINS['A'+(i+8)]={x:286+i*10,y:200}; }
+MEGA_PINS['5V2']={x:372,y:25}; MEGA_PINS['5V3']={x:382,y:25};
+for(let r=1;r<=16;r++){ MEGA_PINS['D'+(20+2*r)]={x:372,y:25+r*10}; MEGA_PINS['D'+(21+2*r)]={x:382,y:25+r*10}; }
+MEGA_PINS['GND4']={x:372,y:195}; MEGA_PINS['GND5']={x:382,y:195};
+const range=(a,b,p)=>Array.from({length:b-a+1},(_,i)=>p+(a+i));
+
+function bHdr(x1,x2,y){ return `<rect x="${x1}" y="${y-6}" width="${x2-x1}" height="12" rx="1.2" fill="url(#gHdr)"/><rect x="${x1+.8}" y="${y-5.2}" width="${x2-x1-1.6}" height="1.2" fill="#fff" opacity=".07"/>`; }
+function bHoles(){ let s=''; for(const n in ARD_PINS){ const p=ARD_PINS[n]; s+=`<rect x="${p.x-2.6}" y="${p.y-2.6}" width="5.2" height="5.2" rx=".6" fill="#050505"/><rect x="${p.x-1.5}" y="${p.y-1.5}" width="3" height="3" fill="#2b2b2b"/>`; } return s; }
+function bLed(id,x,y,lab,fs){ return `<rect x="${x-3}" y="${y-2}" width="6" height="4" fill="#e7e2c6"/><rect class="bled" id="${id}" x="${x-2.2}" y="${y-1.6}" width="4.4" height="3.2" fill="#9a8b52"/><circle id="${id}g" cx="${x}" cy="${y}" r="5.5" fill="#ffd200" opacity="0" filter="url(#fBlur)"/>${lab?`<text class="silk" x="${x+5.5}" y="${y+2}" font-size="${fs||6}">${lab}</text>`:''}`; }
+function bUsbJack(){ return `<g><rect x="-26" y="37" width="64" height="48" rx="2" fill="url(#gUsb)" stroke="#7d868c" stroke-width=".8"/><rect x="-26" y="41" width="62" height="40" rx="1" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".7"/><rect x="-27" y="49" width="7" height="24" fill="#7d868c"/><rect x="-26" y="52" width="5" height="18" fill="#2a2e31"/></g>
+  <g><rect x="-9" y="158" width="56" height="40" rx="2" fill="url(#gJack)"/><rect x="-10" y="164" width="6" height="28" rx="1" fill="#0b0b0b"/><circle cx="-7" cy="178" r="3" fill="#2b2b2b"/></g>
+  <circle cx="64" cy="140" r="9" fill="url(#gMetal)" stroke="#6e777c" stroke-width=".6"/><circle cx="86" cy="140" r="9" fill="url(#gMetal)" stroke="#6e777c" stroke-width=".6"/>
+  <rect x="60" y="164" width="22" height="13" rx="1" fill="#1b1d1e"/><rect x="62" y="158" width="18" height="6" fill="#b9c0c4"/>
+  <g class="act" data-act="reset" id="rstBtn"><rect x="20" y="8" width="18" height="18" rx="1.5" fill="url(#gMetal)" stroke="#7b8388" stroke-width=".6"/><circle id="rstCap" cx="29" cy="17" r="5.5" fill="#d6c8a4" stroke="#8d7f5c" stroke-width=".6"/></g>
+  <text class="silk" x="29" y="33" font-size="5.6" text-anchor="middle">RESET</text>`; }
+function bMount(list){ return list.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7.5" fill="#d9c27a"/><circle cx="${x}" cy="${y}" r="5.3" fill="#1d2a2c"/>`).join(''); }
+
+function megaMarkup(){
+  let s=`<path d="M6 0 H392 Q400 0 400 8 V202 Q400 210 392 210 H6 Q0 210 0 204 V6 Q0 0 6 0 Z" fill="url(#gPcb)" stroke="#06656b" stroke-width="1"/>
+  <g fill="none" stroke="#0f8d95" stroke-width="1.2" opacity=".9"><path d="M114 22 V40 L126 52 H170"/><path d="M200 190 V170 L230 140"/><path d="M300 22 V50 L250 80"/><path d="M330 190 V160 L290 130"/><path d="M372 60 H340 L300 100"/></g>`;
+  s+=bMount([[60,10],[55,200],[350,40],[350,160],[260,180]])+bUsbJack();
+  s+=`<rect x="232" y="78" width="56" height="56" rx="2" fill="url(#gChip)" transform="rotate(45 260 106)"/>`;
+  for(let i=0;i<12;i++){ const o=-27+i*5; s+=`<rect x="${260+o-.8}" y="74" width="1.6" height="3" fill="#c9ced1" transform="rotate(45 260 106)"/><rect x="${260+o-.8}" y="135" width="1.6" height="3" fill="#c9ced1" transform="rotate(45 260 106)"/><rect x="228" y="${106+o-.8}" width="3" height="1.6" fill="#c9ced1" transform="rotate(45 260 106)"/><rect x="289" y="${106+o-.8}" width="3" height="1.6" fill="#c9ced1" transform="rotate(45 260 106)"/>`; }
+  s+=`<text x="260" y="104" font-family="JetBrains Mono, monospace" font-size="5" fill="#8d9296" text-anchor="middle" transform="rotate(45 260 106)">ATMEGA2560</text>`;
+  s+=`<rect x="48" y="44" width="17" height="17" rx="1" fill="url(#gChip)" transform="rotate(45 56.5 52.5)"/><ellipse cx="150" cy="150" rx="8" ry="3.6" fill="url(#gMetal)"/>`;
+  s+=`<rect x="334" y="86" width="24" height="34" rx="1" fill="#1a1a1a"/>`; for(const x of [341,351]) for(const y of [93,103,113]) s+=`<rect x="${x-2}" y="${y-2}" width="4" height="4" fill="#d8b85c"/>`;
+  s+=bHdr(68,170,10)+bHdr(174,256,10)+bHdr(260,342,10)+bHdr(104,186,200)+bHdr(194,276,200)+bHdr(280,362,200);
+  s+=`<rect x="366" y="19" width="22" height="182" rx="1.2" fill="url(#gHdr)"/>`+bHoles();
+  for(const n in ARD_PINS){ const p=ARD_PINS[n]; if(n==='NC') continue; let t=ardLabel(n); if(n==='D1') t='TX0→1'; if(n==='D0') t='RX0←0'; if(n==='VIN') t='Vin';
+    if(p.x>=370){ const right=p.x>377; s+=`<text class="silk" x="${right?p.x+6:p.x-6}" y="${p.y+2}" font-size="5" text-anchor="${right?'start':'end'}">${t}</text>`; continue; }
+    if(p.y<100) s+=`<text class="silk" transform="translate(${p.x+2} 19) rotate(-90)" font-size="6.2" text-anchor="end">${t}</text>`;
+    else s+=`<text class="silk" transform="translate(${p.x+2} 191) rotate(-90)" font-size="6.2" text-anchor="start">${t}</text>`; }
+  s+=`<text class="silk" x="215" y="56" font-size="7" text-anchor="middle" letter-spacing=".6">PWM ~</text><text class="silk" x="300" y="56" font-size="7" text-anchor="middle" letter-spacing=".6">KOMUNIKASI</text>
+    <text class="silk" x="145" y="167" font-size="7" text-anchor="middle">POWER</text><text class="silk" x="280" y="167" font-size="7" text-anchor="middle" letter-spacing=".6">ANALOG IN</text>
+    <text class="silk" x="150" y="100" font-size="26" font-weight="700" text-anchor="middle" letter-spacing="1">MEGA</text><text class="silk" x="150" y="112" font-size="6" text-anchor="middle" letter-spacing=".8" opacity=".85">ATmega2560 · 16 MHz · 5 V</text>`;
+  s+=bLed('bL',96,52,'L')+bLed('bTX',96,64,'TX')+bLed('bRX',96,76,'RX')+bLed('bON',318,74,'ON');
+  return s;
+}
+function nanoMarkup(){
+  let s=`<rect x="0" y="0" width="170" height="70" rx="3" fill="#1c55a6" stroke="#0f3a78" stroke-width=".8"/>
+  <rect x="2" y="2" width="166" height="66" rx="2.5" fill="none" stroke="#fff" stroke-opacity=".12"/>
+  <path d="M30 18 H60 L70 28 M120 50 H150 M40 52 H70 L80 44" fill="none" stroke="#2b67bd" stroke-width="1.2"/>
+  <rect x="-10" y="23" width="28" height="24" rx="2" fill="url(#gUsb)" stroke="#7d868c" stroke-width=".7"/><rect x="-11" y="29" width="6" height="12" fill="#2a2e31"/>
+  <rect x="88" y="24" width="22" height="22" rx="1" fill="url(#gChip)" transform="rotate(45 99 35)"/>
+  <text x="99" y="36" font-family="JetBrains Mono, monospace" font-size="3.2" fill="#8d9296" text-anchor="middle" transform="rotate(45 99 35)">MEGA328P</text>
+  <ellipse cx="72" cy="22" rx="6" ry="2.8" fill="url(#gMetal)"/>
+  <g class="act" data-act="reset" id="rstBtn"><rect x="124" y="29" width="12" height="12" rx="1" fill="url(#gMetal)" stroke="#7b8388" stroke-width=".5"/><circle id="rstCap" cx="130" cy="35" r="3.6" fill="#f2f2f2" stroke="#999" stroke-width=".4"/></g>
+  <text class="silk" x="152" y="32" font-size="6.5" font-weight="700" text-anchor="middle">NANO</text><text class="silk" x="152" y="40" font-size="4.2" text-anchor="middle">V3.0</text>`;
+  s+=bLed('bTX',34,30,'TX',4)+bLed('bRX',34,37,'RX',4)+bLed('bL',34,44,'L',4)+bLed('bON',56,44,'ON',4);
+  for(const n in ARD_PINS){ const p=ARD_PINS[n]; s+=`<rect x="${p.x-3.2}" y="${p.y-3.2}" width="6.4" height="6.4" rx="1" fill="#d6b65a"/><circle cx="${p.x}" cy="${p.y}" r="1.7" fill="#3b3a35"/>`;
+    let t=ardLabel(n).replace('~',''); if(n==='D0') t='RX0'; if(n==='D1') t='TX1'; if(n==='AREF') t='REF'; if(n==='VIN') t='VIN';
+    s+=`<text class="silk" x="${p.x}" y="${p.y<30?15:57.5}" font-size="4.4" text-anchor="middle">${t}</text>`; }
+  return s;
+}
+const BOARDS={
+  uno:{id:'uno',name:'Arduino Uno R3',short:'UNO',chip:'ATmega328P · 16 MHz',mem:'Flash 32 KB · SRAM 2 KB · EEPROM 1 KB',w:270,h:210,x0:-30,pins:UNO_PINS,
+    digital:[...range(0,13,'D'),...range(0,5,'A')],aBase:14,aCount:6,aOnly:[],pwm:[3,5,6,9,10,11],sda:'A4',scl:'A5',
+    unions:[['GND1','GND2','GND3'],['SDA','A4'],['SCL','A5']],male:false,markup:()=>boardMarkup(),desc:'14 pin digital (6 PWM) · 6 input analog'},
+  nano:{id:'nano',name:'Arduino Nano',short:'NANO',chip:'ATmega328P · 16 MHz',mem:'Flash 32 KB · SRAM 2 KB · EEPROM 1 KB',w:170,h:70,x0:-12,pins:NANO_PINS,
+    digital:[...range(0,13,'D'),...range(0,7,'A')],aBase:14,aCount:8,aOnly:[20,21],pwm:[3,5,6,9,10,11],sda:'A4',scl:'A5',
+    unions:[['GND1','GND2'],['RESET','RST2']],male:true,markup:()=>nanoMarkup(),desc:'14 pin digital (6 PWM) · 8 input analog · bisa ditancap di breadboard'},
+  mega:{id:'mega',name:'Arduino Mega 2560',short:'MEGA',chip:'ATmega2560 · 16 MHz',mem:'Flash 256 KB · SRAM 8 KB · EEPROM 4 KB',w:400,h:210,x0:-30,pins:MEGA_PINS,
+    digital:[...range(0,53,'D'),...range(0,15,'A')],aBase:54,aCount:16,aOnly:[],pwm:[2,3,4,5,6,7,8,9,10,11,12,13,44,45,46],sda:'D20',scl:'D21',
+    unions:[['GND1','GND2','GND3','GND4','GND5'],['5V','5V2','5V3'],['SDA','D20'],['SCL','D21']],male:false,markup:()=>megaMarkup(),desc:'54 pin digital (15 PWM) · 16 input analog · 4 port serial'},
+};
+function setBoard(id){ BOARD=BOARDS[id]||BOARDS.uno; ARD_PINS=BOARD.pins; PIN_NAMES=BOARD.digital; PWM_PINS=new Set(BOARD.pwm); holesCache=null; }
+setBoard('uno');
+/* =================== pustaka Arduino tambahan =================== */
+const BUILD_DATE=(()=>{ const d=new Date(); const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return {date:`${M[d.getMonth()]} ${String(d.getDate()).padStart(2,' ')} ${d.getFullYear()}`,time:d.toTimeString().slice(0,8)}; })();
+function localUnix(){ const d=new Date(); return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/1000); }
+function hsv2rgb(h,s,v){ h=((h%65536)+65536)%65536/65536*6; s/=255; v/=255; const i=Math.floor(h), f=h-i, p=v*(1-s), q=v*(1-s*f), t=v*(1-s*(1-f)); const [r,g,b]=[[v,t,p],[q,v,p],[p,v,t],[p,q,v],[t,p,v],[v,p,q]][i%6]; return [Math.round(r*255),Math.round(g*255),Math.round(b*255)]; }
+const g8=x=>Math.round(Math.pow(x/255,2.6)*255);
+function __sprintf(fmt,...a){ let i=0; return String(fmt).replace(/%([-0+ #]*)(\d*)(?:\.(\d+))?(l{0,2}|h)?([diuxXscfeEgGo%])/g,(m,fl,w,pr,len,c)=>{ if(c==='%') return '%'; let v=a[i++]; let s;
+  switch(c){ case 'd': case 'i': s=String(Math.trunc(+v||0)); break; case 'u': s=String(Math.trunc(+v||0)>>>0); break; case 'x': s=(Math.trunc(+v||0)>>>0).toString(16); break; case 'X': s=(Math.trunc(+v||0)>>>0).toString(16).toUpperCase(); break; case 'o': s=(Math.trunc(+v||0)>>>0).toString(8); break;
+    case 'c': s=typeof v==='number'?String.fromCharCode(v):String(v)[0]||''; break; case 's': s=v==null?'':String(v); if(pr) s=s.slice(0,+pr); break; default: s='?'; }
+  w=+w||0; if(s.length<w){ if(fl.includes('-')) s=s.padEnd(w); else if(fl.includes('0')&&/[diuxXo]/.test(c)){ const neg=s[0]==='-'; s=(neg?'-':'')+s.slice(neg?1:0).padStart(w-(neg?1:0),'0'); } else s=s.padStart(w); } return s; }); }
+function __dtostrf(v,w,p){ return (+v).toFixed(Math.max(0,Math.trunc(p))).padStart(Math.abs(Math.trunc(w))); }
+
+function makeLibs(L){
+  const reg=o=>{ sim.libs.push(o); return o; };
+  const NEO_GRB=82, NEO_RGB=6, NEO_KHZ800=0;
+  class Adafruit_NeoPixel{ constructor(n,pin){ this.kind='neo'; this.n=Math.max(1,Math.trunc(n)||1); this.pin=Math.trunc(pin); this.br=0; this.buf=new Array(this.n).fill(0); this.shown=new Array(this.n).fill(0); this.ver=0; reg(this); }
+    begin(){ if(this.pin>=0&&this.pin<PIN_NAMES.length){ sim.pins[this.pin].mode='OUTPUT'; solveDirty=true; } }
+    show(){ const b=this.br; this.shown=this.buf.map(c=>b?(((((c>>16)&255)*b>>8)<<16)|((((c>>8)&255)*b>>8)<<8)|((c&255)*b>>8)):c); this.ver++; }
+    setPin(p){ this.pin=Math.trunc(p); } updateLength(n){ this.n=Math.max(1,Math.trunc(n)); this.buf.length=this.n; this.buf.fill(0); }
+    setPixelColor(i,r,g,b){ i=Math.trunc(i); if(i<0||i>=this.n) return; this.buf[i]=g===undefined?(Math.trunc(r)>>>0)&0xFFFFFF:((r&255)<<16)|((g&255)<<8)|(b&255); }
+    getPixelColor(i){ return this.buf[Math.trunc(i)]||0; }
+    fill(c=0,first=0,count=0){ first=Math.trunc(first); const end=count?Math.min(this.n,first+Math.trunc(count)):this.n; for(let i=first;i<end;i++) this.buf[i]=c&0xFFFFFF; }
+    clear(){ this.buf.fill(0); } setBrightness(b){ this.br=(clamp(Math.trunc(b),0,255)+1)&255; } getBrightness(){ return this.br?this.br-1:255; }
+    numPixels(){ return this.n; } canShow(){ return true; } getPin(){ return this.pin; }
+    Color(r,g,b){ return Adafruit_NeoPixel.Color(r,g,b); } static Color(r,g,b){ return ((r&255)<<16)|((g&255)<<8)|(b&255); }
+    ColorHSV(h,s=255,v=255){ return Adafruit_NeoPixel.ColorHSV(h,s,v); } static ColorHSV(h,s=255,v=255){ const [r,g,b]=hsv2rgb(h,s,v); return (r<<16)|(g<<8)|b; }
+    gamma32(c){ return Adafruit_NeoPixel.gamma32(c); } static gamma32(c){ return (g8((c>>16)&255)<<16)|(g8((c>>8)&255)<<8)|g8(c&255); }
+    gamma8(x){ return g8(x); } static gamma8(x){ return g8(x); }
+    rainbow(first=0,reps=1,sat=255,br=255,gam=true){ for(let i=0;i<this.n;i++){ let c=Adafruit_NeoPixel.ColorHSV(first+(i*reps*65536)/this.n,sat,br); if(gam) c=Adafruit_NeoPixel.gamma32(c); this.buf[i]=c; } }
+  }
+  class LedControl{ constructor(din,clk,cs,n=1){ this.kind='max7219'; this.din=din; this.clk=clk; this.cs=cs; this.n=Math.max(1,Math.min(8,n)); this.dev=Array.from({length:this.n},()=>({on:false,inten:8,rows:new Array(8).fill(0)})); this.ver=0; reg(this); }
+    getDeviceCount(){ return this.n; } shutdown(a,b){ if(this.dev[a]){ this.dev[a].on=!b; this.ver++; } } setIntensity(a,i){ if(this.dev[a]){ this.dev[a].inten=clamp(Math.trunc(i),0,15); this.ver++; } }
+    setScanLimit(){} clearDisplay(a){ if(this.dev[a]){ this.dev[a].rows.fill(0); this.ver++; } }
+    setLed(a,r,c,s){ const d=this.dev[a]; if(!d||r<0||r>7||c<0||c>7) return; const bit=0x80>>c; d.rows[r]=s?(d.rows[r]|bit):(d.rows[r]&~bit); this.ver++; }
+    setRow(a,r,v){ const d=this.dev[a]; if(!d||r<0||r>7) return; d.rows[r]=v&255; this.ver++; }
+    setColumn(a,c,v){ const d=this.dev[a]; if(!d||c<0||c>7) return; for(let r=0;r<8;r++){ const on=(v>>(7-r))&1; const bit=0x80>>c; d.rows[r]=on?(d.rows[r]|bit):(d.rows[r]&~bit); } this.ver++; }
+    setDigit(){} setChar(){} }
+  class Stepper{ constructor(spr,a,b,c,d){ this.kind='stepper'; this.spr=Math.max(1,Math.trunc(spr)); this.pins=[a,b,c,d].filter(x=>x!==undefined).map(x=>Math.trunc(x)); this.rpm=1; this.pos=0; for(const p of this.pins) if(p>=0&&p<PIN_NAMES.length) sim.pins[p].mode='OUTPUT'; reg(this); }
+    setSpeed(r){ this.rpm=Math.max(0.01,+r); } version(){ return 5; }
+    async step(n){ n=Math.trunc(n); const dir=Math.sign(n); let left=Math.abs(n); const per=60000/(this.spr*this.rpm);
+      while(left>0){ const k=Math.min(left,Math.max(1,Math.ceil(16/per))); await L.delay(per*k); this.pos+=dir*k; left-=k; } } }
+  const FONTW=6;
+  class Adafruit_SSD1306{ constructor(w=128,h=64){ this.kind='oled'; this.w=Math.trunc(w)||128; this.h=Math.trunc(h)||64; this.buf=new Uint8Array(this.w*this.h); this.shown=new Uint8Array(this.w*this.h); this.addr=0x3C; this.cx=0; this.cy=0; this.ts=1; this.tsy=1; this.fg=1; this.bg=-1; this.wrap=true; this.inv=false; this.ver=0; this.began=false; reg(this); }
+    begin(v,addr=0x3C){ this.addr=+addr; this.began=true; return true; }
+    display(){ this.shown=this.buf.slice(); this.ver++; } clearDisplay(){ this.buf.fill(0); } width(){ return this.w; } height(){ return this.h; }
+    invertDisplay(b){ this.inv=!!b; this.ver++; } dim(){} setRotation(){} cp437(){} setFont(){} startscrollright(){} startscrollleft(){} startscrolldiagright(){} startscrolldiagleft(){} stopscroll(){} ssd1306_command(){}
+    drawPixel(x,y,c){ x=Math.round(x); y=Math.round(y); if(x<0||y<0||x>=this.w||y>=this.h) return; const i=y*this.w+x; this.buf[i]=c===2?this.buf[i]^1:(c?1:0); }
+    getPixel(x,y){ return this.buf[Math.round(y)*this.w+Math.round(x)]||0; }
+    fillScreen(c){ this.buf.fill(c?1:0); }
+    drawFastHLine(x,y,w,c){ for(let i=0;i<w;i++) this.drawPixel(x+i,y,c); } drawFastVLine(x,y,h,c){ for(let i=0;i<h;i++) this.drawPixel(x,y+i,c); }
+    drawLine(x0,y0,x1,y1,c){ x0=Math.round(x0);y0=Math.round(y0);x1=Math.round(x1);y1=Math.round(y1); const dx=Math.abs(x1-x0),dy=-Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1; let e=dx+dy; for(let n=0;n<4000;n++){ this.drawPixel(x0,y0,c); if(x0===x1&&y0===y1) break; const e2=2*e; if(e2>=dy){e+=dy;x0+=sx;} if(e2<=dx){e+=dx;y0+=sy;} } }
+    drawRect(x,y,w,h,c){ this.drawFastHLine(x,y,w,c); this.drawFastHLine(x,y+h-1,w,c); this.drawFastVLine(x,y,h,c); this.drawFastVLine(x+w-1,y,h,c); }
+    fillRect(x,y,w,h,c){ for(let j=0;j<h;j++) this.drawFastHLine(x,y+j,w,c); }
+    drawRoundRect(x,y,w,h,r,c){ this.drawFastHLine(x+r,y,w-2*r,c); this.drawFastHLine(x+r,y+h-1,w-2*r,c); this.drawFastVLine(x,y+r,h-2*r,c); this.drawFastVLine(x+w-1,y+r,h-2*r,c); this._arcs(x+r,y+r,x+w-r-1,y+h-r-1,r,c,false); }
+    fillRoundRect(x,y,w,h,r,c){ this.fillRect(x+r,y,w-2*r,h,c); this._arcs(x+r,y+r,x+w-r-1,y+h-r-1,r,c,true); }
+    _arcs(x0,y0,x1,y1,r,c,fill){ for(let dy=-r;dy<=r;dy++) for(let dx=-r;dx<=r;dx++){ const d=Math.hypot(dx,dy); if(fill?d<=r+.3:Math.abs(d-r)<.6){ const X=dx<0?x0+dx:x1+dx, Y=dy<0?y0+dy:y1+dy; if(dx<0||dx>0||fill) this.drawPixel(X,Y,c); } } }
+    drawCircle(x0,y0,r,c){ let f=1-r,dx=1,dy=-2*r,x=0,y=r; this.drawPixel(x0,y0+r,c);this.drawPixel(x0,y0-r,c);this.drawPixel(x0+r,y0,c);this.drawPixel(x0-r,y0,c);
+      while(x<y){ if(f>=0){y--;dy+=2;f+=dy;} x++;dx+=2;f+=dx; for(const [a,b] of [[x,y],[y,x]]){ this.drawPixel(x0+a,y0+b,c);this.drawPixel(x0-a,y0+b,c);this.drawPixel(x0+a,y0-b,c);this.drawPixel(x0-a,y0-b,c);} } }
+    fillCircle(x0,y0,r,c){ for(let dy=-r;dy<=r;dy++){ const w=Math.floor(Math.sqrt(r*r-dy*dy)); this.drawFastHLine(x0-w,y0+dy,2*w+1,c); } }
+    drawTriangle(a,b,c2,d,e,f,c){ this.drawLine(a,b,c2,d,c); this.drawLine(c2,d,e,f,c); this.drawLine(e,f,a,b,c); }
+    fillTriangle(x0,y0,x1,y1,x2,y2,c){ const minY=Math.floor(Math.min(y0,y1,y2)), maxY=Math.ceil(Math.max(y0,y1,y2)); const E=[[x0,y0,x1,y1],[x1,y1,x2,y2],[x2,y2,x0,y0]];
+      for(let y=minY;y<=maxY;y++){ const xs=[]; for(const [ax,ay,bx,by] of E){ if((y>=ay&&y<=by)||(y>=by&&y<=ay)){ if(ay===by) xs.push(ax,bx); else xs.push(ax+(y-ay)*(bx-ax)/(by-ay)); } } if(xs.length){ const a=Math.round(Math.min(...xs)), b=Math.round(Math.max(...xs)); this.drawFastHLine(a,y,b-a+1,c); } } }
+    drawBitmap(x,y,bmp,w,h,c,bg){ const bw=Math.ceil(w/8); for(let j=0;j<h;j++) for(let i=0;i<w;i++){ const on=((bmp[j*bw+(i>>3)]||0)<<(i&7))&0x80; if(on) this.drawPixel(x+i,y+j,c); else if(bg!==undefined) this.drawPixel(x+i,y+j,bg); } }
+    setTextSize(s,sy){ this.ts=Math.max(1,Math.trunc(s)); this.tsy=sy?Math.max(1,Math.trunc(sy)):this.ts; } setTextColor(c,bg){ this.fg=c; this.bg=bg===undefined?-1:bg; } setTextWrap(w){ this.wrap=!!w; }
+    setCursor(x,y){ this.cx=Math.trunc(x); this.cy=Math.trunc(y); } getCursorX(){ return this.cx; } getCursorY(){ return this.cy; }
+    drawChar(x,y,ch,c,bg,sx,sy){ const code=typeof ch==='number'?ch:ch.charCodeAt(0); const cols=FONT[code===176?176:code]||FONT[63]; sy=sy||sx;
+      for(let i=0;i<6;i++){ const col=i<5?cols[i]:0; for(let j=0;j<8;j++){ const on=(col>>j)&1; if(on||(bg>=0&&bg!==undefined)){ const cc=on?c:bg; if(sx===1&&sy===1) this.drawPixel(x+i,y+j,cc); else this.fillRect(x+i*sx,y+j*sy,sx,sy,cc); } } } }
+    write(ch){ ch=typeof ch==='number'?String.fromCharCode(ch):String(ch); if(ch==='\n'){ this.cx=0; this.cy+=8*this.tsy; return 1; } if(ch==='\r') return 1;
+      if(this.wrap&&this.cx+FONTW*this.ts>this.w){ this.cx=0; this.cy+=8*this.tsy; } this.drawChar(this.cx,this.cy,ch,this.fg,this.bg,this.ts,this.tsy); this.cx+=FONTW*this.ts; return 1; }
+    print(v,f){ const s=fmtVal(v,f); for(const ch of s) this.write(ch); return s.length; } println(v,f){ this.print(v===undefined?'':v,f); this.write('\n'); }
+    getTextBounds(s,x,y){ return [x,y,String(s).length*6*this.ts,8*this.tsy]; }
+  }
+  class DateTime{ constructor(a,b,c,d,e,f){
+      if(a instanceof DateTime){ this.t=a.t; return; }
+      if(typeof a==='string'&&typeof b==='string'){ const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; const m=a.trim().split(/\s+/); const tt=b.split(':').map(Number); this.t=Date.UTC(+m[2],M.indexOf(m[0]),+m[1],tt[0],tt[1],tt[2])/1000; return; }
+      if(b===undefined){ this.t=Math.trunc(+a||0)+(a>=946684800||a===0?0:946684800); if(a===undefined) this.t=946684800; return; }
+      this.t=Date.UTC(a<100?2000+a:a,(b||1)-1,c||1,d||0,e||0,f||0)/1000; }
+    _d(){ return new Date(this.t*1000); }
+    year(){ return this._d().getUTCFullYear(); } month(){ return this._d().getUTCMonth()+1; } day(){ return this._d().getUTCDate(); }
+    hour(){ return this._d().getUTCHours(); } minute(){ return this._d().getUTCMinutes(); } second(){ return this._d().getUTCSeconds(); }
+    dayOfTheWeek(){ return this._d().getUTCDay(); } unixtime(){ return this.t; } secondstime(){ return this.t-946684800; } isValid(){ return true; }
+    timestamp(){ return this._d().toISOString().slice(0,19); } }
+  class DateTimeBad{ year(){return 2165;} month(){return 165;} day(){return 165;} hour(){return 165;} minute(){return 165;} second(){return 85;} dayOfTheWeek(){return 0;} unixtime(){return 0;} isValid(){return false;} timestamp(){return '2165-165-165T165:165:85';} }
+  class RTC_DS1307{ constructor(){ this.kind='rtc'; this.off=0; reg(this); }
+    _ok(){ for(const p of S.parts) if(p.type==='rtc'&&N(pr(p,'SDA'))===N('ard:'+BOARD.sda)&&N(pr(p,'SCL'))===N('ard:'+BOARD.scl)&&isPwrNet(N(pr(p,'VCC')))&&N(pr(p,'GND'))===N('ard:GND1')) return p; return null; }
+    begin(){ return !!this._ok(); } isrunning(){ return !!this._ok(); } lostPower(){ return false; }
+    adjust(dt){ const p=this._ok(); if(p) p._rtcOff=dt.t-localUnix(); }
+    now(){ const p=this._ok(); if(!p) return new DateTimeBad(); return new DateTime(localUnix()+(p._rtcOff||0)); }
+    getTemperature(){ return 25.25; } }
+  class RTC_DS3231 extends RTC_DS1307{}
+  const DHT11=11, DHT22=22, DHT21=21, AM2301=21;
+  class DHT{ constructor(pin,type){ this.kind='dht'; this.pin=Math.trunc(pin); this.type=type; reg(this); }
+    begin(){} _part(){ if(!(this.pin>=0&&this.pin<PIN_NAMES.length)) return null; const n=N('ard:'+PIN_NAMES[this.pin]); for(const p of S.parts) if(p.type==='dht22'&&N(pr(p,'SDA'))===n&&isPwrNet(N(pr(p,'VCC')))&&N(pr(p,'GND'))===N('ard:GND1')) return p; return null; }
+    readTemperature(f){ const p=this._part(); if(!p) return NaN; let t=p.props.temp+(Math.random()-.5)*0.2; t=Math.round(t*10)/10; return f?t*1.8+32:t; }
+    readHumidity(){ const p=this._part(); if(!p) return NaN; return Math.round((p.props.hum+(Math.random()-.5)*0.4)*10)/10; }
+    convertCtoF(c){ return c*1.8+32; } convertFtoC(f){ return (f-32)/1.8; }
+    computeHeatIndex(t,h,f){ const T=f?t:t*1.8+32; let HI=0.5*(T+61+((T-68)*1.2)+(h*0.094)); if(HI>79) HI=-42.379+2.04901523*T+10.14333127*h-.22475541*T*h-.00683783*T*T-.05481717*h*h+.00122874*T*T*h+.00085282*T*h*h-.00000199*T*T*h*h; return f?HI:(HI-32)/1.8; } }
+  const NO_KEY='';
+  class Keypad{ constructor(map,rows,cols,nr,nc){ this.kind='keypad'; this.map=map; this.rows=Array.from(rows||[]).map(x=>Math.trunc(x)); this.cols=Array.from(cols||[]).map(x=>Math.trunc(x)); this.nr=nr||this.rows.length; this.nc=nc||this.cols.length; this.last=''; reg(this); }
+    _match(ev){ const rp=this.rows[ev.r], cp=this.cols[ev.c]; if(rp==null||cp==null) return false; return N(pr(ev.p,'R'+(ev.r+1)))===N('ard:'+PIN_NAMES[rp])&&N(pr(ev.p,'C'+(ev.c+1)))===N('ard:'+PIN_NAMES[cp]); }
+    getKey(){ while(sim.keyQ.length){ const ev=sim.keyQ.shift(); if(this._match(ev)){ const k=(this.map[ev.r]||[])[ev.c]; this.last=k==null?'':String(k); return this.last; } } return NO_KEY; }
+    async waitForKey(){ while(true){ const k=this.getKey(); if(k) return k; await L.delay(10); } }
+    getState(){ return 0; } isPressed(k){ return S.parts.some(p=>p.type==='keypad'&&p.key&&(this.map[p.key.r]||[])[p.key.c]===k); }
+    setDebounceTime(){} setHoldTime(){} keyStateChanged(){ return false; } }
+  const SEG_A=1,SEG_B=2,SEG_C=4,SEG_D=8,SEG_E=16,SEG_F=32,SEG_G=64,SEG_DP=128;
+  const DIG=[0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71];
+  class TM1637Display{ constructor(clk,dio){ this.kind='tm1637'; this.clk=Math.trunc(clk); this.dio=Math.trunc(dio); this.segs=[0,0,0,0]; this.br=7; this.on=true; this.ver=0; reg(this); }
+    setBrightness(b,on=true){ this.br=clamp(Math.trunc(b)&7,0,7); this.on=!!on; this.ver++; }
+    setSegments(a,len=4,pos=0){ for(let i=0;i<len&&pos+i<4;i++) this.segs[pos+i]=(a[i]||0)&255; this.ver++; }
+    clear(){ this.segs=[0,0,0,0]; this.ver++; } encodeDigit(d){ return DIG[d&15]; }
+    showNumberDec(n,lz=false,len=4,pos=0){ this.showNumberDecEx(n,0,lz,len,pos); }
+    showNumberDecEx(n,dots=0,lz=false,len=4,pos=0){ this._show(Math.trunc(n),dots,lz,len,pos,10); }
+    showNumberHexEx(n,dots=0,lz=false,len=4,pos=0){ this._show(Math.trunc(n),dots,lz,len,pos,16); }
+    _show(n,dots,lz,len,pos,base){ const neg=n<0; let v=Math.abs(n); const d=new Array(len).fill(0);
+      for(let i=len-1;i>=0;i--){ const q=v%base; if(v===0&&i<len-1&&!lz){ d[i]=0; } else d[i]=DIG[q]; v=Math.floor(v/base); }
+      if(n===0&&!lz) d[len-1]=DIG[0];
+      if(neg){ let k=d.findIndex(x=>x); if(k>0) d[k-1]=0x40; else if(k===-1) d[len-1]=0x40; }
+      for(let i=0;i<len;i++){ if(dots&(0x80>>i)) d[i]|=0x80; } this.setSegments(d,len,pos); } }
+  const EEPROM={ read(a){ return sim.eeprom[a&1023]??255; }, write(a,v){ sim.eeprom[a&1023]=v&255; }, update(a,v){ sim.eeprom[a&1023]=v&255; }, length(){ return BOARD.id==='mega'?4096:1024; } };
+  function makeKeymap(x){ return x; }
+  return {Adafruit_NeoPixel,NEO_GRB,NEO_RGB,NEO_KHZ800,LedControl,Stepper,Adafruit_SSD1306,SSD1306_SWITCHCAPVCC:2,SSD1306_EXTERNALVCC:1,SSD1306_WHITE:1,SSD1306_BLACK:0,SSD1306_INVERSE:2,WHITE:1,BLACK:0,INVERSE:2,
+    DateTime,RTC_DS1307,RTC_DS3231,DHT,DHT11,DHT22,DHT21,AM2301,Keypad,NO_KEY,makeKeymap,TM1637Display,SEG_A,SEG_B,SEG_C,SEG_D,SEG_E,SEG_F,SEG_G,SEG_DP,EEPROM,
+    __DATE__:BUILD_DATE.date,__TIME__:BUILD_DATE.time,isnan:x=>Number.isNaN(+x),isinf:x=>!Number.isFinite(+x)&&!Number.isNaN(+x),
+    __sprintf,__dtostrf,__id:x=>x,__cat:(a,b)=>String(a)+String(b),strlen:s=>String(s).length,strcmp:(a,b)=>String(a)<String(b)?-1:String(a)>String(b)?1:0,atoi:s=>parseInt(s)||0,atof:s=>parseFloat(s)||0};
+}
+function isPwrNet(n){ return [N('ard:5V'),N('ard:VIN'),N('ard:3V3'),N('ard:IOREF')].includes(n); }
 /* =================== jaringan & pemecah rangkaian =================== */
 class UF{ constructor(){this.p=new Map();}
   f(x){ let p=this.p.get(x); if(p===undefined){this.p.set(x,x);return x;} if(p===x) return x; const r=this.f(p); this.p.set(x,r); return r; }
@@ -701,12 +931,15 @@ class UF{ constructor(){this.p=new Map();}
 let TOPO=null, topoDirty=true, solveDirty=true, SOL=null;
 function buildTopo(){
   const uf=new UF(), H=holeMap(), occ=new Map();
-  uf.u('ard:GND1','ard:GND2'); uf.u('ard:GND1','ard:GND3'); uf.u('ard:SDA','ard:A4'); uf.u('ard:SCL','ard:A5');
+  for(const g of BOARD.unions) for(let i=1;i<g.length;i++) if(ARD_PINS[g[0]]&&ARD_PINS[g[i]]) uf.u('ard:'+g[0],'ard:'+g[i]);
+  if(BOARD.male){ const bbm=new Map(); for(const h of allHoles()) if(h.brd==='bb') bbm.set(hkey(h.x,h.y),h.ref);
+    for(const n in ARD_PINS){ const p=ARD_PINS[n]; const r=bbm.get(hkey(S.ard.x+p.x,S.ard.y+p.y)); if(r){ uf.u('ard:'+n,r); occ.set(r,'ard:'+n); } } }
   for(let k=0;k<BB_COLS;k++){ for(const r of 'ihgf') uf.u(`bb:${k}:j`,`bb:${k}:${r}`); for(const r of 'dcba') uf.u(`bb:${k}:e`,`bb:${k}:${r}`); }
   for(const r of RAILS){ let first=null; for(let k=1;k<BB_COLS;k++){ if(!railOk(k)) continue; const ref=`bb:${k}:${r}`; if(first) uf.u(first,ref); else first=ref; } }
   for(const p of S.parts){
     for(const pin of pinsOf(p)){ uf.f(pin.ref); const h=H.get(hkey(pin.x,pin.y)); if(h){ uf.u(pin.ref,h.ref); occ.set(h.ref,pin.ref); pin.hole=h.ref; } }
     if(p.type==='button'){ uf.u(pr(p,'1a'),pr(p,'1b')); uf.u(pr(p,'2a'),pr(p,'2b')); if(p.pressed) uf.u(pr(p,'1a'),pr(p,'2a')); }
+    if(PT[p.type].topo) PT[p.type].topo(p,uf);
   }
   for(const w of S.wires) uf.u(w.a,w.b);
   TOPO={uf,occ,H}; topoDirty=false; solveDirty=true;
@@ -741,6 +974,7 @@ function solve(){
       case 'servo': els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/700,p,load:1}); break;
       case 'lcd': els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/260,p,load:1}); break;
       case 'hcsr04': els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/350,p,load:1}); break;
+      default: if(PT[p.type].els) PT[p.type].els(p,r,els,diodes);
     }
   }
   const srcs=[];
@@ -748,7 +982,9 @@ function solve(){
     srcs.push({n:uf.f('ard:5V'),v:5,g:1/0.12,name:'5V',pw:1}); srcs.push({n:uf.f('ard:3V3'),v:3.3,g:1/0.6,name:'3.3V',pw:1});
     srcs.push({n:uf.f('ard:VIN'),v:4.6,g:1/0.8,name:'Vin',pw:1}); srcs.push({n:uf.f('ard:IOREF'),v:5,g:1/1,name:'IOREF',pw:1});
     srcs.push({n:uf.f('ard:RESET'),v:5,g:1/10000,name:'RESET',pull:1});
-    for(let i=0;i<20;i++){ const s=sim.pins[i]; const n=uf.f('ard:'+PIN_NAMES[i]);
+    const isPw=n=>[uf.f('ard:5V'),uf.f('ard:VIN'),uf.f('ard:3V3'),uf.f('ard:IOREF')].includes(n);
+    for(const p of S.parts) if(PT[p.type].srcs) PT[p.type].srcs(p,n=>uf.f(pr(p,n)),srcs,{gnd,isPw,uf});
+    for(let i=0;i<PIN_NAMES.length;i++){ const s=sim.pins[i]; const n=uf.f('ard:'+PIN_NAMES[i]);
       if(s.mode==='OUTPUT'){ const duty=s.tone?0.5:(s.pwm!=null?s.pwm/255:1); const high=s.tone?true:(s.pwm!=null?true:!!s.v); srcs.push({n,v:high?5:0,g:1/25,pin:i,duty:high?duty:1}); }
       else if(s.mode==='PULLUP'||(s.mode==='INPUT'&&s.v)) srcs.push({n,v:5,g:1/35000,pin:i,pull:1});
     }
@@ -793,8 +1029,8 @@ function solve(){
   for(const s of srcs) if(s.duty!=null&&s.duty<1){ const seen=new Set([s.n]); const st=[s.n];
     while(st.length){ const c=st.pop(); dutyNet.set(c,Math.min(dutyNet.get(c)??1,s.duty)); for(const e of els){ if(e.t!=='R') continue; const o=e.a===c?e.b:e.b===c?e.a:null; if(o!=null&&!seen.has(o)&&!strong.has(o)){seen.add(o);st.push(o);} } } }
   const leds=new Map();
-  for(const d of diodes){ d.p._on=d.on; const I=d.on?Math.max(0,(V(d.a)-V(d.b)-d.vf)*d.g):0; const duty=Math.min(dutyNet.get(d.a)??1,dutyNet.get(d.b)??1); leds.set(d.p.id,{I,duty});
-    if(I>0.03) warnings.push({lvl:'err',key:'led'+d.p.id,txt:`<b>${d.p.des}</b>: arus ${(I*1000).toFixed(0)} mA — terlalu besar. Pasang resistor seri (misalnya 220 Ω).`}); }
+  for(const d of diodes){ if(d.key){ d.p._dOn=d.p._dOn||{}; d.p._dOn[d.key]=d.on; } else d.p._on=d.on; const I=d.on?Math.max(0,(V(d.a)-V(d.b)-d.vf)*d.g):0; const duty=Math.min(dutyNet.get(d.a)??1,dutyNet.get(d.b)??1); leds.set(d.key?d.p.id+':'+d.key:d.p.id,{I,duty});
+    if(I>0.03&&!d.key) warnings.push({lvl:'err',key:'led'+d.p.id,txt:`<b>${d.p.des}</b>: arus ${(I*1000).toFixed(0)} mA — terlalu besar. Pasang resistor seri (misalnya 220 Ω).`}); }
   SOL={V,gnd,idx,reached,leds,srcs,els,warnings,short,floating:r=>!reached.has(r)};
   solveDirty=false;
   return SOL;
@@ -804,8 +1040,8 @@ const vOf=ref=>{ const s=ensureSolved(); return s.V(N(ref)); };
 
 /* =================== runtime Arduino =================== */
 const STOP={stop:true};
-const sim={powered:false,running:false,token:0,t0:0,usOff:0,pins:[],rx:[],baud:9600,begun:false,servos:[],lcds:[],isr:[],txUntil:0,rxUntil:0,uploading:false,halted:false,noise:400};
-function resetPins(){ sim.pins=Array.from({length:20},()=>({mode:'INPUT',v:0,pwm:null,tone:null,toneEnd:0,hiAt:0,lastPulse:null})); }
+const sim={libs:[],keyQ:[],eeprom:{},paused:false,pauseStart:0,powered:false,running:false,token:0,t0:0,usOff:0,pins:[],rx:[],baud:9600,begun:false,servos:[],lcds:[],isr:[],txUntil:0,rxUntil:0,uploading:false,halted:false,noise:400};
+function resetPins(){ sim.pins=Array.from({length:PIN_NAMES.length},()=>({mode:'INPUT',v:0,pwm:null,tone:null,toneEnd:0,hiAt:0,lastPulse:null})); }
 resetPins();
 const mc=new MessageChannel(), mq=[]; mc.port1.onmessage=()=>{ const r=mq.shift(); if(r) r(); };
 const yieldNow=()=>new Promise(r=>{ mq.push(r); mc.port2.postMessage(0); });
@@ -827,12 +1063,12 @@ function fmtVal(v,f){
 function makeAPI(token){
   const chk=()=>{ if(token!==sim.token) throw STOP; };
   let lastYield=now();
-  const __tick=async()=>{ chk(); const t=now(); if(t-lastYield>10){ lastYield=t; await yieldNow(); chk(); } };
-  const micros=()=>Math.floor((now()-sim.t0)*1000+sim.usOff);
+  const __tick=async()=>{ chk(); while(sim.paused){ await sleep(60); chk(); lastYield=now(); } const t=now(); if(t-lastYield>10){ lastYield=t; await yieldNow(); chk(); } };
+  const micros=()=>Math.floor(((sim.paused?sim.pauseStart:now())-sim.t0)*1000+sim.usOff);
   const millis=()=>Math.floor(micros()/1000);
-  const delay=async ms=>{ ms=Math.max(0,+ms||0); const end=now()+ms; chk(); while(true){ const left=end-now(); if(left<=0) break; await sleep(Math.min(left,40)); chk(); } lastYield=now(); };
+  const delay=async ms=>{ ms=Math.max(0,+ms||0); const end=micros()/1000+ms; chk(); while(true){ const left=end-micros()/1000; if(left<=0) break; await sleep(sim.paused?60:Math.min(left,40)); chk(); } lastYield=now(); };
   const delayMicroseconds=async us=>{ us=Math.max(0,+us||0); if(us<4000){ sim.usOff+=us; await __tick(); } else await delay(us/1000); };
-  const pinIdx=p=>{ p=Math.trunc(+p); if(!(p>=0&&p<20)) throw new Error(`Nomor pin ${p} tidak ada pada papan UNO`); return p; };
+  const pinIdx=p=>{ p=Math.trunc(+p); if(!(p>=0&&p<PIN_NAMES.length)) throw new Error(`Nomor pin ${p} tidak ada pada papan ${BOARD.short}`); return p; };
   const mark=()=>{ solveDirty=true; };
   const digitalLevel=p=>{ const s=ensureSolved(); const n=N('ard:'+PIN_NAMES[p]); if(s.floating(n)) return Math.random()<.5?1:0; return s.V(n)>2.5?1:0; };
   const Serial={
@@ -866,13 +1102,13 @@ function makeAPI(token){
     createChar(n,rows){ this.cg[n&7]=Array.from(rows||[]).slice(0,8); this.dirty=true; } }
   const api={
     HIGH:1,LOW:0,INPUT:0,OUTPUT:1,INPUT_PULLUP:2,LED_BUILTIN:13,CHANGE:1,FALLING:2,RISING:3,
-    A0:14,A1:15,A2:16,A3:17,A4:18,A5:19,DEC:10,HEX:16,OCT:8,BIN:2,PI:Math.PI,HALF_PI:Math.PI/2,TWO_PI:Math.PI*2,DEG_TO_RAD:Math.PI/180,RAD_TO_DEG:180/Math.PI,
+    ...Object.fromEntries(Array.from({length:16},(_,i)=>['A'+i,i<BOARD.aCount?BOARD.aBase+i:900+i])),SDA:PIN_NAMES.indexOf(BOARD.sda),SCL:PIN_NAMES.indexOf(BOARD.scl),DEC:10,HEX:16,OCT:8,BIN:2,PI:Math.PI,HALF_PI:Math.PI/2,TWO_PI:Math.PI*2,DEG_TO_RAD:Math.PI/180,RAD_TO_DEG:180/Math.PI,
     pinMode(p,m){ p=pinIdx(p); const s=sim.pins[p]; if(m===1) s.mode='OUTPUT'; else if(m===2){ s.mode='PULLUP'; s.v=1; } else { s.mode='INPUT'; s.v=0; } s.pwm=null; mark(); },
-    digitalWrite(p,v){ p=pinIdx(p); const s=sim.pins[p]; v=v?1:0; const t=micros();
+    digitalWrite(p,v){ p=pinIdx(p); if(BOARD.aOnly.includes(p)) throw new Error(`${PIN_NAMES[p]} pada ${BOARD.short} hanya bisa dipakai analogRead()`); const s=sim.pins[p]; v=v?1:0; const t=micros();
       if(s.v&&!v) s.lastPulse={end:t,len:t-s.hiAt}; if(!s.v&&v) s.hiAt=t;
       s.v=v; s.pwm=null; s.tone=null; if(s.mode==='PULLUP'&&!v) s.mode='INPUT'; mark(); },
     digitalRead(p){ p=pinIdx(p); return digitalLevel(p); },
-    analogRead(p){ p=Math.trunc(+p); if(p>=0&&p<=5) p+=14; p=pinIdx(p); const s=ensureSolved(); const n=N('ard:'+PIN_NAMES[p]);
+    analogRead(p){ p=Math.trunc(+p); if(p>=0&&p<BOARD.aCount) p+=BOARD.aBase; p=pinIdx(p); if(p<BOARD.aBase) throw new Error(`Pin ${p} bukan pin analog — gunakan A0 sampai A${BOARD.aCount-1}`); const s=ensureSolved(); const n=N('ard:'+PIN_NAMES[p]);
       if(s.floating(n)){ sim.noise=clamp(sim.noise+(Math.random()-.5)*60,150,700); return Math.round(sim.noise); }
       const v=Math.round(s.V(n)/5*1023); return clamp(v>2&&v<1021?v+Math.round(Math.random()*2-1):v,0,1023); },
     analogWrite(p,v){ p=pinIdx(p); const s=sim.pins[p]; v=clamp(Math.round(+v||0),0,255); s.mode='OUTPUT'; s.tone=null;
@@ -887,7 +1123,7 @@ function makeAPI(token){
         if(N(pr(part,'ECHO'))!==echo) continue;
         if(!(s.V(N(pr(part,'VCC')))-s.V(N(pr(part,'GND')))>4.2)) continue;
         const trig=N(pr(part,'TRIG')); let ok=false;
-        for(let i=0;i<20;i++){ const ps=sim.pins[i]; if(ps.lastPulse&&N('ard:'+PIN_NAMES[i])===trig&&micros()-ps.lastPulse.end<80000&&ps.lastPulse.len>=8){ ok=true; ps.lastPulse=null; } }
+        for(let i=0;i<PIN_NAMES.length;i++){ const ps=sim.pins[i]; if(ps.lastPulse&&N('ard:'+PIN_NAMES[i])===trig&&micros()-ps.lastPulse.end<80000&&ps.lastPulse.len>=8){ ok=true; ps.lastPulse=null; } }
         if(!ok) continue;
         part._ping=now();
         const d=part.props.dist; let us=d>400?38000:d*58.3*(1+(Math.random()-.5)*0.006);
@@ -910,6 +1146,7 @@ function makeAPI(token){
     F:s=>s, Serial, Servo, LiquidCrystal_I2C, Wire:{begin(){}},
     __tick, __i, __b:x=>__i(x)&255, __idiv:(a,b)=>Math.trunc(a/b), __arr, __chr, __String, sizeof:__sizeof,
   };
+  Object.assign(api,makeLibs({chk,delay,micros,millis,pinIdx,mark}));
   return api;
 }
 function __i(x){ if(typeof x==='number') return Math.trunc(x); if(typeof x==='boolean') return x?1:0; if(x==null) return 0; return x; }
@@ -926,6 +1163,7 @@ if(!String.prototype.toInt){
 }
 
 /* =================== penerjemah C++ Arduino → JavaScript =================== */
+const CLASSES='Servo|LiquidCrystal_I2C|Adafruit_NeoPixel|LedControl|Stepper|Adafruit_SSD1306|RTC_DS1307|RTC_DS3231|DateTime|DHT|Keypad|TM1637Display';
 const TYPE='(?:unsigned\\s+long\\s+long|unsigned\\s+long\\s+int|unsigned\\s+long|unsigned\\s+int|unsigned\\s+short|unsigned\\s+char|signed\\s+char|long\\s+long|long\\s+int|short\\s+int|unsigned|long|int|short|float|double|boolean|bool|byte|char|String|word|size_t|u?int(?:8|16|32|64)_t)';
 function typeKind(t){ t=t.replace(/\s+/g,' ');
   if(t==='String') return 'str'; if(t==='char'||t==='signed char') return 'char'; if(/^(byte|uint8_t|unsigned char)$/.test(t)) return 'byte';
@@ -982,7 +1220,15 @@ function transpile(src){
   s=s.replace(/\(\s*(?:float|double)\s*\)/g,'+');
   s=s.replace(/\(\s*bool(?:ean)?\s*\)/g,'!!');
   // 4. objek pustaka
-  s=s.replace(/\b(Servo|LiquidCrystal_I2C)\s+([A-Za-z_]\w*[^;]*);/g,(m,cls,list)=>'let '+splitTop(list).map(it=>{ const mm=it.trim().match(/^(\w+)\s*(?:\(([\s\S]*)\))?$/); return mm?`${mm[1]} = new ${cls}(${mm[2]||''})`:it; }).join(', ')+';');
+  s=s.replace(/\b((?:0x[0-9a-fA-F]+)|(?:\d+\.?\d*(?:[eE][-+]?\d+)?))(?:[uU][lL]{0,2}|[lL]{1,2}[uU]?|[fF])\b/g,'$1').replace(/\bB([01]{1,8})\b/g,'0b$1');
+  s=s.replace(/\bPROGMEM\b/g,'').replace(/([(,]\s*)&(?=[A-Za-z_])/g,'$1');
+  s=s.replace(new RegExp(`\\b(${CLASSES})\\s+([A-Za-z_]\\w*[^;{]*);`,'g'),(m,cls,list)=>{ const o=(list.match(/\(/g)||[]).length, c=(list.match(/\)/g)||[]).length; if(o!==c) return m;
+    return 'let '+splitTop(list).map(it=>{ it=it.trim(); const e=findTopEq(it); if(e>=0){ const nm=it.slice(0,e).trim(), init=it.slice(e+1).trim(); return `${nm} = ${init.replace(new RegExp('^'+cls+'\\s*\\('),'new '+cls+'(')}`; }
+      const mm=it.match(/^(\w+)\s*(?:\(([\s\S]*)\))?$/); return mm?`${mm[1]} = new ${cls}(${mm[2]||''})`:it; }).join(', ')+';'; });
+  s=s.replace(new RegExp(`(?<![\\w.$])(?<!new\\s+)(${CLASSES})\\s*\\(`,'g'),'new $1(');
+  s=s.replace(/\bsprintf\s*\(\s*([A-Za-z_]\w*)\s*,/g,'$1 = __sprintf(').replace(/\bsnprintf\s*\(\s*([A-Za-z_]\w*)\s*,[^,]+,/g,'$1 = __sprintf(')
+   .replace(/\bstrcpy\s*\(\s*([A-Za-z_]\w*)\s*,/g,'$1 = __id(').replace(/\bstrcat\s*\(\s*([A-Za-z_]\w*)\s*,/g,'$1 = __cat($1,')
+   .replace(/\bdtostrf\s*\(([^;]*?),\s*([A-Za-z_]\w*)\s*\)/g,'($2 = __dtostrf($1))');
   // 5. definisi fungsi
   const userFns=new Set();
   const FN_RE=new RegExp(`(^|[\\s;}])((?:(?:static|inline)\\s+)*)(?:const\\s+)?(void|${TYPE})(\\s*[*&]\\s*|\\s+)([A-Za-z_]\\w*)\\s*\\(([^()]*)\\)\\s*(\\{|;)`,'g');
@@ -1024,6 +1270,7 @@ function transpile(src){
   // 9. await untuk fungsi yang bisa menunggu
   const asyncNames=[...userFns,'delay','delayMicroseconds','pulseIn'];
   s=s.replace(new RegExp(`(?<![\\w.$])(?<!function\\s+)(${asyncNames.join('|')})\\s*\\(`,'g'),'await $1(');
+  s=s.replace(/(?<![\w.$])([A-Za-z_]\w*\.(?:step|waitForKey))\s*\(/g,'await $1(');
   // 10. titik jeda di dalam perulangan
   { const edits=[]; const skip=new Set(); let m; const DO=/\bdo\s*\{/g;
     while((m=DO.exec(s))){ const open=s.indexOf('{',m.index); const close=matchClose(s,open); edits.push([open+1,' await __tick();']); if(close>0){ const mm=/^\s*while\b/.exec(s.slice(close+1)); if(mm) skip.add(close+1+mm[0].length-5); } }
@@ -1058,6 +1305,242 @@ function translateErr(m){
    .replace(/Cannot read properties of undefined \(reading '(.+)'\)/,"membaca '$1' dari nilai yang belum ada (indeks larik di luar batas?)")
    .replace(/Assignment to constant variable\./,'nilai const tidak boleh diubah');
 }
+/* =================== komponen tambahan =================== */
+const CATS=[['dasar','Dasar & output'],['tampilan','Tampilan'],['sensor','Sensor & input'],['aktuator','Penggerak'],['modul','Modul']];
+Object.assign(PT.led,{cat:'dasar'}); Object.assign(PT.resistor,{cat:'dasar'}); Object.assign(PT.button,{cat:'sensor'}); Object.assign(PT.pot,{cat:'sensor'});
+Object.assign(PT.ldr,{cat:'sensor'}); Object.assign(PT.buzzer,{cat:'dasar'}); Object.assign(PT.servo,{cat:'aktuator'}); Object.assign(PT.lcd,{cat:'tampilan'}); Object.assign(PT.hcsr04,{cat:'sensor'});
+const pwrOK=(st,p,v,g,min)=>sim.powered&&st.V(N(pr(p,v)))-st.V(N(pr(p,g)))>(min||4);
+const bnet=i=>(i>=0&&i<PIN_NAMES.length)?N('ard:'+PIN_NAMES[i]):'__none';
+const ledB=(L)=>L&&L.I>0?Math.min(1,Math.pow(L.I/0.012,0.55))*L.duty:0;
+const segPoly=(cx,cy,vert,L,T)=>{ const h=L/2,t=T/2; const pts=vert?[[cx,cy-h],[cx+t,cy-h+t],[cx+t,cy+h-t],[cx,cy+h],[cx-t,cy+h-t],[cx-t,cy-h+t]]:[[cx-h,cy],[cx-h+t,cy-t],[cx+h-t,cy-t],[cx+h,cy],[cx+h-t,cy+t],[cx-h+t,cy+t]]; return pts.map(p=>p.join(',')).join(' '); };
+function digitSVG(cls,s){ // s = skala, pusat (0,0)
+  const L=20*s,T=4*s,o=11*s; const seg={a:[0,-2*o,0],b:[o,-o,1],c:[o,o,1],d:[0,2*o,0],e:[-o,o,1],f:[-o,-o,1],g:[0,0,0]};
+  let r=''; for(const k in seg){ const [x,y,v]=seg[k]; r+=`<polygon class="${cls}-${k}" points="${segPoly(x,y,v,L,T)}" fill="#3a2424"/>`; }
+  return r+`<circle class="${cls}-dp" cx="${o+5*s}" cy="${2*o+2*s}" r="${2.3*s}" fill="#3a2424"/>`; }
+const SEGS='abcdefg';
+function lbls(list,y,fs,rot){ return list.map(([t,x])=>rot?`<text transform="translate(${x+1.8} ${y}) rotate(-90)" font-size="${fs}" class="silk">${t}</text>`:`<text x="${x}" y="${y}" font-size="${fs}" class="silk" text-anchor="middle">${t}</text>`).join(''); }
+function hdrPins(list,y){ return list.map(x=>`<rect x="${x-2.2}" y="${y-2.2}" width="4.4" height="4.4" fill="#d6b65a"/>`).join(''); }
+
+Object.assign(PT,{
+  rgbled:{name:'LED RGB',prefix:'RGB',cat:'dasar',desc:'Tiga warna, katoda bersama',pins:[['R',0,0,'Merah'],['COM',10,0,'Kaki bersama'],['G',20,0,'Hijau'],['B',30,0,'Biru']],def:{common:'cathode'},vb:'-10 -42 50 46',
+    spec:p=>'LED RGB 5 mm '+(p.props.common==='cathode'?'katoda':'anoda')+' bersama',
+    els(p,r,els,diodes){ for(const [ch,vf] of [['R',1.9],['G',2.8],['B',2.9]]){ const cat=p.props.common==='cathode'; const d={t:'D',a:cat?r(ch):r('COM'),b:cat?r('COM'):r(ch),vf,g:1/15,p,key:ch,on:!!(p._dOn&&p._dOn[ch])}; els.push(d); diodes.push(d);} },
+    frame(p,g,st){ const c=['R','G','B'].map(k=>ledB(st.leds.get(p.id+':'+k))); const m=Math.max(...c); const col=`rgb(${Math.round(255*Math.min(1,c[0]*1.2))},${Math.round(255*Math.min(1,c[1]*1.2))},${Math.round(255*Math.min(1,c[2]*1.2))})`;
+      const k=col+m.toFixed(2); if(p._k===k) return; p._k=k; const core=g.querySelector('.rgbcore'), gl=g.querySelector('.rgbglow'); core.setAttribute('fill',col); core.setAttribute('opacity',(m*0.9).toFixed(2)); gl.setAttribute('fill',col); gl.setAttribute('opacity',(m*0.85).toFixed(2)); },
+    insp:p=>`<label class="row">Jenis<select data-prop="common">${opt('cathode','Katoda bersama (COM ke GND)',p.props.common)}${opt('anode','Anoda bersama (COM ke 5V)',p.props.common)}</select></label><div class="note">Kaki terpanjang adalah kaki bersama (COM). Pasang resistor 220 Ω di tiap kaki warna.</div>`,
+    meter:(p,st)=>['R','G','B'].map(k=>{ const L=st.leds.get(p.id+':'+k); return mrow({R:'Merah',G:'Hijau',B:'Biru'}[k],L?(L.I*1000*L.duty).toFixed(1)+' mA':'0 mA'); }).join('') },
+  seg7:{name:'Display 7-segmen',prefix:'DS',cat:'tampilan',desc:'Satu digit, katoda bersama',pins:[['G',0,-60,'Segmen g'],['F',10,-60,'Segmen f'],['COM',20,-60,'Kaki bersama'],['A',30,-60,'Segmen a'],['B',40,-60,'Segmen b'],['E',0,0,'Segmen e'],['D',10,0,'Segmen d'],['COM2',20,0,'Kaki bersama'],['C',30,0,'Segmen c'],['DP',40,0,'Titik desimal']],def:{common:'cathode',color:'red'},vb:'-10 -72 60 84',
+    spec:p=>'Display 7-segmen 0,56" '+(p.props.common==='cathode'?'katoda':'anoda')+' bersama',
+    topo(p,uf){ uf.u(pr(p,'COM'),pr(p,'COM2')); },
+    els(p,r,els,diodes){ const cat=p.props.common==='cathode'; for(const k of ['A','B','C','D','E','F','G','DP']){ const d={t:'D',a:cat?r(k):r('COM'),b:cat?r('COM'):r(k),vf:1.9,g:1/20,p,key:k,on:!!(p._dOn&&p._dOn[k])}; els.push(d); diodes.push(d);} },
+    frame(p,g,st){ let k=''; const on=LEDC[p.props.color]?LEDC[p.props.color].on:'#ff3020'; for(const s of ['A','B','C','D','E','F','G','DP']){ const b=ledB(st.leds.get(p.id+':'+s)); k+=b.toFixed(2); } if(p._k===k) return; p._k=k;
+      for(const s of ['A','B','C','D','E','F','G','DP']){ const b=ledB(st.leds.get(p.id+':'+s)); const el=g.querySelector('.sg-'+s.toLowerCase()); if(el){ el.setAttribute('fill',b>0.02?on:'#3a2424'); el.setAttribute('opacity',b>0.02?(0.45+0.55*b).toFixed(2):1); } } },
+    insp:p=>`<label class="row">Jenis<select data-prop="common">${opt('cathode','Katoda bersama',p.props.common)}${opt('anode','Anoda bersama',p.props.common)}</select></label><label class="row">Warna<select data-prop="color">${opt('red','Merah',p.props.color)}${opt('green','Hijau',p.props.color)}${opt('blue','Biru',p.props.color)}</select></label><div class="note">Tiap segmen adalah LED: beri resistor 220 Ω. Atas: g f COM a b · Bawah: e d COM c dp.</div>` },
+  slideswitch:{name:'Saklar geser',prefix:'SS',cat:'sensor',desc:'SPDT, 3 kaki',pins:[['1',0,0,'Kaki 1'],['2',10,0,'Kaki tengah'],['3',20,0,'Kaki 3']],def:{pos:0},vb:'-8 -18 36 22',spec:()=>'Saklar geser SPDT',
+    topo(p,uf){ uf.u(pr(p,'2'),pr(p,p.props.pos?'3':'1')); },
+    act(p,kind){ if(kind==='slide'){ pushUndo(); p.props.pos=p.props.pos?0:1; renderPart(p); topoDirty=true; refreshInspector(); } },
+    insp:p=>`<div class="note">Klik saklar untuk menggeser. Kaki tengah tersambung ke kaki ${p.props.pos?'3 (kanan)':'1 (kiri)'}.</div>`,
+    meter:p=>mrow('Posisi',p.props.pos?'kanan (2–3)':'kiri (1–2)') },
+  pir:{name:'Sensor gerak PIR',prefix:'PIR',cat:'sensor',desc:'HC-SR501, deteksi gerakan',pins:[['VCC',0,0,'VCC 5V'],['OUT',10,0,'Keluaran'],['GND',20,0,'GND']],def:{hold:5},vb:'-56 -104 132 108',spec:()=>'Sensor gerak PIR HC-SR501',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/5000,p,load:1}); },
+    srcs(p,r,srcs,c){ if(c.isPw(r('VCC'))&&r('GND')===c.gnd) srcs.push({n:r('OUT'),v:(p._mot||0)>now()?3.3:0,g:1/150}); },
+    act(p,kind){ if(kind==='motion') pirTrigger(p); },
+    frame(p,g){ const on=(p._mot||0)>now()&&sim.powered; const k=on?Math.ceil((p._mot-now())/1000):0; if(p._k===k) return; p._k=k; g.querySelector('.pirled').setAttribute('opacity',on?1:0); g.querySelector('.pirt').textContent=on?`gerakan · ${k} dtk`:''; solveDirty=true; },
+    insp:p=>`<button class="btn" data-pa="motion">Simulasikan gerakan</button><label class="row">Lama keluaran HIGH: ${p.props.hold} detik<input type="range" min="1" max="30" data-prop="hold" value="${p.props.hold}"></label><div class="note">Klik kubah putih juga memicu gerakan. Keluaran 3,3 V terbaca HIGH.</div>`,
+    action(p,a){ if(a==='motion') pirTrigger(p); },
+    meter:p=>mrow('Status',(p._mot||0)>now()?'ada gerakan':'diam') },
+  dht22:{name:'Sensor suhu DHT22',prefix:'DHT',cat:'sensor',desc:'Suhu & kelembapan udara',pins:[['VCC',0,0,'VCC'],['SDA',10,0,'Data'],['NC',20,0,'Tidak dipakai'],['GND',30,0,'GND']],def:{temp:24,hum:40},vb:'-12 -76 54 80',spec:()=>'Sensor suhu & kelembapan DHT22 (AM2302)',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/5000,p,load:1}); },
+    insp:p=>`<label class="row">Suhu: ${p.props.temp} °C<input type="range" min="-40" max="80" step="0.5" data-prop="temp" value="${p.props.temp}"></label><label class="row">Kelembapan: ${p.props.hum} %<input type="range" min="0" max="100" step="0.5" data-prop="hum" value="${p.props.hum}"></label><div class="note">Pustaka: DHT dht(pin, DHT22). Kaki data biasanya diberi pull-up 10 kΩ.</div>`,
+    liveLabel:true, meter:p=>mrow('Suhu',p.props.temp+' °C')+mrow('Kelembapan',p.props.hum+' %') },
+  joystick:{name:'Joystick analog',prefix:'JOY',cat:'sensor',desc:'Dua sumbu + tombol',pins:[['GND',0,0,'GND'],['VCC',10,0,'VCC 5V'],['VRX',20,0,'Sumbu X'],['VRY',30,0,'Sumbu Y'],['SW',40,0,'Tombol']],def:{},vb:'-22 -94 84 98',spec:()=>'Modul joystick analog KY-023',
+    els(p,r,els){ const R=10000, x=p._jx??.5, y=p._jy??.5; els.push({t:'R',a:r('VCC'),b:r('VRX'),g:1/Math.max(5,R*(1-x)),p},{t:'R',a:r('VRX'),b:r('GND'),g:1/Math.max(5,R*x),p},{t:'R',a:r('VCC'),b:r('VRY'),g:1/Math.max(5,R*(1-y)),p},{t:'R',a:r('VRY'),b:r('GND'),g:1/Math.max(5,R*y),p}); },
+    topo(p,uf){ if(p._sw) uf.u(pr(p,'SW'),pr(p,'GND')); },
+    act(p,kind,el,e,w){ const c0={...pinWorld(p,'GND')}; const [cx,cy]=rotXY(20,-50,p.rot); const C={x:p.x+cx,y:p.y+cy}; let moved=false; p._sw=true; topoDirty=true;
+      return { move(w2){ let [dx,dy]=rotXY(w2.x-C.x,w2.y-C.y,-p.rot); const d=Math.hypot(dx,dy); if(d>3) { moved=true; p._sw=false; } const m=22; if(d>m){dx*=m/d;dy*=m/d;} p._jx=.5+dx/(2*m); p._jy=.5+dy/(2*m); joyDraw(p); solveDirty=true; topoDirty=true; liveInspector(); },
+        up(){ p._jx=.5; p._jy=.5; p._sw=false; joyDraw(p); solveDirty=true; topoDirty=true; liveInspector(); } }; },
+    insp:p=>`<div class="note">Seret tuas untuk menggerakkan, lepas untuk kembali ke tengah. Klik tuas tanpa menggeser untuk menekan tombol SW (pakai INPUT_PULLUP).</div>`,
+    meter:(p,st)=>mrow('X',(p._jx??.5).toFixed(2))+mrow('Y',(p._jy??.5).toFixed(2))+mrow('Tombol',p._sw?'ditekan':'lepas') },
+  keypad:{name:'Keypad 4×4',prefix:'KP',cat:'sensor',desc:'16 tombol membran',pins:[['R1',0,0,'Baris 1'],['R2',10,0,'Baris 2'],['R3',20,0,'Baris 3'],['R4',30,0,'Baris 4'],['C1',40,0,'Kolom 1'],['C2',50,0,'Kolom 2'],['C3',60,0,'Kolom 3'],['C4',70,0,'Kolom 4']],def:{},vb:'-70 -240 210 244',spec:()=>'Keypad membran 4×4',
+    topo(p,uf){ if(p.key) uf.u(pr(p,'R'+(p.key.r+1)),pr(p,'C'+(p.key.c+1))); },
+    act(p,kind,el){ if(kind!=='key') return; const [r,c]=el.dataset.k.split(',').map(Number); p.key={r,c}; sim.keyQ.push({p,r,c}); if(sim.keyQ.length>16) sim.keyQ.shift(); topoDirty=true; keyDraw(p,el,true);
+      return {move(){}, up(){ p.key=null; topoDirty=true; keyDraw(p,el,false); }}; },
+    insp:p=>`<div class="note">Klik tombol pada keypad. Pustaka: Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 4).</div>`,
+    meter:p=>mrow('Tombol',p.key?'ditekan':'—') },
+  relay:{name:'Modul relay',prefix:'K',cat:'aktuator',desc:'Relay 5 V satu kanal',pins:[['VCC',0,0,'VCC 5V'],['GND',10,0,'GND'],['IN',20,0,'Sinyal'],['NC',50,0,'NC (normal tertutup)'],['COM',60,0,'COM'],['NO',70,0,'NO (normal terbuka)']],def:{trig:'high'},vb:'-12 -64 96 68',spec:()=>'Modul relay 5 V 1 kanal',
+    topo(p,uf){ uf.u(pr(p,'COM'),pr(p,p._on?'NO':'NC')); },
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:p._on?1/70:1/5000,p,load:1}); },
+    frame(p,g,st){ const pw=pwrOK(st,p,'VCC','GND'); const n=N(pr(p,'IN')); const v=st.V(n), fl=st.floating(n); const on=pw&&!fl&&(p.props.trig==='high'?v>2.5:v<1.5);
+      if(on!==!!p._on){ p._on=on; topoDirty=true; g.querySelector('.rlled').setAttribute('opacity',on?1:0); g.querySelector('.rlarm').setAttribute('transform',on?'rotate(-8 64 -16)':''); clickSnd(); } },
+    insp:p=>`<label class="row">Pemicu<select data-prop="trig">${opt('high','Aktif HIGH',p.props.trig)}${opt('low','Aktif LOW',p.props.trig)}</select></label><div class="note">Saat aktif, COM tersambung ke NO; saat mati, COM ke NC.</div>`,
+    meter:p=>mrow('Kontak',p._on?'COM–NO (aktif)':'COM–NC (mati)') },
+  neopixel:{name:'NeoPixel',prefix:'NP',cat:'tampilan',desc:'LED RGB WS2812, cincin/strip',pins:[['GND',0,0,'GND'],['VCC',10,0,'VCC 5V'],['DIN',20,0,'Data masuk'],['DOUT',30,0,'Data keluar']],def:{layout:'ring16'},vb:'-46 -126 122 130',
+    spec:p=>p.props.layout==='strip8'?'Strip NeoPixel WS2812B 8 LED':'Cincin NeoPixel WS2812B 16 LED',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/400,p,load:1}); },
+    frame(p,g,st){ const n=p.props.layout==='strip8'?8:16; const pw=pwrOK(st,p,'VCC','GND'); const din=N(pr(p,'DIN')); const lib=pw?sim.libs.find(l=>l.kind==='neo'&&bnet(l.pin)===din):null;
+      const k=lib?lib.ver+':'+lib.n:'0'+pw; if(p._k===k) return; p._k=k;
+      for(let i=0;i<n;i++){ const c=lib&&i<lib.n?lib.shown[i]:0; const r=(c>>16)&255,gg=(c>>8)&255,b=c&255, m=Math.max(r,gg,b); const el=g.querySelector('.np'+i), gl=g.querySelector('.npg'+i);
+        const col=m?`rgb(${Math.round(r*255/m)},${Math.round(gg*255/m)},${Math.round(b*255/m)})`:'#f3f3ee'; el.setAttribute('fill',m?col:'#f3f3ee'); el.setAttribute('opacity',m?(0.55+0.45*m/255).toFixed(2):1); gl.setAttribute('fill',col); gl.setAttribute('opacity',m?Math.min(1,0.25+m/255).toFixed(2):0); } },
+    insp:p=>`<label class="row">Bentuk<select data-prop="layout">${opt('ring16','Cincin 16 LED',p.props.layout)}${opt('strip8','Strip 8 LED',p.props.layout)}</select></label><div class="note">Pustaka: Adafruit_NeoPixel strip(jumlah, pin, NEO_GRB + NEO_KHZ800).</div>` },
+  matrix:{name:'Matriks LED 8×8',prefix:'MX',cat:'tampilan',desc:'Modul MAX7219',pins:[['VCC',0,0,'VCC 5V'],['GND',0,10,'GND'],['DIN',0,20,'DIN'],['CS',0,30,'CS'],['CLK',0,40,'CLK']],def:{},vb:'-6 -48 146 136',spec:()=>'Modul matriks LED 8×8 MAX7219',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/300,p,load:1}); },
+    frame(p,g,st){ const pw=pwrOK(st,p,'VCC','GND'); const lib=pw?sim.libs.find(l=>l.kind==='max7219'&&bnet(l.din)===N(pr(p,'DIN'))&&bnet(l.clk)===N(pr(p,'CLK'))&&bnet(l.cs)===N(pr(p,'CS'))):null;
+      const k=lib?'v'+lib.ver:'x'+pw; if(p._k===k) return; p._k=k; const d=lib?lib.dev[0]:null; const a=d?(0.35+0.65*(d.inten/15)):0;
+      for(let r=0;r<8;r++) for(let c=0;c<8;c++){ const on=d&&d.on&&((d.rows[r]>>(7-c))&1); const el=g.querySelector(`.mx${r}${c}`); el.setAttribute('fill',on?'#ff3a1f':'#3b1d1a'); el.setAttribute('opacity',on?a.toFixed(2):1); } },
+    insp:()=>`<div class="note">Pustaka: LedControl lc = LedControl(DIN, CLK, CS, 1). Panggil lc.shutdown(0, false) agar menyala.</div>` },
+  stepper:{name:'Motor stepper',prefix:'M',cat:'aktuator',desc:'28BYJ-48 + driver ULN2003',pins:[['IN1',0,0,'IN1'],['IN2',10,0,'IN2'],['IN3',20,0,'IN3'],['IN4',30,0,'IN4'],['GND',50,0,'GND (−)'],['VCC',60,0,'VCC 5V (+)']],def:{},vb:'-16 -168 92 172',spec:()=>'Motor stepper 28BYJ-48 + driver ULN2003',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/1000,p,load:1}); },
+    frame(p,g,st){ const pw=pwrOK(st,p,'VCC','GND'); const ins=['IN1','IN2','IN3','IN4'].map(k=>N(pr(p,k))).sort().join('|');
+      const lib=pw?sim.libs.find(l=>l.kind==='stepper'&&l.pins.length===4&&l.pins.map(bnet).sort().join('|')===ins):null;
+      const pos=lib?lib.pos:(p._pos||0); p._pos=pos; const ang=(pos/(lib?lib.spr:2048))*360; const k=ang.toFixed(1)+!!lib; if(p._k===k) return; p._k=k;
+      g.querySelector('.stshaft').setAttribute('transform',`rotate(${ang} 30 -112)`); const ph=((pos%4)+4)%4; for(let i=0;i<4;i++) g.querySelector('.stl'+i).setAttribute('opacity',lib&&(i===ph||i===(ph+1)%4)?1:0.15); },
+    insp:()=>`<div class="note">Pustaka: Stepper motor(2048, 8, 10, 9, 11) untuk IN1–IN4 di pin 8, 9, 10, 11. Satu putaran = 2048 langkah.</div>`,
+    meter:p=>mrow('Sudut poros',((((p._pos||0)/2048*360)%360+360)%360).toFixed(1)+'°') },
+  oled:{name:'OLED 128×64',prefix:'OLED',cat:'tampilan',desc:'SSD1306 I2C, 0,96"',pins:[['GND',0,0,'GND'],['VCC',10,0,'VCC'],['SCL',20,0,'SCL'],['SDA',30,0,'SDA']],def:{addr:0x3C,tint:'white'},vb:'-42 -6 116 110',spec:()=>'Layar OLED 0,96" 128×64 SSD1306 I2C',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/400,p,load:1}); },
+    frame(p,g,st){ const pw=pwrOK(st,p,'VCC','GND',3); const ok=N(pr(p,'SDA'))===N('ard:'+BOARD.sda)&&N(pr(p,'SCL'))===N('ard:'+BOARD.scl);
+      const lib=pw&&ok?sim.libs.find(l=>l.kind==='oled'&&l.began&&l.addr===p.props.addr):null; p._st={pw,ok,lib};
+      const k=lib?'v'+lib.ver:'x'; if(p._k===k&&p._kt===p.props.tint) return; p._k=k; p._kt=p.props.tint;
+      const cv=p._cv||(p._cv=document.createElement('canvas')); cv.width=128; cv.height=64; const c=cv.getContext('2d'); c.fillStyle='#050608'; c.fillRect(0,0,128,64);
+      if(lib){ const im=c.getImageData(0,0,128,64); const tint=p.props.tint; for(let y=0;y<64;y++) for(let x=0;x<128;x++){ let on=x<lib.w&&y<lib.h?lib.shown[y*lib.w+x]:0; if(lib.inv) on=!on; if(!on) continue;
+          const col=tint==='blue'?[110,200,255]:tint==='duo'?(y<16?[255,214,40]:[110,200,255]):[235,245,255]; const i=(y*128+x)*4; im.data[i]=col[0]; im.data[i+1]=col[1]; im.data[i+2]=col[2]; im.data[i+3]=255; } c.putImageData(im,0,0); }
+      g.querySelector('.oledimg').setAttribute('href',cv.toDataURL()); },
+    insp:p=>`<label class="row">Alamat I2C<select data-prop="addr" data-num>${opt(0x3C,'0x3C',p.props.addr)}${opt(0x3D,'0x3D',p.props.addr)}</select></label><label class="row">Warna piksel<select data-prop="tint">${opt('white','Putih',p.props.tint)}${opt('blue','Biru',p.props.tint)}${opt('duo','Kuning-biru',p.props.tint)}</select></label><div class="note">SDA ke ${BOARD.sda}, SCL ke ${BOARD.scl}. Pustaka: Adafruit_SSD1306 display(128, 64, &Wire, -1).</div>`,
+    meter:p=>{ const s=p._st||{}; return mrow('Daya',s.pw?'menyala':'mati')+mrow('Jalur I2C',s.ok?'benar':'belum benar')+mrow('Program',s.lib?'terhubung':'belum begin()'); } },
+  rtc:{name:'Jam RTC DS1307',prefix:'RTC',cat:'modul',desc:'Jam waktu nyata I2C',pins:[['GND',0,0,'GND'],['VCC',10,0,'VCC 5V'],['SDA',20,0,'SDA'],['SCL',30,0,'SCL'],['SQW',40,0,'SQW']],def:{},vb:'-12 -70 64 74',spec:()=>'Modul RTC DS1307 + baterai CR2032',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/5000,p,load:1}); },
+    frame(p,g){ const d=new Date((localUnix()+(p._rtcOff||0))*1000); const t=d.toISOString().slice(11,19); if(p._k===t) return; p._k=t; g.querySelector('.rtct').textContent=t; },
+    insp:()=>`<div class="note">Waktu mengikuti jam komputer Anda. Atur dengan rtc.adjust(DateTime(F(__DATE__), F(__TIME__))).</div>` },
+  encoder:{name:'Rotary encoder',prefix:'ENC',cat:'sensor',desc:'KY-040 dengan tombol',pins:[['CLK',0,0,'CLK (A)'],['DT',10,0,'DT (B)'],['SW',20,0,'Tombol'],['VCC',30,0,'VCC 5V (+)'],['GND',40,0,'GND']],def:{},vb:'-14 -72 68 76',spec:()=>'Modul rotary encoder KY-040',
+    els(p,r,els){ for(const k of ['CLK','DT','SW']) els.push({t:'R',a:r('VCC'),b:r(k),g:1/10000,p}); },
+    topo(p,uf){ const e=p._enc||{a:1,b:1}; if(!e.a) uf.u(pr(p,'CLK'),pr(p,'GND')); if(!e.b) uf.u(pr(p,'DT'),pr(p,'GND')); if(p._sw) uf.u(pr(p,'SW'),pr(p,'GND')); },
+    act(p,kind,el,e,w){ const [cx,cy]=rotXY(20,-40,p.rot); const C={x:p.x+cx,y:p.y+cy}; let a0=Math.atan2(w.y-C.y,w.x-C.x), acc=0, moved=false; p._sw=true; topoDirty=true;
+      return { move(w2){ const a=Math.atan2(w2.y-C.y,w2.x-C.x); let d=a-a0; if(d>Math.PI) d-=2*Math.PI; if(d<-Math.PI) d+=2*Math.PI; a0=a; acc+=d; if(Math.abs(acc)>0.05&&!moved){ moved=true; p._sw=false; topoDirty=true; } while(acc>0.314){ acc-=0.314; encStep(p,1); } while(acc<-0.314){ acc+=0.314; encStep(p,-1); } },
+        up(){ p._sw=false; topoDirty=true; } }; },
+    action(p,a){ if(a==='cw') encStep(p,1); if(a==='ccw') encStep(p,-1); if(a==='press'){ p._sw=true; topoDirty=true; setTimeout(()=>{ p._sw=false; topoDirty=true; },200); } },
+    insp:()=>`<div class="rowbtn"><button class="btn sm" data-pa="ccw">⟲ Kiri</button><button class="btn sm" data-pa="cw">Kanan ⟳</button><button class="btn sm" data-pa="press">Tekan</button></div><div class="note">Atau putar kenopnya dengan menyeret melingkar; klik kenop untuk menekan. CLK, DT, SW memiliki pull-up 10 kΩ di modul.</div>`,
+    meter:p=>mrow('Klik',String(p._cnt||0)) },
+  tm1637:{name:'Display 4 digit',prefix:'TM',cat:'tampilan',desc:'TM1637 dengan titik dua',pins:[['CLK',0,0,'CLK'],['DIO',10,0,'DIO'],['VCC',20,0,'VCC 5V'],['GND',30,0,'GND']],def:{},vb:'-72 -104 174 108',spec:()=>'Modul display 4 digit TM1637',
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/500,p,load:1}); },
+    frame(p,g,st){ const pw=pwrOK(st,p,'VCC','GND'); const lib=pw?sim.libs.find(l=>l.kind==='tm1637'&&bnet(l.clk)===N(pr(p,'CLK'))&&bnet(l.dio)===N(pr(p,'DIO'))):null;
+      const k=lib?'v'+lib.ver:'x'; if(p._k===k) return; p._k=k; const a=lib?(0.4+0.6*lib.br/7).toFixed(2):1;
+      for(let d=0;d<4;d++){ const v=lib&&lib.on?lib.segs[d]:0; for(let i=0;i<7;i++){ const el=g.querySelector(`.t${d}-${SEGS[i]}`); const on=(v>>i)&1; el.setAttribute('fill',on?'#ff3420':'#3a2424'); el.setAttribute('opacity',on?a:1); } }
+      const col=lib&&lib.on&&(lib.segs[1]&0x80); g.querySelectorAll('.tcol').forEach(e=>{ e.setAttribute('fill',col?'#ff3420':'#3a2424'); }); },
+    insp:()=>`<div class="note">Pustaka: TM1637Display display(CLK, DIO). Titik dua menyala dengan showNumberDecEx(angka, 0b01000000, true).</div>` },
+  sensor:{name:'Modul sensor analog',prefix:'S',cat:'sensor',desc:'Tanah, gas, hujan, api',pins:[['VCC',0,0,'VCC 5V'],['GND',10,0,'GND'],['DO',20,0,'Keluaran digital'],['AO',30,0,'Keluaran analog']],def:{kind:'soil',level:30,th:50},vb:'-36 -140 104 144',
+    spec:p=>SENSK[p.props.kind].spec,
+    els(p,r,els){ els.push({t:'R',a:r('VCC'),b:r('GND'),g:1/2000,p,load:1}); },
+    srcs(p,r,srcs,c){ if(!(c.isPw(r('VCC'))&&r('GND')===c.gnd)) return; const K=SENSK[p.props.kind]; srcs.push({n:r('AO'),v:5*K.ao(p.props.level/100),g:1/1000}); srcs.push({n:r('DO'),v:p.props.level>p.props.th?0:5,g:1/1000}); },
+    frame(p,g){ const on=sim.powered&&p.props.level>p.props.th; if(p._k===on) return; p._k=on; g.querySelector('.sdo').setAttribute('opacity',on?1:0.15); },
+    insp:p=>{ const K=SENSK[p.props.kind]; return `<label class="row">Jenis sensor<select data-prop="kind">${Object.keys(SENSK).map(k=>opt(k,SENSK[k].name,p.props.kind)).join('')}</select></label><label class="row">${K.lvl}: ${p.props.level} %<input type="range" min="0" max="100" data-prop="level" value="${p.props.level}"></label><label class="row">Ambang DO (potensiometer): ${p.props.th} %<input type="range" min="0" max="100" data-prop="th" value="${p.props.th}"></label><div class="note">${K.note}</div>`; },
+    meter:p=>{ const K=SENSK[p.props.kind]; return mrow('AO',(5*K.ao(p.props.level/100)).toFixed(2)+' V ≈ '+Math.round(1023*K.ao(p.props.level/100)))+mrow('DO',p.props.level>p.props.th?'LOW (aktif)':'HIGH'); } },
+});
+const SENSK={
+  soil:{name:'Kelembapan tanah',spec:'Sensor kelembapan tanah (YL-69) + modul',lvl:'Kelembapan tanah',ao:x=>1-0.82*x,note:'Makin basah tanah, nilai AO makin kecil. DO menjadi LOW saat melewati ambang.'},
+  gas:{name:'Gas / asap MQ-2',spec:'Sensor gas & asap MQ-2',lvl:'Kadar gas',ao:x=>0.08+0.85*x,note:'Makin banyak gas, nilai AO makin besar. DO menjadi LOW saat melewati ambang.'},
+  rain:{name:'Hujan',spec:'Sensor hujan (FC-37) + modul',lvl:'Kebasahan papan',ao:x=>1-0.85*x,note:'Makin banyak air, nilai AO makin kecil.'},
+  flame:{name:'Api (inframerah)',spec:'Sensor api KY-026',lvl:'Intensitas api',ao:x=>1-0.88*x,note:'Makin dekat api, nilai AO makin kecil. DO LOW saat api terdeteksi.'},
+};
+function pirTrigger(p){ p._mot=now()+p.props.hold*1000; p._k=null; solveDirty=true; }
+function joyDraw(p){ const k=p._g&&p._g.querySelector('.joycap'); if(k) k.setAttribute('transform',`translate(${((p._jx??.5)-.5)*44} ${((p._jy??.5)-.5)*44})`); }
+function keyDraw(p,el,on){ const r=el.querySelector('rect'); if(r) r.setAttribute('fill',on?'#c9ced3':'#eef0f2'); }
+function encStep(p,dir){ p._q=(p._q||[]); p._q.push(dir); p._cnt=(p._cnt||0)+dir; const k=p._g&&p._g.querySelector('.encknob'); p._ang=(p._ang||0)+dir*18; if(k) k.setAttribute('transform',`rotate(${p._ang} 20 -40)`); if(!p._busy) encRun(p); }
+function encRun(p){ const dir=p._q.shift(); if(dir==null){ p._busy=false; return; } p._busy=true;
+  const seq=dir>0?[{a:1,b:0},{a:0,b:0},{a:0,b:1},{a:1,b:1}]:[{a:0,b:1},{a:0,b:0},{a:1,b:0},{a:1,b:1}]; let i=0;
+  const tick=()=>{ p._enc=seq[i++]; topoDirty=true; if(i<seq.length) setTimeout(tick,4); else setTimeout(()=>encRun(p),4); }; tick(); }
+let clickT=0; function clickSnd(){ if(!actx||muted||now()-clickT<60) return; clickT=now(); const o=actx.createOscillator(), g=actx.createGain(); o.type='square'; o.frequency.value=180; g.gain.setValueAtTime(0.05,actx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,actx.currentTime+0.04); o.connect(g).connect(actx.destination); o.start(); o.stop(actx.currentTime+0.05); }
+
+Object.assign(DRAW,{
+  rgbled(p){ const dome='M-1.5 -14.5 V-25 A6.5 6.5 0 0 1 11.5 -25 V-14.5 Z';
+    return `<path d="M0 0 V-13 M10 0 V-13 M20 0 V-9 L11 -13 M30 0 V-8 L12 -13" class="leg"/>
+    <g transform="translate(10 0)"><path d="M-3.2 -12.4 H11.6 V-15.2 H-3.2 Z" fill="#e8e8e6"/><path d="${dome}" fill="#f2f2ef" stroke="rgba(0,0,0,.25)" stroke-width=".5"/>
+    <path class="rgbcore" d="${dome}" fill="#000" opacity="0"/><path d="M1 -16 V-25 A3.5 3.5 0 0 1 4 -28.6" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.1"/>
+    <circle class="rgbglow" cx="5" cy="-21" r="16" fill="#fff" opacity="0" filter="url(#fBlur)" style="pointer-events:none"/></g>
+    ${lbls([['R',0],['−',10],['G',20],['B',30]],6,4.5).replace(/class="silk"/g,'fill="currentColor" font-family="Barlow Condensed, sans-serif"')}`; },
+  seg7(p){ return `<rect x="-6" y="-68" width="52" height="76" rx="2" fill="#1c1c1c" stroke="#000"/><rect x="-3" y="-65" width="46" height="70" fill="#111"/>
+    <g transform="translate(18 -30) skewX(-8)">${digitSVG('sg',0.95)}</g>`; },
+  slideswitch(p){ const x=p.props.pos?11:1; return `<path d="M0 0 V-4 M10 0 V-4 M20 0 V-4" class="leg"/><rect x="-6" y="-14" width="32" height="11" rx="1.5" fill="#2a3f8f" stroke="#18275e"/>
+    <g class="act" data-act="slide"><rect x="-4" y="-12.5" width="28" height="8" rx="1" fill="#16224f"/><rect class="ssk" x="${x}" y="-17" width="8" height="12" rx="1" fill="url(#gMetal)" stroke="#6c757b" stroke-width=".5"/></g>`; },
+  pir(p){ let s=`<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8" class="leg" stroke-width="1.8"/><rect x="-8" y="-12" width="36" height="5" fill="#161616"/>
+    <rect x="-52" y="-100" width="124" height="90" rx="3" fill="url(#gPcbG)" stroke="#0c4a29"/>
+    <circle cx="-42" cy="-90" r="3.5" fill="#0b1f14"/><circle cx="62" cy="-90" r="3.5" fill="#0b1f14"/><circle cx="-42" cy="-20" r="3.5" fill="#0b1f14"/><circle cx="62" cy="-20" r="3.5" fill="#0b1f14"/>
+    <g class="act" data-act="motion"><circle cx="10" cy="-56" r="38" fill="#f4f3ee" stroke="#cfcdc4"/>`;
+    for(let r=32;r>4;r-=7) s+=`<circle cx="10" cy="-56" r="${r}" fill="none" stroke="#dcdad1" stroke-width="1"/>`;
+    s+=`<path d="M-28 -56 H48 M10 -94 V-18 M-17 -83 L37 -29 M37 -83 L-17 -29" stroke="#e3e1d9" stroke-width=".8"/><circle cx="10" cy="-56" r="38" fill="url(#gGlass)"/></g>
+    <circle class="pirled" cx="10" cy="-56" r="5" fill="#ff3b30" opacity="0" filter="url(#fBlur)" style="pointer-events:none"/>
+    <text class="pirt" x="10" y="-106" font-size="7" text-anchor="middle" fill="currentColor" font-family="JetBrains Mono, monospace"></text>
+    ${lbls([['VCC',0],['OUT',10],['GND',20]],-14,4.6,true)}`; return s; },
+  dht22(p){ let s=`<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8" class="leg" stroke-width="1.6"/><rect x="-8" y="-72" width="46" height="64" rx="3" fill="#f2f2ee" stroke="#bdbbb3"/>`;
+    for(let r=0;r<5;r++) for(let c=0;c<4;c++) s+=`<rect x="${-2+c*10}" y="${-64+r*9}" width="7" height="5" rx="1" fill="#d6d4cc"/>`;
+    return s+`<text x="15" y="-14" font-size="6" text-anchor="middle" fill="#666" font-family="Barlow Condensed, sans-serif" font-weight="700">DHT22</text><text class="dhtv" x="15" y="-78" font-size="7" text-anchor="middle" fill="currentColor" font-family="JetBrains Mono, monospace">${p.props.temp}°C ${p.props.hum}%</text>`; },
+  joystick(p){ return `<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8 M40 0 V-8" class="leg" stroke-width="1.8"/><rect x="-6" y="-12" width="52" height="5" fill="#161616"/>
+    <rect x="-18" y="-92" width="76" height="82" rx="3" fill="#1e1e22" stroke="#000"/>
+    <rect x="-6" y="-80" width="52" height="52" rx="3" fill="#2b2b30"/><circle cx="20" cy="-54" r="23" fill="#151517" stroke="#3a3a40"/>
+    <g class="act" data-act="joy"><g class="joycap" transform="translate(${((p._jx??.5)-.5)*44} ${((p._jy??.5)-.5)*44})"><circle cx="20" cy="-54" r="15" fill="url(#gCap)" stroke="#000"/><circle cx="20" cy="-54" r="11" fill="none" stroke="#3a3f44" stroke-width="1.4"/><circle cx="20" cy="-54" r="5" fill="none" stroke="#3a3f44"/></g></g>
+    ${lbls([['GND',0],['+5V',10],['VRx',20],['VRy',30],['SW',40]],-14,4.6,true)}`; },
+  keypad(p){ const K=['123A','456B','789C','*0#D']; let s=`<path d="M-8 -12 H78 V-2 H-8 Z" fill="#1d1d1d"/>`;
+    for(let i=0;i<8;i++) s+=`<path d="M${i*10} 0 V-14" stroke="${['#6b3b1f','#d32f2a','#f08a1c','#f0c419','#2d9d4c','#2f6ed4','#8b4fc6','#9aa0a5'][i]}" stroke-width="2.4"/>`;
+    s+=`<path d="M-8 -14 H78 L96 -26 H-26 Z" fill="#26282b"/><rect x="-66" y="-236" width="206" height="212" rx="6" fill="#1f2226" stroke="#0b0c0d"/>`;
+    for(let r=0;r<4;r++) for(let c=0;c<4;c++){ const x=-56+c*50, y=-226+r*50; const ch=K[r][c]; const col=/[A-D]/.test(ch)?'#e04a3a':/[*#]/.test(ch)?'#2f6ed4':'#2d3238';
+      s+=`<g class="act" data-act="key" data-k="${r},${c}"><rect x="${x}" y="${y}" width="42" height="42" rx="5" fill="#eef0f2" stroke="#c4c8cc"/><text x="${x+21}" y="${y+29}" font-size="20" text-anchor="middle" font-weight="700" fill="${col}" font-family="Barlow, sans-serif" style="pointer-events:none">${ch}</text></g>`; }
+    return s; },
+  relay(p){ return `<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8" class="leg" stroke-width="1.8"/>
+    <rect x="-10" y="-62" width="92" height="54" rx="3" fill="url(#gPcbB)" stroke="#123a75"/>
+    <rect x="16" y="-58" width="40" height="34" rx="1.5" fill="#1d5fd0" stroke="#123a75"/><text x="36" y="-44" font-size="5.6" fill="#e6efff" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="600">RELAY 5VDC</text><text x="36" y="-36" font-size="4.4" fill="#cfe0ff" text-anchor="middle" font-family="Barlow Condensed, sans-serif">10A 250VAC</text>
+    <g class="rlarm"><path d="M56 -16 L72 -16" stroke="#c9ced1" stroke-width="2"/></g>
+    <rect x="44" y="-20" width="34" height="14" rx="1" fill="#1f6fd8" stroke="#0e3d80"/>${[50,60,70].map(x=>`<circle cx="${x}" cy="-13" r="3.6" fill="url(#gMetal)"/><path d="M${x-2.4} -13 H${x+2.4}" stroke="#555"/>`).join('')}
+    <circle class="rlled" cx="0" cy="-48" r="3" fill="#ff3b30" opacity="0"/><circle cx="0" cy="-48" r="3" fill="none" stroke="#7a1b16" stroke-width=".6"/>
+    ${lbls([['VCC',0],['GND',10],['IN',20]],-14,4.6,true)}${lbls([['NC',50],['COM',60],['NO',70]],-24,4.6)}`; },
+  neopixel(p){ const strip=p.props.layout==='strip8'; let s=`<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8" class="leg" stroke-width="1.6"/>`;
+    if(strip){ s+=`<rect x="-12" y="-34" width="176" height="26" rx="2" fill="#141414" stroke="#000"/>`; for(let i=0;i<8;i++){ const x=4+i*20; s+=`<rect x="${x-7}" y="-28" width="14" height="14" rx="1.5" fill="#f3f3ee" class="np${i}"/><circle class="npg${i}" cx="${x}" cy="-21" r="12" fill="#fff" opacity="0" filter="url(#fBlur)" style="pointer-events:none"/>`; } }
+    else { s+=`<circle cx="15" cy="-66" r="54" fill="#141414" stroke="#000"/><circle cx="15" cy="-66" r="34" fill="var(--mat,#d6dfe1)" stroke="#000" style="fill:var(--mat)"/>`; for(let i=0;i<16;i++){ const a=i/16*2*Math.PI-Math.PI/2; const x=15+44*Math.cos(a), y=-66+44*Math.sin(a);
+      s+=`<rect x="${x-6}" y="${y-6}" width="12" height="12" rx="1.5" fill="#f3f3ee" class="np${i}" transform="rotate(${i*22.5} ${x} ${y})"/><circle class="npg${i}" cx="${x}" cy="${y}" r="11" fill="#fff" opacity="0" filter="url(#fBlur)" style="pointer-events:none"/>`; } }
+    return s+lbls([['G',0],['V',10],['DI',20],['DO',30]],7,4.5).replace(/class="silk"/g,'fill="currentColor" font-family="Barlow Condensed, sans-serif"'); },
+  matrix(p){ let s=`<rect x="-4" y="-5" width="8" height="50" fill="#151515"/>`; for(let i=0;i<5;i++) s+=`<rect x="-2.2" y="${i*10-2.2}" width="4.4" height="4.4" fill="#d6b65a"/>`;
+    s+=`<rect x="6" y="-44" width="132" height="132" rx="3" fill="url(#gPcbB)" stroke="#123a75"/><rect x="14" y="-36" width="116" height="116" rx="2" fill="#141414"/>`;
+    for(let r=0;r<8;r++) for(let c=0;c<8;c++) s+=`<circle class="mx${r}${c}" cx="${22+c*14.3}" cy="${-28+r*14.3}" r="5.6" fill="#3b1d1a"/>`;
+    return s+['VCC','GND','DIN','CS','CLK'].map((t,i)=>`<text x="-6" y="${i*10+2}" font-size="5" text-anchor="end" fill="currentColor" font-family="Barlow Condensed, sans-serif">${t}</text>`).join(''); },
+  stepper(p){ return `<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8 M50 0 V-8 M60 0 V-8" class="leg" stroke-width="1.8"/>
+    <rect x="-14" y="-56" width="88" height="48" rx="3" fill="url(#gPcbG)" stroke="#0c4a29"/><rect x="-2" y="-40" width="30" height="16" rx="1" fill="url(#gChip)"/><text x="13" y="-29" font-size="4.6" fill="#8d9296" text-anchor="middle" font-family="JetBrains Mono, monospace">ULN2003</text>
+    ${[0,1,2,3].map(i=>`<circle class="stl${i}" cx="${40+i*8}" cy="-46" r="2.6" fill="#ff3b30" opacity=".15"/>`).join('')}<rect x="36" y="-36" width="34" height="12" rx="1" fill="#f2f2ee"/>
+    <path d="M44 -36 C44 -50 22 -50 22 -66 M48 -36 C48 -52 28 -52 26 -66 M52 -36 C52 -54 34 -54 30 -66 M56 -36 C56 -56 40 -56 34 -66 M60 -36 C60 -58 46 -58 38 -66" fill="none" stroke-width="2" stroke="#2f6ed4"/>
+    <circle cx="30" cy="-112" r="50" fill="url(#gMetal)" stroke="#7d868c"/><circle cx="30" cy="-112" r="42" fill="none" stroke="#9aa1a6" stroke-width="1"/>
+    <rect x="-24" y="-118" width="10" height="12" rx="2" fill="#9aa1a6"/><rect x="74" y="-118" width="10" height="12" rx="2" fill="#9aa1a6"/>
+    <circle cx="30" cy="-130" r="12" fill="#b9bfc4" stroke="#7d868c"/><g class="stshaft"><circle cx="30" cy="-112" r="8" fill="#d6c56a" stroke="#8f7f30"/><rect x="28" y="-128" width="4" height="16" rx="1" fill="#8f7f30"/></g>
+    ${lbls([['IN1',0],['IN2',10],['IN3',20],['IN4',30],['−',50],['+',60]],-12,4.6,true)}`; },
+  oled(p){ return `<path d="M0 0 V6 M10 0 V6 M20 0 V6 M30 0 V6" class="leg" stroke-width="1.6"/><rect x="-38" y="4" width="106" height="96" rx="3" fill="#1d3f8f" stroke="#0e2558"/>
+    ${[[-30,12],[60,12],[-30,92],[60,92]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.2" fill="#0a1530"/>`).join('')}
+    ${lbls([['GND',0],['VCC',10],['SCL',20],['SDA',30]],14,4.6)}
+    <rect x="-34" y="20" width="98" height="58" fill="#0b0c0e"/><image class="oledimg" x="-31" y="23" width="92" height="46" preserveAspectRatio="none" style="image-rendering:pixelated"/>
+    <rect x="-34" y="78" width="98" height="10" fill="#15161a"/>`; },
+  rtc(p){ return `<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8 M40 0 V-8" class="leg" stroke-width="1.6"/><rect x="-10" y="-68" width="60" height="60" rx="3" fill="url(#gPcbB)" stroke="#123a75"/>
+    <circle cx="20" cy="-46" r="17" fill="url(#gMetal)" stroke="#7d868c"/><text x="20" y="-44" font-size="5" text-anchor="middle" fill="#555" font-family="Barlow Condensed, sans-serif" font-weight="700">CR2032</text>
+    <rect x="-4" y="-26" width="14" height="10" rx="1" fill="url(#gChip)"/><ellipse cx="34" cy="-21" rx="6" ry="2.6" fill="url(#gMetal)"/>
+    <text class="rtct" x="20" y="-74" font-size="7" text-anchor="middle" fill="currentColor" font-family="JetBrains Mono, monospace"></text>
+    ${lbls([['GND',0],['VCC',10],['SDA',20],['SCL',30],['SQW',40]],-11,4.6,true)}`; },
+  encoder(p){ let s=`<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8 M40 0 V-8" class="leg" stroke-width="1.8"/><rect x="-12" y="-70" width="64" height="60" rx="3" fill="url(#gPcbB)" stroke="#123a75"/>
+    <rect x="2" y="-56" width="36" height="32" rx="2" fill="#c3c8cc" stroke="#7d868c"/><g class="act" data-act="enc"><circle cx="20" cy="-40" r="19" fill="#26282b" stroke="#000"/><g class="encknob" transform="rotate(${p._ang||0} 20 -40)">`;
+    for(let i=0;i<20;i++){ const a=i/20*Math.PI*2; s+=`<path d="M${20+15*Math.cos(a)} ${-40+15*Math.sin(a)} L${20+18.5*Math.cos(a)} ${-40+18.5*Math.sin(a)}" stroke="#4a4e53" stroke-width="1.4"/>`; }
+    return s+`<circle cx="20" cy="-40" r="10" fill="url(#gMetal)"/><rect x="18.6" y="-50" width="2.8" height="10" fill="#6c757b"/></g></g>${lbls([['CLK',0],['DT',10],['SW',20],['+',30],['GND',40]],-11,4.6,true)}`; },
+  tm1637(p){ let s=`<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8" class="leg" stroke-width="1.6"/><rect x="-70" y="-102" width="170" height="94" rx="3" fill="url(#gPcbB)" stroke="#123a75"/>
+    <rect x="-62" y="-92" width="154" height="62" rx="2" fill="#141414"/>`;
+    for(let d=0;d<4;d++) s+=`<g transform="translate(${-40+d*36+(d>1?8:0)} -61) skewX(-8)">${digitSVG('t'+d,0.82)}</g>`;
+    s+=`<circle class="tcol" cx="15" cy="-69" r="2.4" fill="#3a2424"/><circle class="tcol" cx="13" cy="-53" r="2.4" fill="#3a2424"/>`;
+    return s+lbls([['CLK',0],['DIO',10],['VCC',20],['GND',30]],-11,4.6,true); },
+  sensor(p){ const k=p.props.kind; let probe='';
+    if(k==='soil') probe=`<path d="M-4 -60 V-128 Q-4 -134 0 -136 Q4 -134 4 -128 V-60 Z M26 -60 V-128 Q26 -134 30 -136 Q34 -134 34 -128 V-60 Z" fill="#c9a44a" stroke="#8a6d25"/><rect x="-10" y="-74" width="50" height="16" rx="2" fill="#2a2a2a"/>`;
+    if(k==='gas') probe=`<rect x="-8" y="-74" width="46" height="14" fill="#1b1b1b"/><circle cx="15" cy="-98" r="26" fill="url(#gMetal)" stroke="#7d868c"/><circle cx="15" cy="-98" r="19" fill="url(#pMesh)" stroke="#555"/>`;
+    if(k==='rain') probe=`<rect x="-30" y="-136" width="90" height="62" rx="2" fill="#1f5f2f" stroke="#0f3a1a"/>${[0,1,2,3,4,5].map(i=>`<path d="M-22 ${-128+i*10} H52" stroke="#c9a44a" stroke-width="2"/>`).join('')}`;
+    if(k==='flame') probe=`<path d="M10 -60 V-80 M20 -60 V-80" class="leg"/><path d="M8 -80 V-94 A7 7 0 0 1 22 -94 V-80 Z" fill="#1a1a1a" stroke="#000"/>`;
+    return probe+`<path d="M0 0 V-8 M10 0 V-8 M20 0 V-8 M30 0 V-8" class="leg" stroke-width="1.8"/><rect x="-26" y="-62" width="82" height="54" rx="3" fill="url(#gPcbB)" stroke="#123a75"/>
+    <rect x="22" y="-56" width="16" height="16" rx="1" fill="#2a63c4" stroke="#1b4590"/><circle cx="30" cy="-48" r="5" fill="url(#gKnob)"/><path d="M27 -48 H33" stroke="#5a4e2f" stroke-width="1.4"/>
+    <rect x="-16" y="-54" width="22" height="10" rx="1" fill="url(#gChip)"/><circle cx="-16" cy="-30" r="2.6" fill="#ff3b30"/><circle class="sdo" cx="-6" cy="-30" r="2.6" fill="#2bd66b" opacity=".15"/>
+    <text x="15" y="-24" font-size="5.4" class="silk" text-anchor="middle">${SENSK[k].name.toUpperCase()}</text>${lbls([['VCC',0],['GND',10],['DO',20],['AO',30]],-11,4.6,true)}`; },
+});
+
+Object.assign(PT.seg7,{optPins:['DP','COM','COM2']}); Object.assign(PT.relay,{optPins:['NC','NO','COM']}); Object.assign(PT.neopixel,{optPins:['DOUT']});
+Object.assign(PT.dht22,{optPins:['NC']}); Object.assign(PT.rtc,{optPins:['SQW']}); Object.assign(PT.sensor,{optPins:['DO','AO']}); Object.assign(PT.joystick,{optPins:['SW','VRX','VRY']});
+Object.assign(PT.slideswitch,{optPins:['1','3']}); Object.assign(PT.rgbled,{optPins:['R','G','B']}); Object.assign(PT.encoder,{optPins:['SW']});
 /* =================== referensi DOM =================== */
 const svg=$('#stage'), world=$('#world'), lBoards=$('#lBoards'), lParts=$('#lParts'), lWires=$('#lWires'), lOver=$('#lOver');
 $('#defs').innerHTML=defsMarkup();
@@ -1067,7 +1550,7 @@ const projName=$('#projName'), exSel=$('#exSel');
 let view={x:40,y:40,k:1.6};
 
 const gBB=svgEl('g',{id:'bb','class':'brd',filter:'url(#fShadow)'},lBoards); gBB.innerHTML=bbMarkup();
-const gArd=svgEl('g',{id:'ard','class':'brd',filter:'url(#fShadow)'},lBoards); gArd.innerHTML=boardMarkup();
+const gArd=svgEl('g',{id:'ard','class':'brd',filter:'url(#fShadow)'},lBoards); gArd.innerHTML=BOARD.markup();
 function placeBoards(){ gArd.setAttribute('transform',`translate(${S.ard.x} ${S.ard.y})`); gBB.setAttribute('transform',`translate(${S.bb.x} ${S.bb.y})`); holesCache=null; }
 
 function applyView(){ world.setAttribute('transform',`translate(${view.x} ${view.y}) scale(${view.k})`); pMat.setAttribute('patternTransform',`translate(${view.x} ${view.y}) scale(${view.k})`); $('#zl').textContent=Math.round(view.k*100)+'%'; if(typeof renderHandles==='function'&&sel&&sel.kind==='wire') renderHandles(); }
@@ -1075,11 +1558,11 @@ function toWorld(ev){ const r=svg.getBoundingClientRect(); return {x:(ev.clientX
 function zoomAt(f,cx,cy){ const r=svg.getBoundingClientRect(); if(cx==null){cx=r.width/2;cy=r.height/2;} const k=clamp(view.k*f,0.35,8); const wx=(cx-view.x)/view.k, wy=(cy-view.y)/view.k; view.k=k; view.x=cx-wx*k; view.y=cy-wy*k; applyView(); }
 function fitView(){
   const r=svg.getBoundingClientRect(); if(!r.width) return;
-  let x0=Math.min(S.ard.x-30,S.bb.x), y0=Math.min(S.ard.y-5,S.bb.y), x1=Math.max(S.ard.x+275,S.bb.x+330), y1=Math.max(S.ard.y+215,S.bb.y+198);
+  let x0=Math.min(S.ard.x+BOARD.x0,S.bb.x), y0=Math.min(S.ard.y-5,S.bb.y), x1=Math.max(S.ard.x+BOARD.w+5,S.bb.x+330), y1=Math.max(S.ard.y+BOARD.h+5,S.bb.y+198);
   for(const p of S.parts){ if(!p._g) continue; const b=p._g.getBBox(); const pts=[[b.x,b.y],[b.x+b.width,b.y],[b.x,b.y+b.height],[b.x+b.width,b.y+b.height]].map(([x,y])=>{const [a,c]=rotXY(x,y,p.rot);return [a+p.x,c+p.y];});
     for(const [x,y] of pts){ x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);} }
   for(const w of S.wires) for(const q of (w.pts||[])){ x0=Math.min(x0,q[0]);y0=Math.min(y0,q[1]);x1=Math.max(x1,q[0]);y1=Math.max(y1,q[1]); }
-  const padT=56,pad=24; const k=clamp(Math.min((r.width-pad*2)/(x1-x0),(r.height-padT-pad-30)/(y1-y0)),0.35,6);
+  const padT=r.width<860?104:60,pad=24; const k=clamp(Math.min((r.width-pad*2)/(x1-x0),(r.height-padT-pad-30)/(y1-y0)),0.35,6);
   view.k=k; view.x=(r.width-(x1-x0)*k)/2-x0*k; view.y=padT+(r.height-padT-30-(y1-y0)*k)/2-y0*k; applyView();
 }
 
@@ -1160,7 +1643,7 @@ function select(s){
   $('#bRot').disabled=!(s&&s.kind==='part'); $('#bDel').disabled=!(s&&(s.kind==='part'||s.kind==='wire'));
 }
 const undoStack=[], redoStack=[];
-function snapshot(){ return JSON.stringify({ard:S.ard,bb:S.bb,parts:S.parts.map(cleanPart),wires:S.wires,nextId:S.nextId,code:editor.value,name:projName.value}); }
+function snapshot(){ return JSON.stringify({board:BOARD.id,ard:S.ard,bb:S.bb,parts:S.parts.map(cleanPart),wires:S.wires,nextId:S.nextId,code:editor.value,name:projName.value}); }
 function cleanPart(p){ return {id:p.id,type:p.type,x:p.x,y:p.y,rot:p.rot,props:p.props,des:p.des,burnt:!!p.burnt}; }
 function pushUndo(snap){ undoStack.push(snap||snapshot()); if(undoStack.length>80) undoStack.shift(); redoStack.length=0; updUndo(); }
 function updUndo(){ $('#bUndo').disabled=!undoStack.length; $('#bRedo').disabled=!redoStack.length; }
@@ -1168,10 +1651,12 @@ function undo(){ if(!undoStack.length) return; redoStack.push(snapshot()); loadP
 function redo(){ if(!redoStack.length) return; undoStack.push(snapshot()); loadProject(JSON.parse(redoStack.pop()),true); updUndo(); }
 function loadProject(o,keepView){
   for(const p of S.parts) if(p._g) p._g.remove();
+  if((o.board||'uno')!==BOARD.id){ setBoard(o.board||'uno'); gArd.innerHTML=BOARD.markup(); resetPins(); }
   S={ard:{...o.ard},bb:{...o.bb},parts:o.parts.map(p=>({...p,props:{...p.props}})),wires:o.wires.map(w=>({...w,pts:(w.pts||[]).map(q=>[...q])})),nextId:o.nextId||1};
   for(const p of S.parts) if(p.id>=S.nextId) S.nextId=p.id+1;
   for(const w of S.wires) if(!w.id) w.id=S.nextId++;
   if(o.code!=null){ editor.value=o.code; refreshEditor(); }
+  if($('#boardSel')) $('#boardSel').value=BOARD.id;
   if(o.name!=null) projName.value=o.name;
   if(o.notes!=null) S.notes=o.notes; else S.notes=S.notes||'';
   sel=null; renderAll(); changed(); select(null);
@@ -1228,7 +1713,8 @@ function ridersOf(kind){
   for(const p of S.parts){ if(pinsOf(p).some(pin=>{ const h=H.get(hkey(pin.x,pin.y)); return h&&h.brd===kind; })) parts.push(p); }
   const ids=new Set(parts.map(p=>'p'+p.id));
   const onB=r=>r.startsWith(kind+':')||ids.has(r.split(':')[0]);
-  return {parts,wires:S.wires.filter(w=>onB(w.a)&&onB(w.b))};
+  let board=false; if(kind==='bb'&&BOARD.male){ const bbm=new Set(allHoles().filter(h=>h.brd==='bb').map(h=>hkey(h.x,h.y))); board=Object.values(ARD_PINS).some(q=>bbm.has(hkey(S.ard.x+q.x,S.ard.y+q.y))); }
+  return {parts,board,wires:S.wires.filter(w=>onB(w.a)&&onB(w.b)||(board&&(onB(w.a)||w.a.startsWith('ard:'))&&(onB(w.b)||w.b.startsWith('ard:'))))};
 }
 function showNet(ref){
   netDots.innerHTML='';
@@ -1284,6 +1770,7 @@ svg.addEventListener('pointerdown',e=>{
 svg.addEventListener('pointermove',e=>{
   if(pointers.has(e.pointerId)) pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pinch&&pointers.size===2){ const [p1,p2]=[...pointers.values()]; const d=Math.hypot(p1.x-p2.x,p1.y-p2.y); const r=svg.getBoundingClientRect(); zoomAt((pinch.k*d/pinch.d)/view.k,(p1.x+p2.x)/2-r.left,(p1.y+p2.y)/2-r.top); return; }
+  if(actDrag&&actDrag.gen){ actDrag.gen.move(toWorld(e),e); return; }
   if(actDrag){ const p=actDrag.p; p.props.pos=clamp(actDrag.pos-(e.clientY-actDrag.y)/140+(e.clientX-actDrag.x)/140,0,1); const k=p._g.querySelector('.knobrot'); if(k) k.setAttribute('transform',`rotate(${-135+p.props.pos*270} 10 -17.5)`); solveDirty=true; liveInspector(); return; }
   if(pan){ view.x=pan.vx+e.clientX-pan.x; view.y=pan.vy+e.clientY-pan.y; applyView(); return; }
   const w=toWorld(e);
@@ -1295,8 +1782,9 @@ svg.addEventListener('pointermove',e=>{
     if(!drag.moved&&Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<3) return;
     drag.moved=true;
     if(drag.kind==='part'){ const p=drag.p; p.x=w.x-drag.ox; p.y=w.y-drag.oy; snapPart(p,7); placePart(p); renderWires(); showDrop(p); }
-    else { const k=drag.kind; const nx=Math.round(w.x-drag.ox), ny=Math.round(w.y-drag.oy); const dx=nx-S[k].x, dy=ny-S[k].y; if(!dx&&!dy) return;
-      S[k].x=nx; S[k].y=ny; for(const p of drag.riders.parts){ p.x+=dx; p.y+=dy; placePart(p);} for(const wr of drag.riders.wires) wr.pts=(wr.pts||[]).map(q=>[q[0]+dx,q[1]+dy]); placeBoards(); renderWires(); }
+    else { const k=drag.kind; let nx=Math.round(w.x-drag.ox), ny=Math.round(w.y-drag.oy);
+      if(k==='ard'&&BOARD.male){ const q=ARD_PINS.D13; let best=null,bd=64; for(const h of allHoles()) if(h.brd==='bb'){ const d=(h.x-(nx+q.x))**2+(h.y-(ny+q.y))**2; if(d<bd){bd=d;best=h;} } if(best){ nx=best.x-q.x; ny=best.y-q.y; } } const dx=nx-S[k].x, dy=ny-S[k].y; if(!dx&&!dy) return;
+      S[k].x=nx; S[k].y=ny; if(drag.riders.board){ S.ard.x+=dx; S.ard.y+=dy; } for(const p of drag.riders.parts){ p.x+=dx; p.y+=dy; placePart(p);} for(const wr of drag.riders.wires) wr.pts=(wr.pts||[]).map(q=>[q[0]+dx,q[1]+dy]); placeBoards(); renderWires(); }
     topoDirty=true; return;
   }
   if(wiring){ const a=refPos(wiring.a); const pe=e.target.closest&&e.target.closest('[data-pin]'); const pt=pe?pinPoint(pe):nearestPoint(w,6); const b=pt?{x:pt.x,y:pt.y}:w; const c=autoColor(wiring.a,pt?pt.ref:'')||wireColor;
@@ -1309,7 +1797,8 @@ svg.addEventListener('pointermove',e=>{
 });
 function endPointer(e){
   pointers.delete(e.pointerId); if(pointers.size<2) pinch=null;
-  if(actDrag){ pushUndo(actDrag.snap); actDrag=null; changed(); }
+  if(actDrag&&actDrag.gen){ actDrag.gen.up(); actDrag=null; liveInspector(); }
+  else if(actDrag){ pushUndo(actDrag.snap); actDrag=null; changed(); }
   if(wedit){ const W=wedit.w;
     if(wedit.kind==='end'){ const d=W._drag; W._drag=null; ring.setAttribute('visibility','hidden');
       const other=wedit.idx==='a'?W.b:W.a;
@@ -1336,9 +1825,10 @@ let pressHeld=null;
 function onAct(act,e){
   const kind=act.dataset.act;
   if(kind==='reset'){ const cap=$('#rstCap'); cap.setAttribute('r','4.6'); setTimeout(()=>cap.setAttribute('r','5.5'),160); if(sim.powered&&sim.prog){ logC('Tombol RESET ditekan — program dimulai ulang.','mu'); startProgram(sim.prog); } return; }
-  const p=partById(+act.closest('[data-part]').dataset.part); select({kind:'part',id:p.id});
+  const p=partById(+act.closest('[data-part]').dataset.part); if(sel&&sel.kind==='part'&&sel.id!==p.id) select(null);
   if(kind==='press'){ p.pressed=p.props.latch?!p.pressed:true; renderPart(p); topoDirty=true; pressHeld=p; liveInspector(); }
   if(kind==='knob'){ actDrag={p,x:e.clientX,y:e.clientY,pos:p.props.pos,snap:snapshot()}; }
+  else if(kind!=='press'&&PT[p.type].act){ const h=PT[p.type].act(p,kind,act,e,toWorld(e)); if(h) actDrag={gen:h}; liveInspector(); }
 }
 
 /* papan tombol */
@@ -1377,7 +1867,8 @@ function setWireColor(c){ wireColor=c; $$('#tbWire .sw').forEach(x=>x.classList.
 /* =================== rak komponen =================== */
 (function(){
   const list=$('#partList');
-  for(const type in PT){ const t=PT[type]; const d=document.createElement('div'); d.className='pitem'; d.dataset.type=type; d.tabIndex=0; d.setAttribute('role','button');
+  for(const [cat,cname] of CATS){ const hd=document.createElement('div'); hd.className='pcat'; hd.textContent=cname; hd.dataset.cat=cat; list.appendChild(hd);
+  for(const type in PT){ const t=PT[type]; if(t.cat!==cat) continue; const d=document.createElement('div'); d.className='pitem'; d.dataset.type=type; d.dataset.cat=cat; d.dataset.q=(t.name+' '+t.desc+' '+type).toLowerCase(); d.tabIndex=0; d.setAttribute('role','button');
     const demo={id:0,type,rot:0,props:JSON.parse(JSON.stringify(t.def)),_ang:60};
     d.innerHTML=`<div class="th"><svg viewBox="${t.vb}" preserveAspectRatio="xMidYMid meet">${DRAW[type](demo).replace(/ data-act="[^"]*"/g,'')}</svg></div><div><b>${t.name}</b><span>${t.desc}</span></div>`;
     list.appendChild(d);
@@ -1389,7 +1880,13 @@ function setWireColor(c){ wireColor=c; $$('#tbWire .sw').forEach(x=>x.classList.
       if(g){ g.remove(); g=null; const r=svg.getBoundingClientRect(); if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){ const w=toWorld(e); addPart(type,w.x,w.y); } }
       else addAtCenter(type); });
     d.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); addAtCenter(type); } });
-  }
+  } }
+  const empty=document.createElement('div'); empty.className='pempty'; empty.textContent='Tidak ada komponen yang cocok.'; empty.hidden=true; list.appendChild(empty);
+  const items=$$('.pitem',list); $('#pCount').textContent=items.length;
+  $('#pSearch').addEventListener('input',e=>{ const q=e.target.value.trim().toLowerCase(); let n=0;
+    for(const it of items){ const ok=!q||it.dataset.q.includes(q); it.hidden=!ok; if(ok) n++; }
+    for(const hd of $$('.pcat',list)) hd.hidden=!items.some(it=>!it.hidden&&it.dataset.cat===hd.dataset.cat);
+    empty.hidden=n>0; });
   function addAtCenter(type){ const r=svg.getBoundingClientRect(); const w={x:(r.width/2-view.x)/view.k,y:(r.height/2-view.y)/view.k}; const off=(S.parts.length%5)*20; const p=addPart(type,w.x+off,w.y+off); if(innerWidth<900) $('#stageWrap').scrollIntoView({behavior:'smooth',block:'center'}); return p; }
 })();
 
@@ -1424,7 +1921,7 @@ async function uploadAndRun(){
   if(res.error){ logC(`sketch.ino${res.line?':'+res.line:''}: error: ${res.error}`,'er'); logC('Kompilasi gagal. Perbaiki kesalahan lalu coba lagi.','er'); markErr(res.line); setStatus('err','Kompilasi gagal'); showTab('code'); return; }
   for(const w of res.warns) logC('peringatan: '+w,'wa');
   logC(`Kompilasi selesai — ${res.lines} baris, fungsi: ${res.fns.join(', ')}.`,'ok');
-  logC('Mengunggah ke papan UNO …','mu');
+  logC(`Mengunggah ke papan ${BOARD.short} …`,'mu');
   sim.uploading=true; sim.powered=true; topoDirty=true; setStatus('on','Mengunggah…'); $('#btnStop').disabled=false;
   const tk=++sim.token; await sleep(750); if(tk!==sim.token) return;
   sim.uploading=false; logC('Unggah selesai. Program berjalan.','ok');
@@ -1432,11 +1929,11 @@ async function uploadAndRun(){
 }
 function startProgram(prog){
   sim.token++; const token=sim.token;
-  resetPins(); sim.servos=[]; sim.lcds=[]; sim.isr=[]; sim.rx=[]; sim.begun=false; sim.baud=9600; sim.usOff=0; sim.halted=false;
+  resetPins(); sim.libs=[]; sim.keyQ=[]; sim.paused=false; updPause(); sim.servos=[]; sim.lcds=[]; sim.isr=[]; sim.rx=[]; sim.begun=false; sim.baud=9600; sim.usOff=0; sim.halted=false;
   sim.powered=true; sim.running=true; sim.prog=prog; sim.t0=now(); topoDirty=true; solveDirty=true;
   for(const p of S.parts) if(p.type==='lcd') p._lcdKey=null;
   const api=makeAPI(token); const vals=API_NAMES.map(n=>api[n]);
-  $('#btnStop').disabled=false; $('#btnRun').querySelector('span').innerHTML='Unggah <span class="t-long">ulang</span>';
+  $('#btnStop').disabled=false; $('#btnRun').querySelector('span').innerHTML='Unggah <span class="t-long">ulang</span>'; setTimeout(updPause,0);
   (async()=>{
     try{ const r=await prog.fn(...vals); await r.setup(); while(true){ await r.loop(); await api.__tick(); } }
     catch(e){ if(e===STOP||token!==sim.token) return; runtimeError(e); }
@@ -1453,7 +1950,7 @@ function runtimeError(e){
 function stopSim(silent){
   sim.token++; sim.powered=false; sim.running=false; sim.uploading=false; sim.halted=false; resetPins(); stopAllVoices();
   for(const p of S.parts){ p._on=false; p._over=0; }
-  topoDirty=true; solveDirty=true; $('#btnStop').disabled=true; setStatus('','Papan mati');
+  sim.paused=false; topoDirty=true; solveDirty=true; $('#btnStop').disabled=true; setStatus('','Papan mati'); updPause();
   $('#btnRun').querySelector('span').innerHTML='Unggah <span class="t-long">&amp; Jalankan</span>';
   if(!silent) logC('Papan dimatikan.','mu');
 }
@@ -1583,19 +2080,20 @@ function frame(){
     if(p.type==='led'){ const L=st.leds.get(p.id); const b=L&&L.I>0?Math.min(1,Math.pow(L.I/0.012,0.55))*L.duty:0;
       const core=g.querySelector('.ledcore'), glow=g.querySelector('.ledglow'); core.setAttribute('opacity',(b*0.85).toFixed(3)); glow.setAttribute('opacity',Math.min(1,b*1.05).toFixed(3));
       if(pw&&L&&L.I>0.06){ p._over=(p._over||0)+dt; if(p._over>0.35){ p.burnt=true; p._on=false; renderPart(p); topoDirty=true; logC(`${p.des} terbakar — arus ${(L.I*1000).toFixed(0)} mA jauh di atas batas 20 mA. Pasang resistor lalu ganti LED lewat panel properti.`,'er'); toast(`${p.des} terbakar! Arus terlalu besar tanpa resistor.`); refreshInspector(); } } else p._over=0; }
-    else if(p.type==='buzzer'){ let f=0; if(pw){ const vd=st.V(N(pr(p,'P')))-st.V(N(pr(p,'N'))); if(vd>2){ const nP=N(pr(p,'P')); for(let i=0;i<20;i++){ const s=sim.pins[i]; if(s.tone&&s.mode==='OUTPUT'&&N('ard:'+PIN_NAMES[i])===nP) f=s.tone; } if(!f&&p.props.active) f=2300; } }
+    else if(p.type==='buzzer'){ let f=0; if(pw&&!sim.paused){ const vd=st.V(N(pr(p,'P')))-st.V(N(pr(p,'N'))); if(vd>2){ const nP=N(pr(p,'P')); for(let i=0;i<PIN_NAMES.length;i++){ const s=sim.pins[i]; if(s.tone&&s.mode==='OUTPUT'&&N('ard:'+PIN_NAMES[i])===nP) f=s.tone; } if(!f&&p.props.active) f=2300; } }
       setVoice(p.id,f); p._snd=f; g.querySelector('.buzwave').setAttribute('opacity',f?(0.5+0.5*Math.sin(t/60)).toFixed(2):0); }
     else if(p.type==='servo'){ let target=null; const powered=pw&&st.V(N(pr(p,'VCC')))-st.V(N(pr(p,'GND')))>4; const sig=N(pr(p,'SIG'));
       if(powered) for(const sv of sim.servos) if(sv._att&&sv.pin>=0&&N('ard:'+PIN_NAMES[sv.pin])===sig) target=sv.angle;
       if(p._ang==null) p._ang=90; p._tgt=target; p._pw=powered;
       if(target!=null&&Math.abs(target-p._ang)>0.05){ const step=520*dt; p._ang+=clamp(target-p._ang,-step,step); g.querySelector('.horn').setAttribute('transform',`translate(-12 -88) rotate(${p._ang-90})`); } }
-    else if(p.type==='lcd'){ const pwd=pw&&st.V(N(pr(p,'VCC')))-st.V(N(pr(p,'GND')))>4; const ok=N(pr(p,'SDA'))===N('ard:A4')&&N(pr(p,'SCL'))===N('ard:A5');
+    else if(p.type==='lcd'){ const pwd=pw&&st.V(N(pr(p,'VCC')))-st.V(N(pr(p,'GND')))>4; const ok=N(pr(p,'SDA'))===N('ard:'+BOARD.sda)&&N(pr(p,'SCL'))===N('ard:'+BOARD.scl);
       const lib=sim.lcds.find(l=>l.addr===p.props.addr)||null; p._st={pw:pwd,ok,lib}; renderLcd(p,{pw:pwd,ok,lib}); }
-    else if(p.type==='hcsr04'){ g.querySelector('.sonar').setAttribute('opacity',pw&&p._ping&&t-p._ping<140?0.9:0); const sd=g.querySelector('.sdist'); const txt=`objek: ${p.props.dist} cm`; if(sd.textContent!==txt) sd.textContent=txt; }
+    else if(PT[p.type].frame){ PT[p.type].frame(p,g,st,t,dt); }
+    if(p.type==='hcsr04'){ g.querySelector('.sonar').setAttribute('opacity',pw&&p._ping&&t-p._ping<140?0.9:0); const sd=g.querySelector('.sdist'); const txt=`objek: ${p.props.dist} cm`; if(sd.textContent!==txt) sd.textContent=txt; }
   }
   flushSerial();
   if(plotData.dirty&&curTab==='serial'&&!$('#plotWrap').hidden) drawPlot();
-  if(t-uiT>200){ uiT=t; updateWarns(st); liveInspector(); if(sim.running){ const s=(t-sim.t0)/1000; setStatus('on',`Berjalan · ${String(Math.floor(s/60)).padStart(2,'0')}:${(s%60).toFixed(1).padStart(4,'0')}`); } }
+  if(t-uiT>200){ uiT=t; updateWarns(st); liveInspector(); if(sim.running&&!sim.paused){ const s=(t-sim.t0)/1000; setStatus('on',`Berjalan · ${String(Math.floor(s/60)).padStart(2,'0')}:${(s%60).toFixed(1).padStart(4,'0')}`); } }
   requestAnimationFrame(frame);
 }
 function updateWarns(st){
@@ -1624,6 +2122,7 @@ function refreshInspector(){
       case 'buzzer': body=`<label class="row">Jenis<select data-prop="active" data-bool>${opt('false','Pasif — bunyi dari tone()',String(p.props.active))}${opt('true','Aktif — berbunyi saat diberi HIGH',String(p.props.active))}</select></label>`; break;
       case 'servo': body=`<div class="note">Coklat = GND, merah = 5V, oranye = sinyal (pin dengan Servo.attach()).</div>`; break;
       case 'lcd': body=`<label class="row">Alamat I2C<select data-prop="addr" data-num>${opt(0x27,'0x27',p.props.addr)}${opt(0x3F,'0x3F',p.props.addr)}</select></label><label class="row">Warna layar<select data-prop="tint">${opt('blue','Biru, huruf putih',p.props.tint)}${opt('green','Hijau, huruf gelap',p.props.tint)}</select></label><div class="note">SDA ke A4, SCL ke A5. Alamat harus sama dengan kode.</div>`; break;
+      default: body=PT[p.type].insp?PT[p.type].insp(p):''; break;
       case 'hcsr04': body=`<label class="row">Jarak benda <input type="range" min="2" max="450" data-prop="dist" value="${p.props.dist}"></label><div class="note">Di atas 400 cm sensor tidak menerima pantulan.</div>`; break;
     }
     body+=`<div class="meter" id="iMeter"></div>`;
@@ -1638,7 +2137,7 @@ function refreshInspector(){
       <details class="note"><summary>Cara mengedit kabel</summary>Seret titik oranye di ujung kabel untuk memindah sambungan. Seret titik putih untuk menggeser tikungan, seret tanda + untuk menambah tikungan, atau seret badan kabel langsung. Klik ganda tikungan untuk menghapusnya. Tahan Shift untuk geser halus.</details>
       <div class="meter" id="iMeter"></div>`;
     foot=`<button class="btn" data-a="del">Hapus kabel</button>`;
-  } else if(sel.kind==='ard'){ head=`<b>UNO</b><span>ATmega328P · 16 MHz</span>`; body=`<div class="note">Flash 32 KB · SRAM 2 KB · 14 pin digital (6 PWM) · 6 input analog 10-bit. Batas arus per pin 20 mA (maks 40 mA).</div><div id="iMeter"></div>`; }
+  } else if(sel.kind==='ard'){ head=`<b>${BOARD.short}</b><span>${BOARD.chip}</span>`; body=`<label class="row">Jenis papan<select id="iBoard">${Object.values(BOARDS).map(b=>opt(b.id,b.name,BOARD.id)).join('')}</select></label><div class="note">${BOARD.mem} · ${BOARD.desc}. Batas arus per pin 20 mA (maks 40 mA).</div><div id="iMeter"></div>`; }
   else if(sel.kind==='bb'){ head=`<b>Breadboard</b><span>400 titik</span>`; body=`<div class="note">Setiap kolom bernomor terbagi dua: baris a–e terhubung, f–j terhubung, dipisah parit tengah. Rel + dan − terhubung sepanjang papan. Arahkan tetikus ke lubang untuk melihat apa saja yang terhubung.</div>`; }
   insp.classList.toggle('min',inspMin); insp.innerHTML=`<div class="ih">${head}<button class="ib imin" title="Perkecil/perbesar panel" aria-label="Perkecil panel"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="${inspMin?'m6 8 4 4 4-4':'m6 12 4-4 4 4'}"/></svg></button></div><div class="ib2">${body}</div>${foot?`<div class="if">${foot}</div>`:''}`; insp.hidden=false;
   insp.querySelectorAll('[data-prop]').forEach(el=>{ const ev=el.type==='range'?'input':'change'; let snap=null;
@@ -1647,9 +2146,11 @@ function refreshInspector(){
       if(el.dataset.num!=null) v=+v; if(el.dataset.bool!=null) v=v==='true'; if(el.type==='range') v=+v/(+el.dataset.scale||1);
       if(el.type!=='range') pushUndo(); p.props[k]=v; renderPart(p); solveDirty=true; if(k==='color') topoDirty=true;
       if(el.type!=='range'){ changed(); refreshInspector(); } else { liveInspector(); clearTimeout(saveT); saveT=setTimeout(saveLocal,400); } });
-    if(el.type==='range') el.addEventListener('change',()=>{ if(snap) pushUndo(snap); changed(); });
+    if(el.type==='range') el.addEventListener('change',()=>{ if(snap) pushUndo(snap); changed(); refreshInspector(); });
   });
   insp.querySelector('.imin').onclick=()=>{ inspMin=!inspMin; refreshInspector(); };
+  insp.querySelectorAll('[data-pa]').forEach(b=>b.onclick=()=>{ const p=partById(sel.id); if(p&&PT[p.type].action){ PT[p.type].action(p,b.dataset.pa); liveInspector(); } });
+  const ib=insp.querySelector('#iBoard'); if(ib) ib.onchange=()=>changeBoard(ib.value);
   insp.querySelectorAll('[data-wc]').forEach(b=>b.onclick=()=>setWireColor(b.dataset.wc));
   insp.querySelectorAll('[data-ws]').forEach(b=>b.onclick=()=>setWireStyle(b.dataset.ws));
   insp.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ const a=b.dataset.a; const W=sel&&sel.kind==='wire'?S.wires.find(x=>x.id===sel.id):null;
@@ -1673,6 +2174,7 @@ function liveInspector(){
       case 'buzzer': h=mrow('Tegangan',pw?(V(pr(p,'P'))-V(pr(p,'N'))).toFixed(2)+' V':'—')+mrow('Bunyi',p._snd?p._snd+' Hz':'diam'); break;
       case 'servo': h=mrow('Daya',p._pw?'5 V tersambung':'tidak ada')+mrow('Sudut target',p._tgt!=null?Math.round(p._tgt)+'°':'—')+mrow('Sudut lengan',Math.round(p._ang==null?90:p._ang)+'°'); break;
       case 'lcd': { const s=p._st||{}; h=mrow('Daya',s.pw?'menyala':'mati')+mrow('Jalur I2C',s.ok?'SDA/SCL benar':'belum benar')+mrow('Program',s.lib?(s.lib.inited?'sudah init()':'belum init()'):'tidak ada objek 0x'+p.props.addr.toString(16).toUpperCase()); break; }
+      default: h=PT[p.type].meter?PT[p.type].meter(p,st):''; break;
       case 'hcsr04': h=mrow('Jarak',p.props.dist+' cm')+mrow('Pantulan',p.props.dist>400?'tidak ada':Math.round(p.props.dist*58.3)+' µs')+mrow('Daya',pw&&V(pr(p,'VCC'))-V(pr(p,'GND'))>4.2?'5 V':'tidak ada'); break;
     }
   } else if(sel.kind==='wire'){ const w=S.wires.find(x=>x.id===sel.id); if(!w) return; h=mrow('Tegangan',pw?(st.floating(N(w.a))?'mengambang':V(w.a).toFixed(2)+' V'):'—'); }
@@ -1693,14 +2195,16 @@ function designChecks(){
     const pins=PT[p.type].pins.map(d=>({n:d[0],l:d[3],r:N(pr(p,d[0]))}));
     const lonely=pins.filter(q=>namedRefs().filter(r=>N(r)===q.r).length<=1);
     if(lonely.length===pins.length) res.push(['w',`${p.des} (${PT[p.type].name}) belum terhubung ke apa pun.`]);
-    else for(const q of lonely) if(!(p.type==='button')) res.push(['w',`${p.des}: kaki “${q.l}” belum terhubung.`]);
+    else for(const q of lonely) if(!(p.type==='button')&&!(PT[p.type].optPins||[]).includes(q.n)) res.push(['w',`${p.des}: kaki “${q.l}” belum terhubung.`]);
     if(p.type==='led'){ const a=N(pr(p,'A')), k=N(pr(p,'K'));
       if(a===k) res.push(['e',`${p.des}: kedua kaki berada di jalur yang sama sehingga LED tidak akan menyala.`]);
       else if(a===gnd||k===v5) res.push(['w',`${p.des} kemungkinan terpasang terbalik: anoda (kaki panjang) harus ke sisi positif.`]);
       else if((digitalNets.has(a)||a===v5||a===v33)&&k===gnd) res.push(['e',`${p.des} tersambung langsung tanpa resistor. Tambahkan resistor 220–330 Ω agar LED dan pin tidak rusak.`]); }
     if(p.type==='servo'){ const sig=N(pr(p,'SIG')); if(!digitalNets.has(sig)) res.push(['w',`${p.des}: kabel sinyal (oranye) belum ke pin digital.`]); if(N(pr(p,'VCC'))!==v5) res.push(['w',`${p.des}: kabel merah sebaiknya ke 5V.`]); if(N(pr(p,'GND'))!==gnd) res.push(['w',`${p.des}: kabel coklat harus ke GND.`]); }
-    if(p.type==='lcd'){ const sda=N(pr(p,'SDA')), scl=N(pr(p,'SCL')); if(sda===N('ard:A5')&&scl===N('ard:A4')) res.push(['e',`${p.des}: SDA dan SCL tertukar. SDA ke A4, SCL ke A5.`]); else { if(sda!==N('ard:A4')) res.push(['e',`${p.des}: SDA harus ke A4 (atau pin SDA).`]); if(scl!==N('ard:A5')) res.push(['e',`${p.des}: SCL harus ke A5 (atau pin SCL).`]); }
+    if(p.type==='lcd'){ const sda=N(pr(p,'SDA')), scl=N(pr(p,'SCL')); i2cCheck(p,res);
       if(!new RegExp('0x'+p.props.addr.toString(16),'i').test(code)) res.push(['w',`${p.des}: alamat 0x${p.props.addr.toString(16).toUpperCase()} tidak ditemukan di kode.`]); }
+    if(p.type==='oled'||p.type==='rtc') i2cCheck(p,res);
+    if(PT[p.type].cat&&!['led','resistor','button','pot','ldr','buzzer','servo','lcd','hcsr04'].includes(p.type)&&PT[p.type].pins.some(d=>d[0]==='VCC')&&PT[p.type].pins.some(d=>d[0]==='GND')){ if(!isPwrNet(N(pr(p,'VCC')))) res.push(['w',`${p.des}: VCC belum ke 5V.`]); if(N(pr(p,'GND'))!==gnd) res.push(['w',`${p.des}: GND belum ke GND.`]); }
     if(p.type==='hcsr04'){ if(N(pr(p,'VCC'))!==v5) res.push(['w',`${p.des}: VCC harus ke 5V.`]); if(N(pr(p,'GND'))!==gnd) res.push(['w',`${p.des}: GND belum ke GND.`]); if(!digitalNets.has(N(pr(p,'TRIG')))||!digitalNets.has(N(pr(p,'ECHO')))) res.push(['w',`${p.des}: Trig dan Echo harus ke pin digital.`]); }
     if(p.type==='button'){ const s1=N(pr(p,'1a')), s2=N(pr(p,'2a')); for(const [x,y] of [[s1,s2],[s2,s1]]) if(digitalNets.has(x)&&y===gnd&&!resOn.has(x)&&!/INPUT_PULLUP/.test(code)) res.push(['w',`${p.des}: input ${digitalNets.get(x)} akan mengambang saat tombol dilepas. Pakai INPUT_PULLUP atau resistor pull-up 10 kΩ.`]); }
   }
@@ -1775,6 +2279,64 @@ document.addEventListener('keydown',e=>{
   rz.addEventListener('dblclick',()=>{ layout.w=400; applyLayout(false); });
 })();
 applyLayout(false);
+
+/* =================== papan & bantuan tambahan =================== */
+function i2cCheck(p,res){ const sda=N(pr(p,'SDA')), scl=N(pr(p,'SCL')), A=N('ard:'+BOARD.sda), B=N('ard:'+BOARD.scl);
+  if(sda===B&&scl===A) res.push(['e',`${p.des}: SDA dan SCL tertukar. SDA ke ${BOARD.sda}, SCL ke ${BOARD.scl}.`]);
+  else { if(sda!==A) res.push(['e',`${p.des}: SDA harus ke ${BOARD.sda} (atau pin SDA).`]); if(scl!==B) res.push(['e',`${p.des}: SCL harus ke ${BOARD.scl} (atau pin SCL).`]); } }
+function changeBoard(id){
+  if(id===BOARD.id) return; pushUndo(); stopSim(true);
+  const old=BOARD; setBoard(id); gArd.innerHTML=BOARD.markup(); resetPins();
+  const before=S.wires.length; S.wires=S.wires.filter(w=>[w.a,w.b].every(r=>!r.startsWith('ard:')||ARD_PINS[r.slice(4)]||/^ard:GND/.test(r)));
+  for(const w of S.wires) for(const k of ['a','b']) if(w[k].startsWith('ard:')&&!ARD_PINS[w[k].slice(4)]) w[k]='ard:GND1';
+  if(id==='nano'&&old.id!=='nano'){ S.ard={x:S.bb.x+20+10*3-15,y:S.bb.y+BB_ROWS.g-5}; }
+  else if(old.id==='nano'){ S.ard={x:0,y:0}; }
+  if(id!=='nano'){ const need=S.ard.x+BOARD.w+40-S.bb.x; if(need>0&&S.bb.y<S.ard.y+BOARD.h){ const r=ridersOf('bb'); S.bb.x+=need; for(const p of r.parts){ p.x+=need; placePart(p); } for(const w of r.wires) w.pts=(w.pts||[]).map(q=>[q[0]+need,q[1]]); } }
+  $('#libdoc')._done=false; if(curFile==='lib') renderLibDoc();
+  placeBoards(); changed(); renderAll(); select(sel&&sel.kind==='ard'?{kind:'ard'}:null); $('#boardSel').value=id;
+  const lost=before-S.wires.length; toast(`Papan diganti ke ${BOARD.name}.`+(lost?` ${lost} kabel ke pin yang tidak ada dihapus.`:''));
+  requestAnimationFrame(fitView);
+}
+function updPause(){ const b=$('#btnPause'); if(!b) return; b.disabled=!sim.running; b.classList.toggle('on',!!sim.paused); b.querySelector('span').textContent=sim.paused?'Lanjut':'Jeda'; b.querySelector('path').setAttribute('d',sim.paused?'M4 2.5v11l9-5.5z':'M4 3h3v10H4zM9 3h3v10H9z'); }
+function togglePause(){ if(!sim.running) return; if(!sim.paused){ sim.paused=true; sim.pauseStart=now(); stopAllVoices(); setStatus('','Dijeda'); } else { sim.t0+=now()-sim.pauseStart; sim.paused=false; } updPause(); }
+
+/* =================== tab file: sketch.ino · diagram.json · pustaka =================== */
+let curFile='ino';
+function diagramJSON(){ const o=JSON.parse(snapshot()); delete o.code; delete o.name; return JSON.stringify({version:1,author:'Mutmainnah_Lab',board:o.board,ard:o.ard,bb:o.bb,parts:o.parts,wires:o.wires.map(w=>({id:w.id,a:w.a,b:w.b,color:w.color,style:w.style||'curve',pts:w.pts||[]})),nextId:o.nextId},null,2); }
+function showFile(f){ curFile=f; $$('.ft').forEach(b=>b.classList.toggle('on',b.dataset.f===f)); $('#fIno').hidden=f!=='ino'; $('#fJson').hidden=f!=='json'; $('#fLib').hidden=f!=='lib';
+  $('.edhint').textContent=f==='ino'?'Ctrl+Enter menjalankan':f==='json'?'Tata letak & kabel':'Fungsi yang didukung';
+  if(f==='json') $('#djson').value=diagramJSON(); if(f==='lib') renderLibDoc(); if(f==='ino') refreshEditor(); }
+$$('.ft').forEach(b=>b.onclick=()=>showFile(b.dataset.f));
+$('#fIno').style.display=''; 
+$('#jReload').onclick=()=>{ $('#djson').value=diagramJSON(); toast('diagram.json dimuat ulang dari rangkaian.'); };
+$('#jApply').onclick=()=>{ try{ const o=JSON.parse($('#djson').value); if(!Array.isArray(o.parts)||!Array.isArray(o.wires)) throw new Error('harus ada "parts" dan "wires"');
+    for(const p of o.parts) if(!PT[p.type]) throw new Error(`tipe komponen "${p.type}" tidak dikenal`);
+    pushUndo(); stopSim(true); loadProject({...o,code:editor.value,name:projName.value,notes:S.notes},true); toast('Perubahan diagram.json diterapkan.'); }
+  catch(e){ toast('diagram.json tidak valid: '+e.message); } };
+const LIBDOC0=[
+ ['Inti Arduino','pinMode digitalWrite digitalRead analogRead analogWrite delay delayMicroseconds millis micros tone noTone pulseIn map constrain random attachInterrupt sprintf'],
+ ['Serial','Serial.begin print println available read readString readStringUntil parseInt write'],
+ ['Servo.h','Servo s; s.attach(pin); s.write(sudut); s.read(); s.detach()'],
+ ['LiquidCrystal_I2C.h','LiquidCrystal_I2C lcd(0x27,16,2); init backlight clear setCursor print createChar write'],
+ ['Adafruit_NeoPixel.h','Adafruit_NeoPixel strip(n, pin, NEO_GRB + NEO_KHZ800); begin show setPixelColor Color ColorHSV gamma32 fill clear setBrightness numPixels rainbow'],
+ ['Adafruit_SSD1306.h + Adafruit_GFX.h','Adafruit_SSD1306 display(128, 64, &Wire, -1); begin(SSD1306_SWITCHCAPVCC, 0x3C) clearDisplay display setTextSize setTextColor setCursor print println drawPixel drawLine drawRect fillRect drawRoundRect drawCircle fillCircle drawTriangle fillTriangle drawBitmap invertDisplay'],
+ ['LedControl.h (MAX7219)','LedControl lc = LedControl(DIN, CLK, CS, 1); shutdown setIntensity clearDisplay setLed setRow setColumn'],
+ ['TM1637Display.h','TM1637Display d(CLK, DIO); setBrightness showNumberDec showNumberDecEx setSegments clear encodeDigit'],
+ ['Stepper.h','Stepper motor(2048, 8, 10, 9, 11); setSpeed(rpm); step(langkah)'],
+ ['RTClib.h','RTC_DS1307 rtc; begin adjust(DateTime(F(__DATE__), F(__TIME__))) now() → year month day hour minute second dayOfTheWeek unixtime'],
+ ['DHT.h','DHT dht(pin, DHT22); begin readTemperature readHumidity computeHeatIndex · isnan()'],
+ ['Keypad.h','Keypad kp = Keypad(makeKeymap(keys), rowPins, colPins, 4, 4); getKey() waitForKey() · NO_KEY'],
+ ['EEPROM.h','EEPROM.read(alamat) EEPROM.write(alamat, nilai) EEPROM.update EEPROM.length()'],
+];
+const LIBDOC=LIBDOC0.map(([h,f])=>{ const m=f.match(/^(.*?;)\s+(.*)$/); return m?[h,m[1],m[2]]:[h,'',f]; });
+function renderLibDoc(){ const el=$('#libdoc'); if(el._done) return; el._done=true;
+  el.innerHTML=`<p style="margin-bottom:10px">Pustaka di bawah ini sudah tersedia. Cukup tulis <code>#include</code>-nya. Papan aktif: <b>${esc(BOARD.name)}</b> · SDA ${BOARD.sda}, SCL ${BOARD.scl} · analog A0–A${BOARD.aCount-1}.</p>`+LIBDOC.map(([h,d,f])=>`<h4>${esc(h)}</h4>${d?`<p><code>${esc(d)}</code></p>`:''}<div class="fnl">${f.split(/\s+(?![^(]*\))/).map(x=>`<code>${esc(x)}</code>`).join('')}</div>`).join('')+
+  `<h4>Belum didukung</h4><p>LiquidCrystal paralel, WiFi/Bluetooth, SPI/Wire tingkat rendah, struct/class buatan sendiri, pointer.</p>`; }
+/* papan & jeda */
+$('#boardSel').value=BOARD.id;
+$('#boardSel').onchange=e=>changeBoard(e.target.value);
+$('#btnPause').onclick=togglePause;
+document.addEventListener('keydown',e=>{ if(e.code==='Space'&&!/INPUT|TEXTAREA|SELECT|BUTTON/.test(document.activeElement.tagName)&&sim.running){ e.preventDefault(); togglePause(); } });
 /* =================== contoh proyek =================== */
 const H=(k,r)=>`bb:${k}:${r}`;
 const CW={blk:'#1e1e1e',red:'#d32f2a',org:'#f08a1c',yel:'#f0c419',grn:'#2d9d4c',blu:'#2f6ed4',pur:'#8b4fc6',wht:'#ececec'};
@@ -1787,6 +2349,527 @@ void loop() {
   // diulang terus-menerus
 }
 `;
+const PW=[['ard:5V',H(1,'tp'),'#d32f2a',null,[[150,228],[296,228],[296,30]]],['ard:GND1',H(2,'tm'),'#1e1e1e']];
+const EX2=[
+ {id:'rgb',name:'11 · LED RGB warna-warni',title:'LED RGB',parts:[['rgbled',H(12,'c'),0,{common:'cathode'}],['resistor',H(12,'g'),90,{ohm:220}],['resistor',H(14,'g'),90,{ohm:220}],['resistor',H(15,'g'),90,{ohm:220}]],
+  wires:[['ard:D11',H(12,'j'),'#d32f2a'],['ard:D10',H(14,'j'),'#2d9d4c'],['ard:D9',H(15,'j'),'#2f6ed4'],[H(13,'a'),H(13,'bm'),'#1e1e1e'],['ard:GND2',H(2,'bm'),'#1e1e1e']],
+  notes:'LED RGB katoda bersama dikendalikan tiga pin PWM. Campuran merah, hijau, dan biru menghasilkan warna lain.',
+  code:`// LED RGB: mencampur warna dengan PWM
+const int PIN_R = 11;
+const int PIN_G = 10;
+const int PIN_B = 9;
+
+void warna(int r, int g, int b) {
+  analogWrite(PIN_R, r);
+  analogWrite(PIN_G, g);
+  analogWrite(PIN_B, b);
+}
+
+void setup() {
+  pinMode(PIN_R, OUTPUT);
+  pinMode(PIN_G, OUTPUT);
+  pinMode(PIN_B, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  warna(255, 0, 0);   Serial.println("Merah");   delay(800);
+  warna(0, 255, 0);   Serial.println("Hijau");   delay(800);
+  warna(0, 0, 255);   Serial.println("Biru");    delay(800);
+  warna(255, 200, 0); Serial.println("Kuning");  delay(800);
+  warna(150, 0, 255); Serial.println("Ungu");    delay(800);
+  warna(255, 255, 255); Serial.println("Putih"); delay(800);
+  // pelangi halus
+  for (int i = 0; i < 255; i += 3) { warna(255 - i, i, 0); delay(10); }
+  for (int i = 0; i < 255; i += 3) { warna(0, 255 - i, i); delay(10); }
+  for (int i = 0; i < 255; i += 3) { warna(i, 0, 255 - i); delay(10); }
+}
+`},
+ {id:'seg7',name:'12 · Hitung 0–9 (7-segmen)',title:'Penghitung 7-Segmen',parts:[['seg7',H(9,'c'),0,{common:'cathode'}],['resistor',H(11,'b'),90,{ohm:220}]],
+  wires:[['ard:D8',H(9,'j'),'#8b4fc6'],['ard:D7',H(10,'j'),'#2f6ed4'],['ard:D2',H(12,'j'),'#d32f2a'],['ard:D3',H(13,'j'),'#f08a1c'],['ard:D6',H(9,'a'),'#2d9d4c'],['ard:D5',H(10,'a'),'#f0c419'],['ard:D4',H(12,'a'),'#ececec'],['ard:GND2',H(2,'bm'),'#1e1e1e']],
+  notes:'Display 7-segmen katoda bersama menampilkan angka 0 sampai 9. Segmen a–g terhubung ke pin 2–8.',
+  code:`// Display 7-segmen: menghitung 0 sampai 9
+// urutan segmen: a, b, c, d, e, f, g
+const int pinSeg[7] = {2, 3, 4, 5, 6, 7, 8};
+const byte angka[10][7] = {
+  {1,1,1,1,1,1,0}, // 0
+  {0,1,1,0,0,0,0}, // 1
+  {1,1,0,1,1,0,1}, // 2
+  {1,1,1,1,0,0,1}, // 3
+  {0,1,1,0,0,1,1}, // 4
+  {1,0,1,1,0,1,1}, // 5
+  {1,0,1,1,1,1,1}, // 6
+  {1,1,1,0,0,0,0}, // 7
+  {1,1,1,1,1,1,1}, // 8
+  {1,1,1,1,0,1,1}  // 9
+};
+
+void tampil(int n) {
+  for (int i = 0; i < 7; i++) {
+    digitalWrite(pinSeg[i], angka[n][i]);
+  }
+}
+
+void setup() {
+  for (int i = 0; i < 7; i++) pinMode(pinSeg[i], OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  for (int n = 0; n <= 9; n++) {
+    tampil(n);
+    Serial.println(n);
+    delay(1000);
+  }
+}
+`},
+ {id:'neopixel',name:'13 · Pelangi NeoPixel',title:'Cincin NeoPixel',parts:[['neopixel',[420,-24],0,{layout:'ring16'}]],
+  wires:[...PW,['#0.GND',H(9,'tm'),'#1e1e1e'],['#0.VCC',H(11,'tp'),'#d32f2a'],['#0.DIN','ard:D6','#2d9d4c']],
+  notes:'Cincin 16 LED WS2812 menampilkan pelangi yang berputar memakai pustaka Adafruit_NeoPixel.',
+  code:`#include <Adafruit_NeoPixel.h>
+
+#define PIN_DATA 6
+#define JUMLAH 16
+
+Adafruit_NeoPixel cincin(JUMLAH, PIN_DATA, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  cincin.begin();
+  cincin.setBrightness(80);
+  cincin.show();
+}
+
+void loop() {
+  // pelangi berputar
+  for (long hue = 0; hue < 65536; hue += 512) {
+    for (int i = 0; i < cincin.numPixels(); i++) {
+      long h = hue + (i * 65536L / cincin.numPixels());
+      cincin.setPixelColor(i, cincin.gamma32(cincin.ColorHSV(h)));
+    }
+    cincin.show();
+    delay(20);
+  }
+  // titik berlari
+  for (int i = 0; i < JUMLAH * 2; i++) {
+    cincin.clear();
+    cincin.setPixelColor(i % JUMLAH, cincin.Color(255, 60, 0));
+    cincin.show();
+    delay(60);
+  }
+}
+`},
+ {id:'oled',name:'14 · Layar OLED',title:'Layar OLED',parts:[['oled',[360,252],0,{addr:0x3C,tint:'duo'}]],
+  wires:[['#0.GND','ard:GND3','#1e1e1e'],['#0.VCC','ard:5V','#d32f2a'],['#0.SCL','ard:A5','#2d9d4c'],['#0.SDA','ard:A4','#2f6ed4']],
+  notes:'OLED 128×64 I2C menampilkan teks, grafik, dan bola yang memantul.',
+  code:`#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define LEBAR 128
+#define TINGGI 64
+Adafruit_SSD1306 display(LEBAR, TINGGI, &Wire, -1);
+
+int bx = 20, by = 30, vx = 2, vy = 1;
+
+void setup() {
+  Serial.begin(9600);
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("OLED tidak ditemukan");
+    for (;;);
+  }
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 20);
+  display.println("Halo!");
+  display.display();
+  delay(1500);
+}
+
+void loop() {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+  display.print("Waktu: ");
+  display.print(millis() / 1000);
+  display.println(" dtk");
+  display.drawRect(0, 16, 128, 48, SSD1306_WHITE);
+  display.fillCircle(bx, by, 4, SSD1306_WHITE);
+  display.display();
+
+  bx += vx; by += vy;
+  if (bx <= 5 || bx >= 122) vx = -vx;
+  if (by <= 21 || by >= 58) vy = -vy;
+  delay(30);
+}
+`},
+ {id:'dht',name:'15 · Termometer DHT22 + LCD',title:'Termometer Digital',parts:[['dht22',[410,-24],0,{temp:27.5,hum:65}],['lcd',[350,282],0,{addr:0x27,tint:'blue'}]],
+  wires:[...PW,['#0.VCC',H(7,'tp'),'#d32f2a'],['#0.GND',H(10,'tm'),'#1e1e1e'],['#0.SDA','ard:D2','#2d9d4c'],['#1.GND','ard:GND3','#1e1e1e'],['#1.VCC','ard:5V','#d32f2a'],['#1.SDA','ard:A4','#2f6ed4'],['#1.SCL','ard:A5','#f0c419']],
+  notes:'DHT22 mengukur suhu dan kelembapan udara; hasilnya tampil di LCD 16×2 dan Serial Monitor. Ubah nilai lewat panel properti sensor.',
+  code:`#include <DHT.h>
+#include <LiquidCrystal_I2C.h>
+
+#define PIN_DHT 2
+DHT dht(PIN_DHT, DHT22);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  lcd.init();
+  lcd.backlight();
+  lcd.print("Termometer");
+  delay(1000);
+}
+
+void loop() {
+  float suhu = dht.readTemperature();
+  float lembap = dht.readHumidity();
+  if (isnan(suhu) || isnan(lembap)) {
+    lcd.clear();
+    lcd.print("Sensor error!");
+    Serial.println("Gagal membaca DHT22");
+    delay(2000);
+    return;
+  }
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Suhu : ");
+  lcd.print(suhu, 1);
+  lcd.print((char)223);
+  lcd.print("C");
+  lcd.setCursor(0, 1);
+  lcd.print("Lembap: ");
+  lcd.print(lembap, 1);
+  lcd.print("%");
+  Serial.print("Suhu: ");
+  Serial.print(suhu);
+  Serial.print(" C  Kelembapan: ");
+  Serial.print(lembap);
+  Serial.println(" %");
+  delay(2000);
+}
+`},
+ {id:'safe',name:'16 · Brankas kode (keypad)',title:'Brankas Elektronik',parts:[['keypad',[130,-30],0,{}],['lcd',[350,282],0,{addr:0x27,tint:'green'}],['servo',[430,-24],0,{}]],
+  wires:[['#0.R1','ard:D9','#6b3b1f'],['#0.R2','ard:D8','#d32f2a'],['#0.R3','ard:D7','#f08a1c'],['#0.R4','ard:D6','#f0c419'],['#0.C1','ard:D5','#2d9d4c'],['#0.C2','ard:D4','#2f6ed4'],['#0.C3','ard:D3','#8b4fc6'],['#0.C4','ard:D2','#ececec'],
+    ['#1.GND','ard:GND3','#1e1e1e'],['#1.VCC','ard:5V','#d32f2a'],['#1.SDA','ard:A4','#2f6ed4'],['#1.SCL','ard:A5','#f0c419'],...PW,['#2.GND',H(9,'tm'),'#6b3b1f'],['#2.VCC',H(10,'tp'),'#d32f2a'],['#2.SIG','ard:D10','#f08a1c']],
+  notes:'Ketik kode 1234 lalu tekan # untuk membuka kunci (servo berputar 90°). Tekan * untuk menghapus.',
+  code:`#include <Keypad.h>
+#include <Servo.h>
+#include <LiquidCrystal_I2C.h>
+
+const byte BARIS = 4;
+const byte KOLOM = 4;
+char tombol[BARIS][KOLOM] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+byte pinBaris[BARIS] = {9, 8, 7, 6};
+byte pinKolom[KOLOM] = {5, 4, 3, 2};
+Keypad keypad = Keypad(makeKeymap(tombol), pinBaris, pinKolom, BARIS, KOLOM);
+
+Servo kunci;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+String sandi = "1234";
+String masukan = "";
+
+void tampilAwal() {
+  lcd.clear();
+  lcd.print("Masukkan kode:");
+  lcd.setCursor(0, 1);
+}
+
+void setup() {
+  kunci.attach(10);
+  kunci.write(0);
+  lcd.init();
+  lcd.backlight();
+  Serial.begin(9600);
+  tampilAwal();
+}
+
+void loop() {
+  char k = keypad.getKey();
+  if (k) {
+    Serial.print("Tombol: ");
+    Serial.println(k);
+    if (k == '*') {
+      masukan = "";
+      tampilAwal();
+    } else if (k == '#') {
+      lcd.clear();
+      if (masukan == sandi) {
+        lcd.print("Kunci TERBUKA");
+        kunci.write(90);
+        delay(3000);
+        kunci.write(0);
+      } else {
+        lcd.print("Kode SALAH!");
+        delay(1500);
+      }
+      masukan = "";
+      tampilAwal();
+    } else if (masukan.length() < 8) {
+      masukan += k;
+      lcd.print("*");
+    }
+  }
+}
+`},
+ {id:'clock',name:'17 · Jam digital RTC',title:'Jam Digital',parts:[['rtc',[410,-24],0,{}],['tm1637',[540,-24],0,{}]],
+  wires:[...PW,['#0.GND',H(7,'tm'),'#1e1e1e'],['#0.VCC',H(8,'tp'),'#d32f2a'],['#0.SDA','ard:SDA','#2f6ed4'],['#0.SCL','ard:SCL','#2d9d4c'],['#1.CLK','ard:D3','#f0c419'],['#1.DIO','ard:D2','#f08a1c'],['#1.VCC',H(22,'tp'),'#d32f2a'],['#1.GND',H(23,'tm'),'#1e1e1e']],
+  notes:'Modul RTC DS1307 menyimpan waktu; display TM1637 menampilkan jam:menit dengan titik dua berkedip.',
+  code:`#include <Wire.h>
+#include <RTClib.h>
+#include <TM1637Display.h>
+
+RTC_DS1307 rtc;
+TM1637Display layar(3, 2);   // CLK, DIO
+
+void setup() {
+  Serial.begin(9600);
+  layar.setBrightness(5);
+  if (!rtc.begin()) {
+    Serial.println("RTC tidak ditemukan!");
+    while (1);
+  }
+  // atur jam sesuai waktu kompilasi
+  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+}
+
+void loop() {
+  DateTime now = rtc.now();
+  int jamMenit = now.hour() * 100 + now.minute();
+  bool titik = now.second() % 2 == 0;
+  layar.showNumberDecEx(jamMenit, titik ? 0b01000000 : 0, true);
+
+  char teks[20];
+  sprintf(teks, "%02d:%02d:%02d", now.hour(), now.minute(), now.second());
+  Serial.println(teks);
+  delay(500);
+}
+`},
+ {id:'pir',name:'18 · Alarm gerak PIR',title:'Alarm Gerak',parts:[['pir',[410,-24],0,{hold:4}],['led',H(20,'c'),0,{color:'red'}],['resistor',H(21,'b'),90,{ohm:220}],['buzzer',H(8,'e'),0,{active:false}]],
+  wires:[...PW,['#0.VCC',H(7,'tp'),'#d32f2a'],['#0.OUT','ard:D2','#f0c419'],['#0.GND',H(9,'tm'),'#1e1e1e'],['ard:D13',H(20,'a'),'#f08a1c'],['ard:D8',H(8,'a'),'#2f6ed4'],[H(11,'a'),H(11,'bm'),'#1e1e1e'],['ard:GND2',H(2,'bm'),'#1e1e1e']],
+  notes:'Saat sensor PIR mendeteksi gerakan, LED menyala dan buzzer berbunyi. Klik kubah PIR untuk mensimulasikan gerakan.',
+  code:`// Alarm gerak dengan sensor PIR
+const int PIR = 2;
+const int LED = 13;
+const int BUZZER = 8;
+int statusLama = LOW;
+
+void setup() {
+  pinMode(PIR, INPUT);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Alarm siap. Klik sensor PIR untuk bergerak.");
+}
+
+void loop() {
+  int gerak = digitalRead(PIR);
+  if (gerak == HIGH) {
+    digitalWrite(LED, HIGH);
+    tone(BUZZER, 1000);
+    delay(150);
+    tone(BUZZER, 1500);
+    delay(150);
+    if (statusLama == LOW) Serial.println("Gerakan terdeteksi!");
+  } else {
+    digitalWrite(LED, LOW);
+    noTone(BUZZER);
+    if (statusLama == HIGH) Serial.println("Aman.");
+  }
+  statusLama = gerak;
+}
+`},
+ {id:'joymx',name:'19 · Joystick & matriks 8×8',title:'Joystick dan Matriks',parts:[['joystick',[60,330],0,{}],['matrix',[360,262],0,{}]],
+  wires:[['#0.GND','ard:GND2','#1e1e1e'],['#0.VCC','ard:5V','#d32f2a'],['#0.VRX','ard:A0','#f0c419'],['#0.VRY','ard:A1','#2d9d4c'],['#0.SW','ard:A2','#2f6ed4'],
+    ['#1.VCC','ard:IOREF','#d32f2a'],['#1.GND','ard:GND3','#1e1e1e'],['#1.DIN','ard:A3','#f08a1c'],['#1.CS','ard:A4','#8b4fc6'],['#1.CLK','ard:A5','#ececec']],
+  notes:'Gerakkan tuas joystick untuk memindah titik di matriks LED. Klik tuas untuk menyalakan/mematikan jejak.',
+  code:`#include <LedControl.h>
+
+// DIN, CLK, CS, jumlah modul
+LedControl lc = LedControl(A3, A5, A4, 1);
+bool jejak = false;
+int swLama = HIGH;
+
+void setup() {
+  pinMode(A2, INPUT_PULLUP);
+  lc.shutdown(0, false);
+  lc.setIntensity(0, 6);
+  lc.clearDisplay(0);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int x = map(analogRead(A0), 0, 1023, 0, 7);
+  int y = map(analogRead(A1), 0, 1023, 0, 7);
+  int sw = digitalRead(A2);
+  if (sw == LOW && swLama == HIGH) {
+    jejak = !jejak;
+    Serial.println(jejak ? "Jejak: hidup" : "Jejak: mati");
+  }
+  swLama = sw;
+  if (!jejak) lc.clearDisplay(0);
+  lc.setLed(0, y, x, true);
+  delay(40);
+}
+`},
+ {id:'stepper',name:'20 · Motor stepper',title:'Motor Stepper',parts:[['stepper',[420,-24],0,{}]],
+  wires:[...PW,['#0.IN1','ard:D8','#2f6ed4'],['#0.IN2','ard:D9','#f08a1c'],['#0.IN3','ard:D10','#f0c419'],['#0.IN4','ard:D11','#2d9d4c'],['#0.GND',H(13,'tm'),'#1e1e1e'],['#0.VCC',H(14,'tp'),'#d32f2a']],
+  notes:'Motor 28BYJ-48 berputar satu putaran searah jarum jam, lalu kembali. Perhatikan urutan pin 8, 10, 9, 11 pada kode.',
+  code:`#include <Stepper.h>
+
+const int LANGKAH_PER_PUTARAN = 2048;
+// urutan IN1, IN3, IN2, IN4 untuk 28BYJ-48
+Stepper motor(LANGKAH_PER_PUTARAN, 8, 10, 9, 11);
+
+void setup() {
+  motor.setSpeed(12);   // rpm
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.println("Searah jarum jam");
+  motor.step(LANGKAH_PER_PUTARAN);
+  delay(500);
+  Serial.println("Berlawanan arah");
+  motor.step(-LANGKAH_PER_PUTARAN / 2);
+  delay(500);
+}
+`},
+ {id:'encoder',name:'21 · Rotary encoder + display',title:'Penghitung Putar',parts:[['encoder',[410,-24],0,{}],['tm1637',[540,-24],0,{}]],
+  wires:[...PW,['#0.CLK','ard:D2','#f0c419'],['#0.DT','ard:D3','#2d9d4c'],['#0.SW','ard:D4','#2f6ed4'],['#0.VCC',H(10,'tp'),'#d32f2a'],['#0.GND',H(11,'tm'),'#1e1e1e'],['#1.CLK','ard:D6','#f08a1c'],['#1.DIO','ard:D5','#8b4fc6'],['#1.VCC',H(22,'tp'),'#d32f2a'],['#1.GND',H(23,'tm'),'#1e1e1e']],
+  notes:'Putar kenop encoder (seret melingkar atau tombol di panel properti) untuk menambah/mengurangi angka. Tekan kenop untuk mengatur ulang ke 0.',
+  code:`#include <TM1637Display.h>
+
+const int CLK = 2;
+const int DT = 3;
+const int SW = 4;
+TM1637Display layar(6, 5);
+
+int hitung = 0;
+int clkLama;
+
+void setup() {
+  pinMode(CLK, INPUT);
+  pinMode(DT, INPUT);
+  pinMode(SW, INPUT_PULLUP);
+  Serial.begin(9600);
+  layar.setBrightness(6);
+  clkLama = digitalRead(CLK);
+  layar.showNumberDec(hitung);
+}
+
+void loop() {
+  int clk = digitalRead(CLK);
+  if (clk != clkLama && clk == 1) {
+    if (digitalRead(DT) != clk) hitung--;
+    else hitung++;
+    Serial.print("Nilai: ");
+    Serial.println(hitung);
+    layar.showNumberDec(hitung);
+  }
+  clkLama = clk;
+  if (digitalRead(SW) == LOW) {
+    hitung = 0;
+    layar.showNumberDec(hitung);
+    Serial.println("Reset");
+    delay(250);
+  }
+  delay(1);
+}
+`},
+ {id:'relay',name:'22 · Relay & lampu',title:'Relay Lampu',parts:[['relay',[410,-24],0,{trig:'high'}],['led',H(16,'h'),180,{color:'yellow'}],['resistor',H(15,'i'),270,{ohm:220}]],
+  wires:[...PW,['#0.VCC',H(7,'tp'),'#d32f2a'],['#0.GND',H(8,'tm'),'#1e1e1e'],['#0.IN','ard:D7','#f08a1c'],['#0.COM',H(13,'tp'),'#d32f2a'],['#0.NO',H(16,'j'),'#f0c419']],
+  notes:'Relay bekerja seperti saklar yang digerakkan Arduino. Kontak COM–NO menyalakan lampu (LED) dari jalur 5V.',
+  code:`// Relay menyalakan dan mematikan lampu
+const int RELAY = 7;
+
+void setup() {
+  pinMode(RELAY, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(RELAY, HIGH);
+  Serial.println("Lampu NYALA");
+  delay(2000);
+  digitalWrite(RELAY, LOW);
+  Serial.println("Lampu MATI");
+  delay(2000);
+}
+`},
+ {id:'soil',name:'23 · Sensor kelembapan tanah',title:'Penyiram Otomatis',parts:[['sensor',[60,352],0,{kind:'soil',level:20,th:35}],['led',H(8,'h'),180,{color:'blue'}],['resistor',H(7,'i'),270,{ohm:220}]],
+  wires:[['#0.VCC','ard:5V','#d32f2a'],['#0.GND','ard:GND2','#1e1e1e'],['#0.AO','ard:A0','#f0c419'],['#0.DO','ard:A1','#2d9d4c'],['ard:D13',H(8,'j'),'#2f6ed4'],['ard:GND1',H(1,'tm'),'#1e1e1e']],
+  notes:'Jika tanah kering, LED biru (pompa) menyala. Geser kelembapan tanah di panel properti sensor dan lihat grafiknya di Serial Plotter.',
+  code:`// Penyiram tanaman otomatis
+const int SENSOR = A0;
+const int POMPA = 13;
+
+void setup() {
+  pinMode(POMPA, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int nilai = analogRead(SENSOR);
+  // 1023 = kering, ~180 = sangat basah
+  int persen = map(nilai, 1023, 180, 0, 100);
+  persen = constrain(persen, 0, 100);
+  Serial.print("Kelembapan:");
+  Serial.println(persen);
+  digitalWrite(POMPA, persen < 30 ? HIGH : LOW);
+  delay(300);
+}
+`},
+ {id:'nano',name:'24 · Nano di breadboard',title:'Nano Blink',board:'nano',ard:{x:345,y:75},parts:[['led',H(22,'h'),180,{color:'green'}],['resistor',H(21,'i'),270,{ohm:220}]],
+  wires:[[H(2,'j'),H(22,'j'),'#f0c419'],[H(15,'j'),H(15,'tm'),'#1e1e1e']],
+  notes:'Arduino Nano ditancapkan langsung di breadboard. Pin D13 (kolom 3) disambung ke LED, GND (kolom 16) ke rel −.',
+  code:`// Arduino Nano di breadboard
+void setup() {
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  Serial.println("Nyala");
+  delay(500);
+  digitalWrite(13, LOW);
+  Serial.println("Padam");
+  delay(500);
+}
+`},
+ {id:'mega',name:'25 · Mega: LED berjalan',title:'LED Berjalan Mega',board:'mega',bb:{x:440,y:6},
+  parts:[2,5,8,11,14,17].flatMap((a,i)=>[['led',`bb:${a}:h`,180,{color:['red','yellow','green','blue','white','red'][i]}],['resistor',`bb:${a-1}:i`,270,{ohm:220}]]),
+  wires:[...[22,23,24,25,26,27].map((d,i)=>['ard:D'+d,`bb:${[2,5,8,11,14,17][i]}:j`,['#d32f2a','#f08a1c','#f0c419','#2d9d4c','#2f6ed4','#8b4fc6'][i]]),['ard:GND4','bb:1:tm','#1e1e1e',null,[[372,226],[420,226],[420,20]]]],
+  notes:'Arduino Mega punya pin 22–53 di sisi kanan. Enam LED menyala bergantian seperti lampu berjalan.',
+  code:`// Arduino Mega: LED berjalan di pin 22 sampai 27
+const int AWAL = 22;
+const int JUMLAH = 6;
+
+void setup() {
+  for (int i = 0; i < JUMLAH; i++) pinMode(AWAL + i, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i < JUMLAH; i++) {
+    digitalWrite(AWAL + i, HIGH);
+    delay(120);
+    digitalWrite(AWAL + i, LOW);
+  }
+  for (int i = JUMLAH - 2; i > 0; i--) {
+    digitalWrite(AWAL + i, HIGH);
+    delay(120);
+    digitalWrite(AWAL + i, LOW);
+  }
+}
+`},
+];
+
 const EX=[
  {id:'blink',name:'01 · Blink LED',title:'Blink LED',parts:[['led',H(8,'h'),180,{color:'red'}],['resistor',H(7,'i'),270,{ohm:220}]],
   wires:[['ard:D13',H(8,'j'),CW.org],['ard:GND1',H(1,'tm'),CW.blk]],
@@ -2029,18 +3112,21 @@ void loop() {
   delay(200);
 }
 `},
- {id:'empty',name:'10 · Proyek kosong',title:'Proyek Baru',parts:[],wires:[],notes:'',code:EMPTY_CODE},
+ ...EX2,
+ {id:'empty',name:'Proyek kosong',title:'Proyek Baru',parts:[],wires:[],notes:'',code:EMPTY_CODE},
 ];
 function buildExample(ex){
-  const base={ard:{x:0,y:0},bb:{x:320,y:6}}; const saved=S; S={...base,parts:[],wires:[],nextId:1}; holesCache=null;
+  const boardId=ex.board||'uno'; const prevB=BOARD.id; setBoard(boardId);
+  const base={ard:{...(ex.ard||{x:0,y:0})},bb:{...(ex.bb||{x:320,y:6})}}; const saved=S; S={...base,parts:[],wires:[],nextId:1}; holesCache=null;
   const parts=[];
   for(const [type,at,rot,props] of ex.parts){ const pos=Array.isArray(at)?{x:at[0],y:at[1]}:refPos(at); const p={id:S.nextId++,type,x:pos.x,y:pos.y,rot,props:{...PT[type].def,...props}}; p.des=nextDesIn(parts,type); parts.push(p); S.parts.push(p); }
+  const R=x=>typeof x==='string'&&x[0]==='#'?pr(parts[+x.slice(1,x.indexOf('.'))],x.slice(x.indexOf('.')+1)):x;
   const wires=[];
   for(const w of ex.wires){ let [a,b,color,pin,pts]=w;
     if(b===null) b=pr(parts[0],pin); if(a===0) a=pr(parts[0],pin);
-    wires.push({id:S.nextId++,a,b,color,pts:pts||[]}); }
-  const out={...base,parts:parts.map(cleanPart),wires,nextId:S.nextId,code:ex.code,name:ex.title,notes:ex.notes};
-  S=saved; holesCache=null; return out;
+    wires.push({id:S.nextId++,a:R(a),b:R(b),color,pts:pts||[]}); }
+  const out={board:boardId,...base,parts:parts.map(cleanPart),wires,nextId:S.nextId,code:ex.code,name:ex.title,notes:ex.notes};
+  S=saved; setBoard(prevB); holesCache=null; return out;
 }
 function nextDesIn(list,type){ const pre=PT[type].prefix; const used=new Set(list.map(q=>q.des)); let n=1; while(used.has(pre+n)) n++; return pre+n; }
 
